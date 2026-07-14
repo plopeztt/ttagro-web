@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — TerraTech Agro</title>
+  <meta name="description" content="Contáctanos: completa el formulario y el equipo de TerraTech Agro se pondrá en contacto contigo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="batica-modern-sans-serif-font-2026-04-07-06-19-09-utc/Web-TT/BaticaSans-Regular.woff2">
+  <link rel="preload" as="font" type="font/ttf" crossorigin href="batica-modern-sans-serif-font-2026-04-07-06-19-09-utc/OpenType-TT/BaticaSans-Bold.ttf">
+  <link rel="stylesheet" href="styles.css?v=35">
+</head>
+<body class="page-nosotros page-contacto">
+
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="TerraTech Agro — Inicio">
+      <img class="logo-img" src="assets/logo-dark.png" alt="TerraTech Agro" width="122" height="46">
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="que-hacemos.html">¿Qué hacemos?</a>
+      <a href="proyectos.html">Proyectos</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="search-btn" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/>
+        </svg>
+      </button>
+      <a class="btn btn-yellow" href="contacto.html">Contacto</a>
+      <div class="lang-menu">
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false">Esp
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lang-options" hidden>
+          <a class="lang-opt is-active" href="contacto.html">Esp</a>
+          <span class="lang-opt lang-soon" aria-disabled="true">Eng <em>Coming soon</em></span>
+        </div>
+      </div>
+    </div>
+
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main class="contacto-main">
+    <div class="container">
+      <span class="chip">Estamos para ayudarte</span>
+    </div>
+
+    <!-- Franja de introducción -->
+    <div class="contacto-banda">
+      <div class="container">
+        <p>¿Tienes consultas sobre nuestra empresa o servicios? Completa el formulario y nuestro equipo se pondrá en contacto contigo.</p>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="container">
+      <form class="contacto-form" novalidate>
+        <h2 class="cf-heading">Datos personales</h2>
+
+        <div class="cf-field">
+          <label for="cf-nombre">Nombre completo</label>
+          <input type="text" id="cf-nombre" name="nombre" autocomplete="name" required>
+        </div>
+        <div class="cf-field">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="cf-field">
+          <label for="cf-telefono">Teléfono</label>
+          <input type="tel" id="cf-telefono" name="telefono" autocomplete="tel">
+        </div>
+
+        <h2 class="cf-heading cf-heading-sep">Area de contacto</h2>
+
+        <div class="cf-field">
+          <label for="cf-area">Selecciona una opción:</label>
+          <div class="cf-select-wrap">
+            <select id="cf-area" name="area" required>
+              <option value="" selected></option>
+              <option value="productiva-agricola">Productiva agrícola</option>
+              <option value="administrativa-contable">Administrativa contable</option>
+              <option value="adquisiciones">Adquisiciones</option>
+              <option value="relaciones-publicas">Relaciones públicas</option>
+            </select>
+            <svg class="cf-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="cf-field">
+          <label for="cf-asunto">Asunto</label>
+          <input type="text" id="cf-asunto" name="asunto" required>
+        </div>
+        <div class="cf-field">
+          <label for="cf-mensaje">Mensaje</label>
+          <textarea id="cf-mensaje" name="mensaje" required></textarea>
+        </div>
+
+        <label class="cf-consent">
+          <input type="checkbox" name="consentimiento" required>
+          <span>Acepto que TerraTech procese mi información personal de acuerdo con su Política de privacidad</span>
+        </label>
+
+        <button type="submit" class="btn btn-yellow cf-enviar">Enviar</button>
+
+        <p class="cf-success" role="status" hidden>¡Gracias por tu mensaje! Nuestro equipo se pondrá en contacto contigo.</p>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer (versión clara) -->
+  <footer class="site-footer footer-light">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">TERRATECH AGRO</p>
+        <p class="footer-tagline">Empresa gestora de proyectos agrícolas sustentables</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram"><img src="assets/png/social-ig-gris.png" alt="" width="24" height="24"></a>
+          <a href="#" aria-label="LinkedIn"><img src="assets/png/social-li-gris.png" alt="" width="24" height="24"></a>
+          <a href="#" aria-label="X"><img src="assets/png/social-x-gris.png" alt="" width="24" height="24"></a>
+        </div>
+      </div>
+
+      <nav class="footer-nav" aria-label="Enlaces del pie de página">
+        <div class="footer-col footer-col-wide">
+          <h3>Dirección</h3>
+          <p>Santiago, Chile<br>Isidora Goyenechea 3162,<br>Of. 902, Las Condes</p>
+        </div>
+        <div class="footer-col">
+          <h3>Recursos</h3>
+          <a href="index.html">Inicio</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="que-hacemos.html">¿Qué hacemos?</a>
+        </div>
+        <div class="footer-col">
+          <h3>Ayuda</h3>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
