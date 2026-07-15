@@ -773,6 +773,15 @@ a { text-decoration: none; color: inherit; }
   vertical-align: 19px; /* centrado respecto a la altura de los números */
 }
 
+/* +25 no tiene sufijo que equilibre el "+", así que el número quedaba corrido a
+   la derecha. Se neutraliza el ancho del signo (width = -margin) para que el
+   "25" quede centrado bajo el texto y el botón. */
+.stat-3 .stat-plus {
+  display: inline-block;
+  width: 0.6em;
+  margin-left: -0.6em;
+}
+
 .stat-label {
   margin-top: 14px;
   font-family: var(--font);
