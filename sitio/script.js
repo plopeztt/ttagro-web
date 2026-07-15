@@ -264,8 +264,10 @@ document.addEventListener('DOMContentLoaded', () => {
       playEsquema();
     };
 
+    const galCount = modal.querySelector('.gal-count');
     const showFoto = (i, noFade) => {
       idx = (i + fotos.length) % fotos.length;
+      if (galCount) galCount.textContent = `${idx + 1} / ${fotos.length}`;
       const src = BASE + fotos[idx];
       const incoming = activeGal === galA ? galB : galA;
       incoming.src = src;
