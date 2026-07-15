@@ -392,12 +392,12 @@ document.addEventListener('DOMContentLoaded', () => {
       else closeModal();
     };
 
-    // el "+" de +60k abre el collage; KPIs el esquema; +30 los logos
-    const btn60k = document.querySelector('.stat-1 .stat-more');
+    // Todo el recuadro es clickeable: +60k abre el collage; KPIs el esquema; +25 los logos
+    const btn60k = document.querySelector('.stat-1');
     if (btn60k) btn60k.addEventListener('click', openModal);
-    const btnKpis = document.querySelector('.stat-2 .stat-more');
+    const btnKpis = document.querySelector('.stat-2');
     if (btnKpis) btnKpis.addEventListener('click', openEsquema);
-    const btn30 = document.querySelector('.stat-3 .stat-more');
+    const btn30 = document.querySelector('.stat-3');
     if (btn30) btn30.addEventListener('click', () => {
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
@@ -436,7 +436,9 @@ document.addEventListener('DOMContentLoaded', () => {
       'assets/proyectos/carrusel-1.webp',
       'assets/proyectos/carrusel-2.webp',
       'assets/proyectos/carrusel-3.webp',
-      'assets/proyectos/carrusel-4.webp'
+      'assets/proyectos/carrusel-4.webp',
+      'assets/proyectos/carrusel-5.webp',
+      'assets/proyectos/carrusel-6.webp'
     ];
     const pA = proySlider.querySelector('.proy-a');
     const pB = proySlider.querySelector('.proy-b');
