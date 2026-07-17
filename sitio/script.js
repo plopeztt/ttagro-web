@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cultivos:   { titulo: EN ? 'Crops' : 'Cultivos',                          fotos: ['cultivos/foto1.webp', 'cultivos/foto2.webp', 'cultivos/foto3.webp'] },
     frutales:   { titulo: EN ? 'Fruit trees' : 'Frutales',                    fotos: ['frutales/foto1.webp', 'frutales/foto2.webp', 'frutales/foto3.webp', 'frutales/foto4.webp', 'frutales/foto5.webp'] },
     riego:      { titulo: EN ? 'Water management' : 'Gestión hídrica',         fotos: ['riego/foto1.webp', 'riego/foto2.webp', 'riego/foto3.webp'] },
-    innovacion: { titulo: EN ? 'Agricultural innovation' : 'Innovación agrícola', fotos: ['innovacion/foto1.webp', 'innovacion/foto2.webp'] },
+    innovacion: { titulo: EN ? 'Agricultural innovation' : 'Innovación agrícola', fotos: ['innovacion/foto1.webp', 'innovacion/foto2.webp', 'innovacion/foto3.webp', 'innovacion/foto4.webp'] },
     impacto:    { titulo: EN ? 'Environmental impact' : 'Impacto ambiental',  fotos: ['impacto/foto1.webp', 'impacto/foto2.webp'] }
   };
   const BASE = 'assets/collage/galerias/';
@@ -181,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dialog = modal.querySelector('.exp-dialog');
 
     const showCollage = () => {
+      if (typeof stopGalAuto === 'function') stopGalAuto();
       galleryView.hidden = true;
       esquemaView.hidden = true;
       logosView.hidden = true;
@@ -264,10 +265,10 @@ document.addEventListener('DOMContentLoaded', () => {
       playEsquema();
     };
 
-    const galCount = modal.querySelector('.gal-count');
+    const galDots = modal.querySelector('.gal-dots');
     const showFoto = (i, noFade) => {
       idx = (i + fotos.length) % fotos.length;
-      if (galCount) galCount.textContent = `${idx + 1} / ${fotos.length}`;
+      if (galDots) { const ds = galDots.children; for (let k = 0; k < ds.length; k++) ds[k].classList.toggle('active', k === idx); }
       const src = BASE + fotos[idx];
       const incoming = activeGal === galA ? galB : galA;
       incoming.src = src;
@@ -295,16 +296,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
+    let galAuto = null;
+    const stopGalAuto = () => { if (galAuto) { clearInterval(galAuto); galAuto = null; } };
+    const goGal = i => { showFoto(i); stopGalAuto(); galAuto = setInterval(() => goGal(idx + 1), 3200); };
+    const startGalAuto = () => { stopGalAuto(); galAuto = setInterval(() => goGal(idx + 1), 3200); };
+
     const openGallery = (cat, noFade) => {
       const g = GALERIAS[cat];
       if (!g) return;
       fotos = g.fotos;
       titulo = g.titulo;
       modal.querySelector('.gal-title').textContent = titulo;
+      if (galDots) {
+        let h = '';
+        for (let k = 0; k < fotos.length; k++) h += '<button class="dot" data-i="' + k + '" aria-label="Foto ' + (k + 1) + '"></button>';
+        galDots.innerHTML = h;
+      }
       collageView.hidden = true;
       galleryView.hidden = false;
       dialog.classList.add('in-gallery');
       showFoto(0, noFade);
+      startGalAuto();
     };
 
     // Expande SOLO la foto (limpia, sin texto) desde la tarjeta clicada hasta llenar
@@ -382,6 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const closeModal = () => {
+      stopGalAuto();
       modal.classList.remove('open');
       modal.classList.remove('mode-esquema');
       modal.setAttribute('aria-hidden', 'true');
@@ -419,8 +432,9 @@ document.addEventListener('DOMContentLoaded', () => {
       t.addEventListener('mouseenter', () => preloadFirst(t.dataset.cat));
       t.addEventListener('click', () => expandThenGallery(t));
     });
-    modal.querySelector('.gal-prev').addEventListener('click', () => showFoto(idx - 1));
-    modal.querySelector('.gal-next').addEventListener('click', () => showFoto(idx + 1));
+    modal.querySelector('.gal-zone-prev').addEventListener('click', () => goGal(idx - 1));
+    modal.querySelector('.gal-zone-next').addEventListener('click', () => goGal(idx + 1));
+    if (galDots) galDots.addEventListener('click', e => { const b = e.target.closest('.dot'); if (b) goGal(+b.dataset.i); });
 
     document.addEventListener('keydown', e => {
       if (!modal.classList.contains('open')) return;
@@ -461,12 +475,32 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     fotos.forEach(src => { new Image().src = src; });   // precarga
-    proySlider.querySelector('.proy-prev').addEventListener('click', () => showProy(f - 1));
-    proySlider.querySelector('.proy-next').addEventListener('click', () => showProy(f + 1));
+
+    // puntos + auto-avance + click en mitades
+    const proyDots = document.getElementById('proyDots');
+    let proyAuto = null;
+    const updateProyDots = () => {
+      if (!proyDots) return;
+      const ds = proyDots.children;
+      for (let k = 0; k < ds.length; k++) ds[k].classList.toggle('active', k === f);
+    };
+    const stopProyAuto = () => { if (proyAuto) { clearInterval(proyAuto); proyAuto = null; } };
+    const goProy = i => { showProy(i); updateProyDots(); stopProyAuto(); proyAuto = setInterval(() => goProy(f + 1), 3200); };
+
+    if (proyDots) {
+      let h = '';
+      for (let k = 0; k < fotos.length; k++) h += '<button class="dot" data-i="' + k + '" aria-label="Foto ' + (k + 1) + '"></button>';
+      proyDots.innerHTML = h;
+      proyDots.addEventListener('click', e => { const b = e.target.closest('.dot'); if (b) goProy(+b.dataset.i); });
+    }
+    proySlider.querySelector('.proy-zone-prev').addEventListener('click', () => goProy(f - 1));
+    proySlider.querySelector('.proy-zone-next').addEventListener('click', () => goProy(f + 1));
 
     // primera foto (capa A ya es la activa)
     pA.src = fotos[0];
     pA.alt = (EN ? 'Sur Andina — photo 1 of ' : 'Sur Andina — foto 1 de ') + fotos.length;
+    updateProyDots();
+    proyAuto = setInterval(() => goProy(f + 1), 3200);
   }
 
   // ----- Selector de idioma (Esp/Eng) -----

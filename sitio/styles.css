@@ -1385,6 +1385,19 @@ a { text-decoration: none; color: inherit; }
 
 .gal-close:hover span { background: var(--amarillo); color: var(--verde-oscuro); transform: rotate(90deg); }
 
+/* Carrusel galería: sin flechas, click en mitades + puntos */
+.gal-nav { display: none; }
+.gal-zone { position: absolute; top: 0; bottom: 0; width: 26%; z-index: 3; background: none; border: 0; cursor: pointer; display: flex; align-items: center; }
+.gal-zone-prev { left: 0; justify-content: flex-start; padding-left: 20px; }
+.gal-zone-next { right: 0; justify-content: flex-end; padding-right: 20px; }
+/* flecha en círculo semitransparente, aparece al hover cerca del borde */
+.z-circle { width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 0, 0, 0.32); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+.z-circle svg { width: 24px; height: 24px; color: #fff; }
+.gal-zone:hover .z-circle { opacity: 1; }
+.gal-dots { display: flex; justify-content: center; gap: 10px; margin-top: 22px; }
+.gal-dots .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); border: 0; padding: 0; cursor: pointer; transition: background 0.25s, transform 0.25s; }
+.gal-dots .dot.active { background: var(--amarillo); transform: scale(1.3); }
+
 /* en la galería manda la X propia (alineada con la flecha derecha, a 40px de la foto) */
 .exp-dialog.in-gallery > .exp-close { display: none; }
 
@@ -1743,6 +1756,16 @@ body.modal-open { overflow: hidden; }
   transition: opacity 0.5s ease;
 }
 .proy-photo.is-active { opacity: 1; }
+
+/* Carrusel: sin flechas, click en mitades + puntos */
+.proy-nav { display: none; }
+.proy-zone { position: absolute; top: 0; bottom: 0; width: 30%; z-index: 3; background: none; border: 0; cursor: pointer; display: flex; align-items: center; }
+.proy-zone-prev { left: 0; justify-content: flex-start; padding-left: 14px; }
+.proy-zone-next { right: 0; justify-content: flex-end; padding-right: 14px; }
+.proy-zone:hover .z-circle { opacity: 1; }
+.proy-dots { position: absolute; left: 0; right: 0; bottom: 16px; z-index: 4; display: flex; justify-content: center; gap: 9px; }
+.proy-dots .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); border: 0; padding: 0; cursor: pointer; transition: background 0.25s, transform 0.25s; }
+.proy-dots .dot.active { background: #fff; transform: scale(1.3); }
 
 .proy-nav {
   position: absolute;
