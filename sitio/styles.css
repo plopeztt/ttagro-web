@@ -338,7 +338,7 @@ a { text-decoration: none; color: inherit; }
 
 .enfoque {
   background: var(--verde-claro-bg);
-  padding: 73px 0 69.5px;   /* 73 arriba del chip; 69.5 bajo el botón */
+  padding: 73px 0 110px;   /* espacio inferior equilibrado con el superior */
 }
 
 .enfoque-text {
@@ -374,6 +374,7 @@ a { text-decoration: none; color: inherit; }
   align-items: center;
   gap: 8px;
   margin-top: 14px;
+  margin-left: 24px;   /* alinea con el inicio del texto del chip (padding 23 + borde) */
   font-family: var(--font);
   font-size: 18px;
   font-weight: 400;
@@ -1489,6 +1490,7 @@ body.modal-open { overflow: hidden; }
   border-radius: 44px;
   padding: 48px 52px;
 }
+.mv-card.reveal { transform: translateY(10px); }   /* entrada más tenue */
 .mv-chip {
   display: inline-block;
   font-family: var(--font-display);   /* Batica Sans Regular 20 */
