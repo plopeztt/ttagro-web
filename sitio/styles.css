@@ -8,6 +8,7 @@
   --verde-fondo: #043120;       /* degradado hero / footer */
   --verde-claro-bg: #f3faef;    /* fondo "Nuestro enfoque" */
   --amarillo: #f4df57;          /* acento principal */
+  --naranja: #F9BD23;           /* hover/nav activo (más visible que el amarillo en el header claro) */
   --amarillo-90: rgba(244, 223, 87, 0.9);
   --blanco-suave: #f8f9f9;
   --texto-claro: #eaf4f0;
@@ -99,7 +100,7 @@ a { text-decoration: none; color: inherit; }
   border-bottom-right-radius: 18px;
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
-  font-size: 16px;
+  font-size: 20px;
   letter-spacing: -0.16px;
   color: var(--verde-oscuro);
 }
@@ -169,7 +170,9 @@ a { text-decoration: none; color: inherit; }
 }
 
 .main-nav a { transition: color 0.2s ease; }
-.main-nav a:hover { color: var(--amarillo); }
+.main-nav a:hover { color: var(--naranja); }
+/* el color de la página activa aparece solo al hacer scroll (nav con fondo) */
+.main-nav.scrolled a.active { color: var(--naranja); font-weight: 600; }
 
 .header-actions { display: flex; align-items: center; gap: 14px; }
 
@@ -305,6 +308,32 @@ a { text-decoration: none; color: inherit; }
 
 .hero-copy strong { color: var(--amarillo); font-weight: 700; }
 
+/* Indicador de scroll: una flecha con fundido suave, invita a bajar */
+.hero { position: relative; }
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 64px;
+  transform: translateX(-50%);
+  z-index: 4;
+  line-height: 0;
+  color: #d3dbd6;   /* blanca grisácea */
+  transition: color 0.2s ease;
+}
+.scroll-hint svg {
+  width: 34px; height: 18px;
+  fill: none; stroke: currentColor; stroke-width: 2.4;
+  stroke-linecap: round; stroke-linejoin: round;
+  display: block;
+  animation: scrollFade 1.5s ease-in-out infinite;
+}
+.scroll-hint:hover { color: var(--naranja); }
+@keyframes scrollFade {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .scroll-hint svg { animation: none; opacity: 1; } }
+
 /* ---------- NUESTRO ENFOQUE ---------- */
 
 .enfoque {
@@ -340,19 +369,42 @@ a { text-decoration: none; color: inherit; }
 }
 
 .pilares-sub {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
   margin-top: 14px;
   font-family: var(--font);
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.2px;
   color: #4e625b;   /* gris-verde secundario del diseño */
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
+.pilares-sub:hover { color: var(--verde-oscuro); }
+.pilares-sub .ps-arrow { display: inline-block; font-weight: 600; transition: transform 0.25s ease; }
+.pilares-sub:hover .ps-arrow { transform: translateY(4px); }
+
+/* CTA "Ver más" bajo el botón + de Experiencia */
+.stat-cta {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: var(--amarillo);
+}
+.stat:hover .stat-cta { text-decoration: underline; }
 
 .pilares-figure {
   position: relative;
   width: 269px;
   height: 420px;
   margin: 132px auto 0;   /* bajado para centrar más el isotipo en la sección */
+  scroll-margin-top: 200px;   /* al bajar desde el subtítulo, deja espacio bajo el nav */
 }
 
 /* Rebote en secuencia: cada hoja del isotipo "salta" por turnos para invitar a
@@ -904,6 +956,8 @@ a { text-decoration: none; color: inherit; }
 }
 
 .footer-col a { text-decoration: underline; text-underline-position: from-font; }
+.footer-col a.q-underline { text-decoration: none; }
+.footer-col a.q-underline span { text-decoration: underline; text-underline-position: from-font; }
 .footer-col a:hover { color: var(--amarillo); }
 
 /* ---------- Modal Experiencia (+60k): collage y galerías ---------- */
