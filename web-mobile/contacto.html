@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <script src="version.js"></script>
 <title>TerraTech Agro — Contacto (móvil)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,19 +10,44 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="mobile.css">
 <style>
-  .cont{padding:44px 30px 46px}
-  .cont .banda{margin-top:22px;background:var(--verde-claro-bg);border-radius:16px;padding:20px 22px;font-size:15px;line-height:1.5;color:#0c2c1e;font-weight:300}
-  .cf{margin-top:28px;display:flex;flex-direction:column;gap:16px}
-  .cf h2{font-family:var(--display);font-size:20px;color:var(--verde-oscuro);margin-top:8px}
-  .cf-field{display:flex;flex-direction:column;gap:6px}
-  .cf-field label{font-size:13px;color:#3c4b45;font-weight:400}
-  .cf-field input,.cf-field select,.cf-field textarea{font-family:var(--font);font-size:15px;color:#0c2c1e;background:#fff;border:1px solid var(--borde-chip);border-radius:12px;padding:12px 14px;width:100%}
-  .cf-field textarea{min-height:110px;resize:vertical}
-  .cf-field select{-webkit-appearance:none;appearance:none;padding-right:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2301302b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:16px 16px}
-  .cf-consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#3c4b45;font-weight:300;margin-top:4px;line-height:1.4}
-  .cf-consent input{margin-top:3px;flex:none}
-  .cf-enviar{margin-top:12px;background:var(--amarillo);color:var(--verde-oscuro);border:0;border-radius:13px;padding:14px;font-family:var(--font);font-size:15px;font-weight:500;cursor:pointer}
-  .cf-success{margin-top:10px;font-size:14px;color:var(--hoja-media);font-weight:500}
+  /* Contacto movil: mismos colores, cajas y tipografia que la version de escritorio.
+     Referencia: styles.css (.contacto-banda, .cf-heading, .cf-field, .cf-consent). */
+  .cont{padding:44px 0 46px}
+  .cont .chip{margin-left:30px}
+
+  /* franja de introduccion: a todo el ancho, igual que en desktop */
+  .cont .banda{
+    margin-top:22px;background:var(--verde-claro-bg);border-radius:0;
+    padding:30px;font-family:var(--font);font-size:18px;line-height:1.4;
+    letter-spacing:-.25px;color:var(--hoja-media);font-weight:400
+  }
+
+  .cf{margin-top:36px;padding:0 30px;display:flex;flex-direction:column}
+  .cf h2{font-family:var(--font);font-weight:600;font-size:16px;color:var(--hoja-media);margin:0 0 22px}
+  .cf h2.sep{margin-top:38px}
+
+  .cf-field{display:flex;flex-direction:column;margin-bottom:22px}
+  .cf-field label{font-size:15px;color:var(--hoja-media);font-weight:400;margin-bottom:10px}
+
+  /* cajas del diseno: alto 47, radio 20, fondo #F3FAEF al 50%, borde #043120 al 21% */
+  .cf-field input,.cf-field select,.cf-field textarea{
+    width:100%;height:47px;padding:0 20px;border-radius:20px;
+    background:rgba(243,250,239,.5);border:1px solid rgba(4,49,32,.21);
+    font-family:var(--font);font-size:16px;color:var(--verde-oscuro);outline:none;
+    transition:border-color .2s ease,background .2s ease
+  }
+  .cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{
+    border-color:rgba(4,49,32,.55);background:rgba(243,250,239,.85)
+  }
+  .cf-field textarea{height:170px;padding:14px 20px;resize:vertical}
+  .cf-field select{-webkit-appearance:none;appearance:none;padding-right:48px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2301302b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 20px center;background-size:22px 22px}
+
+  .cf-consent{display:flex;gap:10px;align-items:flex-start;margin:8px 0 26px;font-size:14px;line-height:1.4;color:var(--hoja-media);font-weight:400}
+  .cf-consent input{width:16px;height:16px;margin-top:3px;flex:none;accent-color:var(--hoja-media)}
+
+  /* boton: color y radio del desktop, ancho completo por comodidad tactil */
+  .cf-enviar{width:100%;height:48px;background:var(--amarillo);color:var(--verde-oscuro);border:0;border-radius:13px;font-family:var(--font);font-size:16.3px;font-weight:400;letter-spacing:-.4px;cursor:pointer}
+  .cf-success{margin-top:18px;font-size:15px;color:var(--hoja-media)}
 </style>
 </head>
 <body>
@@ -58,9 +83,9 @@
         <div class="cf-field"><label for="cf-email">Email</label><input type="email" id="cf-email" name="email" autocomplete="email" required></div>
         <div class="cf-field"><label for="cf-telefono">Teléfono</label><input type="tel" id="cf-telefono" name="telefono" autocomplete="tel"></div>
 
-        <h2>Área de contacto</h2>
+        <h2 class="sep">Área de contacto</h2>
         <div class="cf-field">
-          <label for="cf-area">Selecciona una opción</label>
+          <label for="cf-area">Selecciona una opción:</label>
           <select id="cf-area" name="area" required>
             <option value="" selected></option>
             <option value="productiva-agricola">Productiva agrícola</option>
