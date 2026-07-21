@@ -173,24 +173,59 @@
   @keyframes mfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   .m-title{font-family:var(--display);font-size:24px;font-weight:400;color:var(--amarillo);margin-bottom:18px}
   [data-view="esquema"] .m-title{color:#fff;font-size:28px;line-height:1;margin-bottom:8px}
-  /* collage: tarjetas full-width (formato móvil) — foto limpia + vidrio esmerilado + título */
+  /* collage: tarjetas full-width — foto limpia + vidrio esmerilado en CSS + título.
+     El tinte y el blur salen de styles.css (.tile-glass): un color por categoría al 40%,
+     blur 18px. En desktop el vidrio va horneado dentro de portada-base.webp; acá se
+     dibuja con backdrop-filter para poder ajustarle el tamaño y que siga a la foto. */
   .gcards{display:flex;flex-direction:column;gap:14px;margin-top:6px}
   .gcard{position:relative;width:100%;aspect-ratio:1000/494;border:0;padding:0;border-radius:18px;overflow:hidden;cursor:pointer;background:#022016;transition:transform .28s cubic-bezier(.22,.61,.36,1)}
   .gcard:active{transform:scale(.985)}
   .gcard .cover{width:100%;height:100%;object-fit:cover;display:block}
-  .gcard .gtitle{position:absolute;right:0;bottom:24px;z-index:2;width:51%;padding:0 14px;font-family:var(--display);font-size:19px;line-height:1.14;color:#EAF4F0;text-align:center;pointer-events:none}
+  .gcard .gglass{
+    position:absolute;right:0;bottom:0;z-index:2;pointer-events:none;
+    width:47%;height:58%;border-radius:88px 0 18px 0;
+    background:var(--tinte);
+    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    /* centrado óptico: la esquina de 88px quita masa arriba a la izquierda, así que
+       el centroide real cae 6px a la derecha y 4px abajo del centro geométrico */
+    padding:8px 14px 0 26px;text-align:center;
+  }
+  .gcard .gglass .n{font-family:var(--display);font-size:18px;line-height:1.14;color:var(--tinta)}
+  .gcard .gglass .c{margin-top:5px;font-size:11.5px;color:var(--tinta);opacity:.82;letter-spacing:.02em}
+
   /* gallery */
-  .m-view[data-view="gallery"]:not([hidden]){min-height:74vh;display:flex;flex-direction:column;justify-content:center}
-  .g-back{background:none;border:0;color:var(--texto-claro);font-size:14px;cursor:pointer;margin-bottom:12px;display:inline-flex;align-items:center;gap:5px}
-  .g-title{font-family:var(--display);font-size:22px;font-weight:400;color:var(--amarillo);margin-bottom:14px}
-  .g-stage{position:relative;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#022016}
-  .g-stage img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .35s ease}
-  .g-zone{position:absolute;top:0;bottom:0;width:50%;cursor:pointer;z-index:2;background:none;border:0}
-  .g-zone-prev{left:0}
-  .g-zone-next{right:0}
-  .g-dots{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:18px}
-  .g-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:background .25s,transform .25s;border:0;padding:0}
-  .g-dot.active{background:var(--amarillo);transform:scale(1.3)}
+  .m-view[data-view="gallery"]:not([hidden]){min-height:74vh;display:flex;flex-direction:column}
+  /* punto que se estira en píldora al activarse: cuántas fotos hay y en cuál estás */
+  .g-segs{display:flex;justify-content:center;gap:7px;margin-bottom:14px}
+  .g-seg{flex:none;width:8px;height:8px;border-radius:999px;overflow:hidden;
+         background:rgba(255,255,255,.35);transition:width .35s ease,background .35s ease}
+  .g-seg.done{background:rgba(255,255,255,.6)}
+  .g-seg.now{width:52px;background:rgba(255,255,255,.25)}
+  .g-seg i{display:block;height:100%;width:0;border-radius:999px;background:var(--amarillo);transition:width .3s ease}
+  .g-seg.now i{width:100%}
+  @media (prefers-reduced-motion: reduce){ .g-seg{transition:none} }
+  .g-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .g-title{flex:1;font-family:var(--display);font-size:20px;font-weight:400;color:#fff}
+  .g-count{font-size:13px;color:rgba(255,255,255,.72);font-variant-numeric:tabular-nums}
+  /* carrusel nativo: el swipe lo hace el navegador, con su inercia */
+  .g-track{flex:1;display:flex;align-items:center;overflow-x:auto;scroll-snap-type:x mandatory;
+           scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:12px}
+  .g-track::-webkit-scrollbar{display:none}
+  .g-slide{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center}
+  /* 4/3: se respeta el encuadre, no se estira al alto de la pantalla */
+  .g-slide img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:18px;display:block;background:#022016}
+  /* el padding vertical deja aire para el contorno de la miniatura activa
+     (overflow-x:auto también recorta en vertical) y los márgenes negativos
+     compensan el padding del panel para que la tira llegue a los bordes */
+  .g-thumbs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;
+            margin:0 -34px;padding:14px 34px 6px;scroll-padding:0 34px}
+  .g-thumbs::-webkit-scrollbar{display:none}
+  .g-thumb{flex:0 0 76px;height:58px;border:0;padding:0;border-radius:10px;overflow:hidden;cursor:pointer;
+           opacity:.45;transition:opacity .25s,outline-color .25s;outline:2px solid transparent;outline-offset:2px}
+  .g-thumb.active{opacity:1;outline-color:var(--amarillo)}
+  .g-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .g-hint{text-align:center;font-size:12px;color:rgba(255,255,255,.5);padding-top:12px}
   /* esquema */
   .m-sub{display:inline-block;margin:8px 0 28px;background:var(--amarillo);border-radius:18px 0 18px 0;padding:8px 24px;font-family:var(--display);font-size:17px;color:#01302b}
   .esq-list{list-style:none}
@@ -324,13 +359,13 @@
       <div class="cols2">
         <div class="col">
           <h3>Recursos</h3>
-          <a class="link" href="#">Inicio</a>
-          <a class="link" href="#">Nosotros</a>
+          <a class="link" href="index.html">Inicio</a>
+          <a class="link" href="nosotros.html">Nosotros</a>
           <a class="link q-link" href="que-hacemos.html">¿<span>Qué hacemos</span>?</a>
         </div>
         <div class="col">
           <h3>Ayuda</h3>
-          <a class="link" href="#">Contacto</a>
+          <a class="link" href="contacto.html">Contacto</a>
         </div>
       </div>
     </footer>
@@ -343,24 +378,20 @@
 
         <!-- +60k: collage de categorías -->
         <div class="m-view" data-view="collage" hidden>
-          <div class="gcards">
-            <button class="gcard g-cultivos" data-cat="cultivos"><img class="cover" src="assets/galerias/cultivos/portada.webp" alt=""><span class="gtitle">Cultivos</span></button>
-            <button class="gcard g-frutales" data-cat="frutales"><img class="cover" src="assets/galerias/frutales/portada.webp" alt=""><span class="gtitle">Frutales</span></button>
-            <button class="gcard g-riego" data-cat="riego"><img class="cover" src="assets/galerias/riego/portada.webp" alt=""><span class="gtitle">Gestión<br>hídrica</span></button>
-            <button class="gcard g-innovacion" data-cat="innovacion"><img class="cover" src="assets/galerias/innovacion/portada.webp" alt=""><span class="gtitle">Innovación<br>agrícola</span></button>
-            <button class="gcard g-impacto" data-cat="impacto"><img class="cover" src="assets/galerias/impacto/portada.webp" alt=""><span class="gtitle">Impacto<br>ambiental</span></button>
-          </div>
+          <!-- las tarjetas se generan desde GAL: portada, tinte y conteo en un solo lugar -->
+          <div class="gcards"></div>
         </div>
 
         <!-- galería de fotos -->
         <div class="m-view" data-view="gallery" hidden>
-          <h3 class="g-title"></h3>
-          <div class="g-stage">
-            <img class="g-img" src="" alt="">
-            <button class="g-zone g-zone-prev" aria-label="Anterior"></button>
-            <button class="g-zone g-zone-next" aria-label="Siguiente"></button>
+          <div class="g-segs"></div>
+          <div class="g-head">
+            <h3 class="g-title"></h3>
+            <span class="g-count"></span>
           </div>
-          <div class="g-dots"></div>
+          <div class="g-track"></div>
+          <div class="g-thumbs"></div>
+          <p class="g-hint">Desliza para ver más</p>
         </div>
 
         <!-- KPIs: esquema de gestión (lista vertical) -->
@@ -405,23 +436,37 @@
   <script src="mobile.js"></script>
   <script>
   (function(){
+    // tinte y color de texto por categoría: valores exactos de styles.css (.tile-glass / .tile-title)
     var GAL={
-      cultivos:{t:'Cultivos',f:['cultivos/foto1.webp','cultivos/foto2.webp','cultivos/foto3.webp']},
-      frutales:{t:'Frutales',f:['frutales/foto1.webp','frutales/foto2.webp','frutales/foto3.webp','frutales/foto4.webp','frutales/foto5.webp']},
-      riego:{t:'Gestión hídrica',f:['riego/foto1.webp','riego/foto2.webp','riego/foto3.webp']},
-      innovacion:{t:'Innovación agrícola',f:['innovacion/foto1.webp','innovacion/foto2.webp','innovacion/foto3.webp','innovacion/foto4.webp']},
-      impacto:{t:'Impacto ambiental',f:['impacto/foto1.webp','impacto/foto2.webp']}
+      cultivos:{t:'Cultivos',tinte:'rgba(123,194,80,.4)',tinta:'#EAF4F0',f:['cultivos/foto1.webp','cultivos/foto2.webp','cultivos/foto3.webp']},
+      frutales:{t:'Frutales',tinte:'rgba(249,189,35,.4)',tinta:'#EAF4F0',f:['frutales/foto1.webp','frutales/foto2.webp','frutales/foto3.webp','frutales/foto4.webp','frutales/foto5.webp']},
+      riego:{t:'Gestión hídrica',tinte:'rgba(13,114,51,.4)',tinta:'#EAF4F0',f:['riego/foto1.webp','riego/foto2.webp','riego/foto3.webp']},
+      innovacion:{t:'Innovación agrícola',tinte:'rgba(4,49,32,.4)',tinta:'#EAF4F0',f:['innovacion/foto1.webp','innovacion/foto2.webp','innovacion/foto3.webp','innovacion/foto4.webp']},
+      // en desktop el título de impacto va en verde oscuro sobre el amarillo
+      impacto:{t:'Impacto ambiental',tinte:'rgba(244,223,87,.4)',tinta:'#043120',f:['impacto/foto1.webp','impacto/foto2.webp']}
     };
     var BASE='assets/galerias/';
     var modal=document.getElementById('modal');
     var views={};
     modal.querySelectorAll('.m-view').forEach(function(v){views[v.dataset.view]=v;});
     var cur=[],idx=0;
-    var img=modal.querySelector('.g-img'), gtitle=modal.querySelector('.g-title'), dotsBox=modal.querySelector('.g-dots');
-    var autoT=null;
-    function stopAuto(){ if(autoT){clearInterval(autoT);autoT=null;} }
-    function startAuto(){ stopAuto(); if(cur.length>1) autoT=setInterval(function(){ go(idx+1); }, 3000); }
-    function show(name){for(var k in views){views[k].hidden=(k!==name);} if(name!=='gallery') stopAuto();}
+    var gtitle=modal.querySelector('.g-title'), gcount=modal.querySelector('.g-count');
+    var track=modal.querySelector('.g-track'), thumbs=modal.querySelector('.g-thumbs'), segsBox=modal.querySelector('.g-segs');
+    var cardsBox=modal.querySelector('.gcards');
+    function show(name){for(var k in views){views[k].hidden=(k!==name);}}
+
+    // tarjetas de categoría: portada = primera foto real (las 'portada-base' traen
+    // el vidrio horneado y chocarían con el que dibujamos en CSS)
+    Object.keys(GAL).forEach(function(k){
+      var g=GAL[k];
+      var b=document.createElement('button');
+      b.className='gcard'; b.dataset.cat=k;
+      b.innerHTML='<img class="cover" alt="">'+
+        '<span class="gglass" style="--tinte:'+g.tinte+';--tinta:'+g.tinta+'">'+
+        '<span class="n">'+g.t+'</span><span class="c">'+g.f.length+' fotos</span></span>';
+      b.querySelector('img').src=BASE+g.f[0];
+      cardsBox.appendChild(b);
+    });
     function animateEsquema(){
       modal.querySelectorAll('.esq-list li').forEach(function(li,i){
         var base=0.15+i*0.26;
@@ -437,23 +482,45 @@
       });
     }
     function open(view){show(view);modal.hidden=false;document.body.style.overflow='hidden';if(view==='esquema')animateEsquema();}
-    function close(){modal.hidden=true;document.body.style.overflow='';stopAuto();}
+    function close(){modal.hidden=true;document.body.style.overflow='';}
     function smartClose(){ if(!views.gallery.hidden){ show('collage'); } else { close(); } }
-    function buildDots(){var h='';for(var i=0;i<cur.length;i++){h+='<button class="g-dot" data-i="'+i+'" aria-label="Foto '+(i+1)+'"></button>';}dotsBox.innerHTML=h;}
-    function render(){img.src=BASE+cur[idx];var ds=dotsBox.children;for(var i=0;i<ds.length;i++){ds[i].classList.toggle('active',i===idx);}}
-    function go(n){idx=(n+cur.length)%cur.length;render();startAuto();}
-    function openGallery(cat){var g=GAL[cat];if(!g)return;cur=g.f;idx=0;gtitle.textContent=g.t;buildDots();render();show('gallery');startAuto();}
+
+    // sin avance automático: el ritmo lo marca quien mira
+    function sync(){
+      gcount.textContent=(idx+1)+' / '+cur.length;
+      [].forEach.call(segsBox.children,function(s,i){s.className='g-seg'+(i<idx?' done':i===idx?' now':'');});
+      [].forEach.call(thumbs.children,function(t,i){t.classList.toggle('active',i===idx);});
+    }
+    function openGallery(cat){
+      var g=GAL[cat]; if(!g) return;
+      cur=g.f; idx=0; gtitle.textContent=g.t;
+      track.innerHTML =cur.map(function(f){return '<div class="g-slide"><img src="'+BASE+f+'" alt=""></div>';}).join('');
+      thumbs.innerHTML=cur.map(function(f,i){return '<button class="g-thumb" data-i="'+i+'" aria-label="Foto '+(i+1)+'"><img src="'+BASE+f+'" alt=""></button>';}).join('');
+      segsBox.innerHTML=cur.map(function(){return '<span class="g-seg"><i></i></span>';}).join('');
+      show('gallery'); track.scrollLeft=0; sync();
+    }
     // disparadores por stat
     modal.parentNode.querySelector('.stat-1').addEventListener('click',function(){open('collage');});
     modal.parentNode.querySelector('.stat-2').addEventListener('click',function(){open('esquema');});
     modal.parentNode.querySelector('.stat-3').addEventListener('click',function(){open('logos');});
-    // tiles -> galería
+    // tarjetas -> galería
     modal.querySelectorAll('.gcard').forEach(function(t){t.addEventListener('click',function(){openGallery(t.dataset.cat);});});
-    // navegación galería: click en mitad izq/der + puntos
-    modal.querySelector('.g-zone-prev').addEventListener('click',function(){go(idx-1);});
-    modal.querySelector('.g-zone-next').addEventListener('click',function(){go(idx+1);});
-    dotsBox.addEventListener('click',function(e){var b=e.target.closest('.g-dot');if(b)go(+b.dataset.i);});
-    if(window.TT&&TT.swipe) TT.swipe(modal.querySelector('.g-stage'),function(){go(idx-1);},function(){go(idx+1);});
+    // el índice sale del scroll nativo: el swipe lo resuelve el navegador
+    var tick;
+    track.addEventListener('scroll',function(){
+      clearTimeout(tick);
+      tick=setTimeout(function(){
+        var n=Math.round(track.scrollLeft/track.clientWidth);
+        if(n!==idx){idx=n;sync();}
+      },60);
+    });
+    thumbs.addEventListener('click',function(e){
+      var b=e.target.closest('.g-thumb'); if(!b) return;
+      idx=+b.dataset.i;
+      track.scrollTo({left:idx*track.clientWidth,behavior:'smooth'});
+      sync();
+    });
+    // volver a categorías: lo hace la X del modal (smartClose)
     // cerrar: la X vuelve a categorías si estamos en una galería; si no, cierra el modal
     modal.querySelector('.m-close').addEventListener('click',smartClose);
     modal.querySelector('.m-backdrop').addEventListener('click',close);

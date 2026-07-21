@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Proyectos — Opción C: mosaico con visor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mobile.css">
+<style>
+  /* OPCIÓN C — Mosaico con visor
+     Las 6 fotos se ven de entrada, sin esperar a que pasen. Al tocar una se abre
+     a pantalla completa y ahí sí se desliza. Primero panorama, después detalle. */
+  .proy{padding:44px 30px 46px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+  .cell{border:0;padding:0;border-radius:14px;overflow:hidden;cursor:pointer;background:#022016;
+        transition:transform .25s cubic-bezier(.22,.61,.36,1)}
+  .cell:active{transform:scale(.97)}
+  .cell img{width:100%;height:100%;object-fit:cover;display:block}
+  /* la primera ocupa el ancho completo: hace de portada y rompe la monotonía */
+  .cell:first-child{grid-column:1 / -1;aspect-ratio:16/10}
+  .cell:not(:first-child){aspect-ratio:1}
+
+  .card{margin-top:28px;background:#F3FAEF;border-radius:28px;padding:30px 26px}
+  .card p{font-size:16px;line-height:1.4;color:#0d7233;font-weight:400;text-align:center;letter-spacing:-.2px}
+  .card strong{font-weight:500}
+
+  /* visor */
+  .lb{position:fixed;inset:0;z-index:200;background:rgba(4,49,32,.94);
+      -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+      display:none;flex-direction:column;
+      padding:calc(16px + env(safe-area-inset-top)) 0 calc(20px + env(safe-area-inset-bottom))}
+  .lb.on{display:flex}
+  .lb-top{display:flex;align-items:center;justify-content:space-between;padding:0 22px 14px}
+  .lb-count{font-size:13px;color:rgba(255,255,255,.8);font-variant-numeric:tabular-nums}
+  .lb-x{width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.16);
+        -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-size:20px;cursor:pointer}
+  .lb-track{flex:1;display:flex;align-items:center;overflow-x:auto;scroll-snap-type:x mandatory;
+            scrollbar-width:none;gap:12px;padding:0 22px}
+  .lb-track::-webkit-scrollbar{display:none}
+  .lb-slide{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center}
+  .lb-slide img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px;display:block}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar"><div class="appbar">
+    <a href="index.html"><img class="logo" src="assets/logo-dark.webp" alt="TerraTech Agro"></a>
+  </div></div>
+
+  <main class="proy">
+    <span class="chip">Sur Andina</span>
+    <div class="grid" id="grid"></div>
+    <article class="card">
+      <p>Sur Andina es un proyecto agroindustrial de <strong>500 Hectáreas</strong>, distribuidas en <strong>cítricos y cultivos</strong>, desarrollado en <strong>Olmos, Perú</strong>, donde se ejecutó la habilitación integral del predio, incorporando <strong>infraestructura, recursos hídricos, sistemas de riego, plantación y obras estratégicas</strong> que permiten una operación agrícola eficiente de cara a mercados de agroexportación.</p>
+    </article>
+  </main>
+</div>
+
+<div class="lb" id="lb">
+  <div class="lb-top">
+    <span class="lb-count" id="lbCount"></span>
+    <button class="lb-x" id="lbX" aria-label="Cerrar">&times;</button>
+  </div>
+  <div class="lb-track" id="lbTrack"></div>
+</div>
+
+<script>
+(function(){
+  var F=['carrusel-1.webp','carrusel-2.webp','carrusel-3.webp','carrusel-4.webp','carrusel-5.webp','carrusel-6.webp'];
+  var B='assets/proyectos/', i=0;
+  var grid=document.getElementById('grid'), lb=document.getElementById('lb');
+  var lbTrack=document.getElementById('lbTrack'), lbCount=document.getElementById('lbCount');
+
+  grid.innerHTML=F.map(function(f,k){return '<button class="cell" data-i="'+k+'"><img src="'+B+f+'" alt=""></button>';}).join('');
+  lbTrack.innerHTML=F.map(function(f){return '<div class="lb-slide"><img src="'+B+f+'" alt=""></div>';}).join('');
+
+  function sync(){ lbCount.textContent=(i+1)+' / '+F.length; }
+  grid.addEventListener('click',function(e){
+    var b=e.target.closest('.cell'); if(!b) return;
+    i=+b.dataset.i; lb.classList.add('on'); document.body.style.overflow='hidden';
+    lbTrack.scrollLeft=i*lbTrack.clientWidth; sync();
+  });
+  document.getElementById('lbX').addEventListener('click',function(){
+    lb.classList.remove('on'); document.body.style.overflow='';
+  });
+  var t; lbTrack.addEventListener('scroll',function(){
+    clearTimeout(t); t=setTimeout(function(){
+      var n=Math.round(lbTrack.scrollLeft/lbTrack.clientWidth);
+      if(n!==i){i=n;sync();}
+    },60);
+  });
+})();
+</script>
+</body>
+</html>

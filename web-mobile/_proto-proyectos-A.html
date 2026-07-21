@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Proyectos — Opción A: carrusel con anticipo</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mobile.css">
+<style>
+  /* OPCIÓN A — Carrusel con anticipo
+     La foto siguiente asoma por el borde: se entiende que hay más sin necesidad
+     de texto. El desplazamiento es nativo (scroll-snap), con la inercia del sistema. */
+  .proy{padding:44px 0 46px}
+  .proy .chip{margin-left:30px}
+
+  .track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+         scrollbar-width:none;-webkit-overflow-scrolling:touch;
+         margin-top:22px;padding:0 30px;scroll-padding:0 30px}
+  .track::-webkit-scrollbar{display:none}
+  .slide{flex:0 0 82%;scroll-snap-align:center}
+  .slide img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;display:block;background:#022016}
+
+  .meta{display:flex;align-items:center;gap:12px;padding:16px 30px 0}
+  .segs{flex:1;display:flex;gap:4px}
+  .seg{flex:1;height:3px;border-radius:2px;background:rgba(4,49,32,.18);overflow:hidden}
+  .seg i{display:block;height:100%;width:0;background:var(--hoja-media);transition:width .3s ease}
+  .seg.done i,.seg.now i{width:100%}
+  .count{font-size:13px;color:#0d7233;font-variant-numeric:tabular-nums}
+
+  .card{margin:28px 30px 0;background:#F3FAEF;border-radius:28px;padding:30px 26px}
+  .card p{font-size:16px;line-height:1.4;color:#0d7233;font-weight:400;text-align:center;letter-spacing:-.2px}
+  .card strong{font-weight:500}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar"><div class="appbar">
+    <a href="index.html"><img class="logo" src="assets/logo-dark.webp" alt="TerraTech Agro"></a>
+  </div></div>
+
+  <main class="proy">
+    <span class="chip">Sur Andina</span>
+    <div class="track" id="track"></div>
+    <div class="meta">
+      <div class="segs" id="segs"></div>
+      <span class="count" id="count"></span>
+    </div>
+    <article class="card">
+      <p>Sur Andina es un proyecto agroindustrial de <strong>500 Hectáreas</strong>, distribuidas en <strong>cítricos y cultivos</strong>, desarrollado en <strong>Olmos, Perú</strong>, donde se ejecutó la habilitación integral del predio, incorporando <strong>infraestructura, recursos hídricos, sistemas de riego, plantación y obras estratégicas</strong> que permiten una operación agrícola eficiente de cara a mercados de agroexportación.</p>
+    </article>
+  </main>
+</div>
+<script>
+(function(){
+  var F=['carrusel-1.webp','carrusel-2.webp','carrusel-3.webp','carrusel-4.webp','carrusel-5.webp','carrusel-6.webp'];
+  var B='assets/proyectos/', i=0;
+  var track=document.getElementById('track'), segs=document.getElementById('segs'), count=document.getElementById('count');
+  track.innerHTML=F.map(function(f){return '<div class="slide"><img src="'+B+f+'" alt=""></div>';}).join('');
+  segs.innerHTML =F.map(function(){return '<span class="seg"><i></i></span>';}).join('');
+  function sync(){
+    count.textContent=(i+1)+' / '+F.length;
+    [].forEach.call(segs.children,function(s,k){s.className='seg'+(k<i?' done':k===i?' now':'');});
+  }
+  var t; track.addEventListener('scroll',function(){
+    clearTimeout(t); t=setTimeout(function(){
+      var w=track.querySelector('.slide').offsetWidth+12;
+      var n=Math.round(track.scrollLeft/w);
+      if(n!==i){i=n;sync();}
+    },60);
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

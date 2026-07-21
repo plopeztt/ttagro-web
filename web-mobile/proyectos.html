@@ -16,9 +16,21 @@
   .proy .zone{position:absolute;top:0;bottom:0;width:50%;cursor:pointer;z-index:2;background:none;border:0}
   .proy .zone-prev{left:0}
   .proy .zone-next{right:0}
-  .proy .dots{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:18px}
-  .proy .dot{width:8px;height:8px;border-radius:50%;background:rgba(4,49,32,.25);cursor:pointer;transition:background .25s,transform .25s;border:0;padding:0}
-  .proy .dot.active{background:var(--hoja-media);transform:scale(1.3)}
+  /* barra segmentada: se ve cuántas fotos hay, en cuál estás y cuánto falta
+     para que pase la siguiente (el segmento activo se llena durante el intervalo) */
+  /* punto que se estira en píldora al activarse; la píldora se llena como cuenta regresiva */
+  .proy .segs{display:flex;justify-content:center;gap:7px;margin-top:18px}
+  .proy .seg{flex:none;width:8px;height:8px;border-radius:999px;overflow:hidden;border:0;padding:0;cursor:pointer;
+             background:rgba(4,49,32,.22);transition:width .35s ease,background .35s ease}
+  .proy .seg.done{background:rgba(4,49,32,.4)}
+  .proy .seg.now{width:52px;background:rgba(4,49,32,.15)}
+  .proy .seg i{display:block;height:100%;width:0;border-radius:999px;background:var(--hoja-media)}
+  .proy .seg.now i{animation:proyLlenar var(--dur,3000ms) linear forwards}
+  @keyframes proyLlenar{from{width:0}to{width:100%}}
+  @media (prefers-reduced-motion: reduce){
+    .proy .seg{transition:none}
+    .proy .seg.now i{animation:none;width:100%}
+  }
   .proy .card{margin-top:28px;background:#F3FAEF;border-radius:28px;padding:30px 26px}
   .proy .card p{font-size:16px;line-height:1.4;color:#0d7233;font-weight:400;text-align:center;letter-spacing:-.2px}
   .proy .card strong{font-weight:500}
@@ -55,7 +67,7 @@
         <button class="zone zone-prev" aria-label="Anterior"></button>
         <button class="zone zone-next" aria-label="Siguiente"></button>
       </div>
-      <div class="dots" id="proyDots"></div>
+      <div class="segs" id="proySegs"></div>
 
       <article class="card">
         <p>Sur Andina es un proyecto agroindustrial de <strong>500 Hectáreas</strong>, distribuidas en <strong>cítricos y cultivos</strong>, desarrollado en <strong>Olmos, Perú</strong>, donde se ejecutó la habilitación integral del predio, incorporando <strong>infraestructura, recursos hídricos, sistemas de riego, plantación y obras estratégicas</strong> que permiten una operación agrícola eficiente de cara a mercados de agroexportación.</p>
@@ -82,17 +94,27 @@
   <script>
   (function(){
     var fotos=['carrusel-1.webp','carrusel-2.webp','carrusel-3.webp','carrusel-4.webp','carrusel-5.webp','carrusel-6.webp'];
-    var i=0, img=document.getElementById('proyImg'), dots=document.getElementById('proyDots'), autoT=null;
+    var DUR=3000;
+    var i=0, img=document.getElementById('proyImg'), segs=document.getElementById('proySegs'), autoT=null;
+    document.querySelector('.proy').style.setProperty('--dur', DUR+'ms');
     function stopAuto(){ if(autoT){clearInterval(autoT);autoT=null;} }
-    function startAuto(){ stopAuto(); autoT=setInterval(function(){ go(i+1); }, 3000); }
-    function buildDots(){var h='';for(var k=0;k<fotos.length;k++){h+='<button class="dot" data-i="'+k+'" aria-label="Foto '+(k+1)+'"></button>';}dots.innerHTML=h;}
-    function render(){img.src='assets/proyectos/'+fotos[i];var ds=dots.children;for(var k=0;k<ds.length;k++){ds[k].classList.toggle('active',k===i);}}
+    function startAuto(){ stopAuto(); autoT=setInterval(function(){ go(i+1); }, DUR); }
+    function buildSegs(){var h='';for(var k=0;k<fotos.length;k++){h+='<button class="seg" data-i="'+k+'" aria-label="Foto '+(k+1)+'"><i></i></button>';}segs.innerHTML=h;}
+    function render(){
+      img.src='assets/proyectos/'+fotos[i];
+      var ds=segs.children;
+      for(var k=0;k<ds.length;k++){
+        ds[k].className='seg'+(k<i?' done':k===i?' now':'');
+        // reinicia la animación de llenado del segmento activo
+        if(k===i){var b=ds[k].firstElementChild;b.style.animation='none';void b.offsetWidth;b.style.animation='';}
+      }
+    }
     function go(n){i=(n+fotos.length)%fotos.length;render();startAuto();}
     document.querySelector('.zone-prev').addEventListener('click',function(){go(i-1);});
     document.querySelector('.zone-next').addEventListener('click',function(){go(i+1);});
-    dots.addEventListener('click',function(e){var b=e.target.closest('.dot');if(b)go(+b.dataset.i);});
+    segs.addEventListener('click',function(e){var b=e.target.closest('.seg');if(b)go(+b.dataset.i);});
     if(window.TT&&TT.swipe) TT.swipe(document.querySelector('.stage'),function(){go(i-1);},function(){go(i+1);});
-    buildDots(); render(); startAuto();
+    buildSegs(); render(); startAuto();
   })();
   </script>
 </body>

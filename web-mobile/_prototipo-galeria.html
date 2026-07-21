@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Prototipo galería — TerraTech Agro</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Batica Sans';src:url('assets/fonts/BaticaSans-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+  @font-face{font-family:'Batica Sans';src:url('assets/fonts/BaticaSans-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+  :root{
+    --verde-oscuro:#01302b; --verde-fondo:#043120; --amarillo:#f4df57;
+    --texto-claro:#eaf4f0; --font:'Outfit',sans-serif; --display:'Batica Sans','Outfit',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--font);background:#0a1f16;display:flex;justify-content:center}
+  .app{width:100%;max-width:430px;min-height:100vh;position:relative;
+       background:linear-gradient(180deg,#0d3a28,#04241a)}
+
+  /* ============ VISTA A: categorías ============ */
+  .cats{padding:calc(24px + env(safe-area-inset-top)) 20px 32px}
+  .cats-head{display:flex;justify-content:flex-end;margin-bottom:16px}
+  .btn-x{width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.14);
+         -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+         color:#fff;font-size:20px;cursor:pointer;flex:none}
+
+  .cat-list{display:flex;flex-direction:column;gap:12px}
+  .cat{position:relative;display:block;width:100%;border:0;padding:0;border-radius:18px;
+       overflow:hidden;cursor:pointer;background:#022016;aspect-ratio:16/9;
+       transition:transform .25s cubic-bezier(.22,.61,.36,1)}
+  .cat:active{transform:scale(.98)}
+  .cat img{width:100%;height:100%;object-fit:cover;display:block}
+  /* vidrio esmerilado de marca. Tinte y blur tomados de styles.css (.tile-glass):
+     un color por categoría al 40%, blur 18px. En desktop va horneado dentro de
+     portada-base.webp; acá va en CSS para poder ajustar tamaño y que siga la foto. */
+  .cat-glass{
+    position:absolute;right:0;bottom:0;z-index:2;pointer-events:none;
+    width:47%;height:58%;
+    border-radius:88px 0 18px 0;
+    background:var(--tinte);
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    /* centrado óptico: la esquina redondeada de 88px quita masa arriba a la izquierda,
+       así que el centroide real cae 6px a la derecha y 4px abajo del centro geométrico */
+    padding:8px 14px 0 26px;text-align:center;
+  }
+  .cat-glass .n{font-family:var(--display);font-size:18px;line-height:1.14;color:var(--tinta)}
+  .cat-glass .c{margin-top:5px;font-size:11.5px;color:var(--tinta);opacity:.82;letter-spacing:.02em}
+
+  /* ============ VISTA B: visor ============ */
+  .viewer{display:none;flex-direction:column;height:100vh;
+          padding:calc(14px + env(safe-area-inset-top)) 0 calc(14px + env(safe-area-inset-bottom))}
+  .viewer.on{display:flex}
+
+  .v-top{padding:0 20px}
+  /* barra segmentada: se ve de un vistazo cuántas fotos hay y en cuál estás */
+  .segs{display:flex;gap:4px;margin-bottom:14px}
+  .seg{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.22);overflow:hidden}
+  .seg i{display:block;height:100%;width:0;background:var(--amarillo);transition:width .3s ease}
+  .seg.done i{width:100%}
+  .seg.now i{width:100%}
+
+  .v-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .v-back{width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.14);
+          -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+          color:#fff;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+  .v-back svg{width:17px;height:17px}
+  .v-title{flex:1;font-family:var(--display);font-size:20px;font-weight:400;color:var(--amarillo)}
+  .v-count{font-size:13px;color:rgba(255,255,255,.72);font-variant-numeric:tabular-nums}
+
+  /* carrusel nativo: swipe real con inercia, sin JS de arrastre */
+  .track{flex:1;display:flex;align-items:center;overflow-x:auto;scroll-snap-type:x mandatory;
+         scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:12px;padding:0 20px}
+  .track::-webkit-scrollbar{display:none}
+  .slide{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center}
+  /* horizontal: se respeta el encuadre original, no se estira al alto de la pantalla */
+  .slide img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;
+             border-radius:18px;display:block;background:#022016}
+
+  /* miniaturas: permiten saltar directo y muestran qué más hay */
+  .thumbs{display:flex;gap:8px;overflow-x:auto;padding:14px 20px 0;scrollbar-width:none}
+  .thumbs::-webkit-scrollbar{display:none}
+  .thumb{flex:0 0 76px;height:58px;border:0;padding:0;border-radius:10px;overflow:hidden;
+         cursor:pointer;opacity:.45;transition:opacity .25s,outline-color .25s;
+         outline:2px solid transparent;outline-offset:2px}
+  .thumb.active{opacity:1;outline-color:var(--amarillo)}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+  .hint{text-align:center;font-size:12px;color:rgba(255,255,255,.5);padding-top:12px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- VISTA A -->
+  <section class="cats" id="cats">
+    <div class="cats-head">
+      <button class="btn-x" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="cat-list" id="catList"></div>
+  </section>
+
+  <!-- VISTA B -->
+  <section class="viewer" id="viewer">
+    <div class="v-top">
+      <div class="segs" id="segs"></div>
+      <div class="v-head">
+        <button class="v-back" id="back" aria-label="Volver a categorías">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <h3 class="v-title" id="vTitle"></h3>
+        <span class="v-count" id="vCount"></span>
+      </div>
+    </div>
+    <div class="track" id="track"></div>
+    <div class="thumbs" id="thumbs"></div>
+    <p class="hint">Desliza para ver más</p>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var BASE = 'assets/galerias/';
+  // tinte y color de texto por categoría: valores exactos de styles.css (.tile-glass / .tile-title)
+  var GAL = {
+    cultivos:   {t:'Cultivos',            tinte:'rgba(123,194,80,.4)', tinta:'#EAF4F0',
+                 f:['cultivos/foto1.webp','cultivos/foto2.webp','cultivos/foto3.webp']},
+    frutales:   {t:'Frutales',            tinte:'rgba(249,189,35,.4)', tinta:'#EAF4F0',
+                 f:['frutales/foto1.webp','frutales/foto2.webp','frutales/foto3.webp','frutales/foto4.webp','frutales/foto5.webp']},
+    riego:      {t:'Gestión hídrica',     tinte:'rgba(13,114,51,.4)',  tinta:'#EAF4F0',
+                 f:['riego/foto1.webp','riego/foto2.webp','riego/foto3.webp']},
+    innovacion: {t:'Innovación agrícola', tinte:'rgba(4,49,32,.4)',    tinta:'#EAF4F0',
+                 f:['innovacion/foto1.webp','innovacion/foto2.webp','innovacion/foto3.webp','innovacion/foto4.webp']},
+    // en desktop el título de impacto va en verde oscuro sobre el amarillo
+    impacto:    {t:'Impacto ambiental',   tinte:'rgba(244,223,87,.4)', tinta:'#043120',
+                 f:['impacto/foto1.webp','impacto/foto2.webp']}
+  };
+
+  var catList = document.getElementById('catList');
+  var cats = document.getElementById('cats');
+  var viewer = document.getElementById('viewer');
+  var track = document.getElementById('track');
+  var thumbs = document.getElementById('thumbs');
+  var segs = document.getElementById('segs');
+  var vTitle = document.getElementById('vTitle');
+  var vCount = document.getElementById('vCount');
+  var cur = [], idx = 0;
+
+  // ---- vista A
+  Object.keys(GAL).forEach(function(k){
+    var g = GAL[k];
+    var b = document.createElement('button');
+    b.className = 'cat';
+    // portada = primera foto real de la galería (las 'portada-base' traen
+    // una mancha de color incrustada que ensucia el degradado)
+    b.innerHTML = '<img alt="">' +
+      '<span class="cat-glass" style="--tinte:' + g.tinte + ';--tinta:' + g.tinta + '">' +
+      '<span class="n">' + g.t + '</span>' +
+      '<span class="c">' + g.f.length + ' fotos</span></span>';
+    b.querySelector('img').src = BASE + g.f[0];
+    b.addEventListener('click', function(){ openGal(k); });
+    catList.appendChild(b);
+  });
+
+  // ---- vista B
+  function openGal(k){
+    var g = GAL[k];
+    cur = g.f; idx = 0;
+    vTitle.textContent = g.t;
+
+    track.innerHTML  = cur.map(function(f){
+      return '<div class="slide"><img src="' + BASE + f + '" alt=""></div>'; }).join('');
+    thumbs.innerHTML = cur.map(function(f,i){
+      return '<button class="thumb" data-i="' + i + '"><img src="' + BASE + f + '" alt=""></button>'; }).join('');
+    segs.innerHTML   = cur.map(function(){ return '<span class="seg"><i></i></span>'; }).join('');
+
+    cats.style.display = 'none';
+    viewer.classList.add('on');
+    track.scrollLeft = 0;
+    sync();
+  }
+
+  function sync(){
+    vCount.textContent = (idx + 1) + ' / ' + cur.length;
+    [].forEach.call(segs.children, function(s,i){ s.className = 'seg' + (i < idx ? ' done' : i === idx ? ' now' : ''); });
+    [].forEach.call(thumbs.children, function(t,i){ t.classList.toggle('active', i === idx); });
+  }
+
+  // el índice sale del scroll nativo: sin listeners de arrastre
+  var tick;
+  track.addEventListener('scroll', function(){
+    clearTimeout(tick);
+    tick = setTimeout(function(){
+      var n = Math.round(track.scrollLeft / track.clientWidth);
+      if (n !== idx) { idx = n; sync(); }
+    }, 60);
+  });
+
+  thumbs.addEventListener('click', function(e){
+    var b = e.target.closest('.thumb'); if (!b) return;
+    idx = +b.dataset.i;
+    track.scrollTo({ left: idx * track.clientWidth, behavior: 'smooth' });
+    sync();
+  });
+
+  document.getElementById('back').addEventListener('click', function(){
+    viewer.classList.remove('on');
+    cats.style.display = '';
+  });
+})();
+</script>
+</body>
+</html>
