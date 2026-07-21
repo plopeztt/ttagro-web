@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <script src="version.js"></script>
 <title>TerraTech Agro — Home móvil</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +46,7 @@
 
   /* ---------- header frosted (con espacio superior, sin barra de estado) ---------- */
   .topbar{
-    position:absolute;top:0;left:0;right:0;z-index:40;padding-top:40px;
+    position:absolute;top:0;left:0;right:0;z-index:40;padding-top:calc(40px + env(safe-area-inset-top));
     background:transparent;
   }
   .appbar{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
@@ -72,7 +72,7 @@
 
   /* ---------- hero ---------- */
   .hero{
-    position:relative;min-height:600px;padding:124px 34px 48px;color:#fff;overflow:hidden;
+    position:relative;min-height:600px;padding:calc(124px + env(safe-area-inset-top)) 34px 48px;color:#fff;overflow:hidden;
     display:flex;flex-direction:column;
     background:linear-gradient(180deg,rgba(3,30,20,.30) 0%,rgba(3,30,20,.74) 100%),
                url('assets/hero-bg.webp') center/cover no-repeat,#043120;
