@@ -265,10 +265,25 @@ document.addEventListener('DOMContentLoaded', () => {
       playEsquema();
     };
 
-    const galDots = modal.querySelector('.gal-dots');
+    const GAL_DUR = 3200;
+    const galQuieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const galThumbs = modal.querySelector('.gal-thumbs');
+    const galSegs   = modal.querySelector('.gal-segs');
+    const galCount  = modal.querySelector('.gal-count');
+    if (galleryView) galleryView.style.setProperty('--gal-dur', GAL_DUR + 'ms');
+
     const showFoto = (i, noFade) => {
       idx = (i + fotos.length) % fotos.length;
-      if (galDots) { const ds = galDots.children; for (let k = 0; k < ds.length; k++) ds[k].classList.toggle('active', k === idx); }
+      if (galCount) galCount.textContent = (idx + 1) + ' / ' + fotos.length;
+      if (galThumbs) { const ts = galThumbs.children; for (let k = 0; k < ts.length; k++) ts[k].classList.toggle('active', k === idx); }
+      if (galSegs) {
+        const ss = galSegs.children;
+        for (let k = 0; k < ss.length; k++) {
+          ss[k].className = 'gal-seg' + (k < idx ? ' done' : k === idx ? ' now' : '');
+          // reinicia el llenado del segmento activo
+          if (k === idx) { const bar = ss[k].firstElementChild; bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+        }
+      }
       const src = BASE + fotos[idx];
       const incoming = activeGal === galA ? galB : galA;
       incoming.src = src;
@@ -297,20 +312,25 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let galAuto = null;
-    const stopGalAuto = () => { if (galAuto) { clearInterval(galAuto); galAuto = null; } };
-    const goGal = i => { showFoto(i); stopGalAuto(); galAuto = setInterval(() => goGal(idx + 1), 3200); };
-    const startGalAuto = () => { stopGalAuto(); galAuto = setInterval(() => goGal(idx + 1), 3200); };
+    const stopGalAuto = () => { if (galAuto) { clearTimeout(galAuto); galAuto = null; } };
+    const startGalAuto = () => { stopGalAuto(); if (!galQuieto) galAuto = setTimeout(() => goGal(idx + 1), GAL_DUR); };
+    const goGal = i => { showFoto(i); startGalAuto(); };
 
     const openGallery = (cat, noFade) => {
       const g = GALERIAS[cat];
       if (!g) return;
       fotos = g.fotos;
       titulo = g.titulo;
-      modal.querySelector('.gal-title').textContent = titulo;
-      if (galDots) {
+      modal.querySelector('.gal-name').textContent = titulo;
+      if (galThumbs) {
         let h = '';
-        for (let k = 0; k < fotos.length; k++) h += '<button class="dot" data-i="' + k + '" aria-label="Foto ' + (k + 1) + '"></button>';
-        galDots.innerHTML = h;
+        for (let k = 0; k < fotos.length; k++) h += '<button class="gal-thumb" data-i="' + k + '" aria-label="Foto ' + (k + 1) + '"><img src="' + BASE + fotos[k] + '" alt=""></button>';
+        galThumbs.innerHTML = h;
+      }
+      if (galSegs) {
+        let h = '';
+        for (let k = 0; k < fotos.length; k++) h += '<span class="gal-seg"><i></i></span>';
+        galSegs.innerHTML = h;
       }
       collageView.hidden = true;
       galleryView.hidden = false;
@@ -429,12 +449,27 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.querySelector('.gal-close').addEventListener('click', showCollage);
     modal.querySelector('.exp-backdrop').addEventListener('click', closeModal);
     modal.querySelectorAll('.tile').forEach(t => {
+      // conteo de fotos dentro del título: sale de GALERIAS, así no se desincroniza
+      const g = GALERIAS[t.dataset.cat];
+      const ti = t.querySelector('.tile-title');
+      if (g && ti && !ti.querySelector('.tile-count')) {
+        const c = document.createElement('span');
+        c.className = 'tile-count';
+        c.textContent = g.fotos.length + (EN ? ' photos' : ' fotos');
+        ti.appendChild(c);
+      }
       t.addEventListener('mouseenter', () => preloadFirst(t.dataset.cat));
       t.addEventListener('click', () => expandThenGallery(t));
     });
     modal.querySelector('.gal-zone-prev').addEventListener('click', () => goGal(idx - 1));
     modal.querySelector('.gal-zone-next').addEventListener('click', () => goGal(idx + 1));
-    if (galDots) galDots.addEventListener('click', e => { const b = e.target.closest('.dot'); if (b) goGal(+b.dataset.i); });
+    if (galThumbs) galThumbs.addEventListener('click', e => { const b = e.target.closest('.gal-thumb'); if (b) goGal(+b.dataset.i); });
+    // con el mouse sobre la foto o las miniaturas, el automático se detiene
+    [modal.querySelector('.gal-box'), galThumbs].forEach(el => {
+      if (!el) return;
+      el.addEventListener('mouseenter', () => { stopGalAuto(); galleryView.classList.add('pausa'); });
+      el.addEventListener('mouseleave', () => { galleryView.classList.remove('pausa'); startGalAuto(); });
+    });
 
     document.addEventListener('keydown', e => {
       if (!modal.classList.contains('open')) return;
@@ -477,30 +512,41 @@ document.addEventListener('DOMContentLoaded', () => {
     fotos.forEach(src => { new Image().src = src; });   // precarga
 
     // puntos + auto-avance + click en mitades
-    const proyDots = document.getElementById('proyDots');
+    const PROY_DUR = 3200;
+    const proySegs = document.getElementById('proySegs');
+    const proyQuieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    proySlider.style.setProperty('--proy-dur', PROY_DUR + 'ms');
     let proyAuto = null;
-    const updateProyDots = () => {
-      if (!proyDots) return;
-      const ds = proyDots.children;
-      for (let k = 0; k < ds.length; k++) ds[k].classList.toggle('active', k === f);
+    const updateProySegs = () => {
+      if (!proySegs) return;
+      const ss = proySegs.children;
+      for (let k = 0; k < ss.length; k++) {
+        ss[k].className = 'proy-seg' + (k < f ? ' done' : k === f ? ' now' : '');
+        // reinicia el llenado del segmento activo
+        if (k === f) { const bar = ss[k].firstElementChild; bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+      }
     };
-    const stopProyAuto = () => { if (proyAuto) { clearInterval(proyAuto); proyAuto = null; } };
-    const goProy = i => { showProy(i); updateProyDots(); stopProyAuto(); proyAuto = setInterval(() => goProy(f + 1), 3200); };
+    const stopProyAuto = () => { if (proyAuto) { clearTimeout(proyAuto); proyAuto = null; } };
+    const startProyAuto = () => { stopProyAuto(); if (!proyQuieto) proyAuto = setTimeout(() => goProy(f + 1), PROY_DUR); };
+    const goProy = i => { showProy(i); updateProySegs(); startProyAuto(); };
 
-    if (proyDots) {
+    if (proySegs) {
       let h = '';
-      for (let k = 0; k < fotos.length; k++) h += '<button class="dot" data-i="' + k + '" aria-label="Foto ' + (k + 1) + '"></button>';
-      proyDots.innerHTML = h;
-      proyDots.addEventListener('click', e => { const b = e.target.closest('.dot'); if (b) goProy(+b.dataset.i); });
+      for (let k = 0; k < fotos.length; k++) h += '<button class="proy-seg" data-i="' + k + '" aria-label="Foto ' + (k + 1) + '"><i></i></button>';
+      proySegs.innerHTML = h;
+      proySegs.addEventListener('click', e => { const b = e.target.closest('.proy-seg'); if (b) goProy(+b.dataset.i); });
     }
+    // con el mouse sobre la foto, el automático se detiene
+    proySlider.addEventListener('mouseenter', () => { stopProyAuto(); proySlider.classList.add('pausa'); });
+    proySlider.addEventListener('mouseleave', () => { proySlider.classList.remove('pausa'); startProyAuto(); });
     proySlider.querySelector('.proy-zone-prev').addEventListener('click', () => goProy(f - 1));
     proySlider.querySelector('.proy-zone-next').addEventListener('click', () => goProy(f + 1));
 
     // primera foto (capa A ya es la activa)
     pA.src = fotos[0];
     pA.alt = (EN ? 'Sur Andina — photo 1 of ' : 'Sur Andina — foto 1 de ') + fotos.length;
-    updateProyDots();
-    proyAuto = setInterval(() => goProy(f + 1), 3200);
+    updateProySegs();
+    startProyAuto();
   }
 
   // ----- Selector de idioma (Esp/Eng) -----
