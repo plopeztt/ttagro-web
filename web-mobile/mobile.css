@@ -33,7 +33,7 @@ body{font-family:var(--font);background:#dfe3e0;color:#111;display:flex;justify-
 .app{width:100%;max-width:430px;min-height:100vh;background:#fff;position:relative;overflow-x:hidden;box-shadow:0 0 60px rgba(0,0,0,.12)}
 
 /* header frosted con espacio superior */
-.topbar{position:relative;z-index:40;padding-top:40px;background:transparent}
+.topbar{position:relative;z-index:40;padding-top:calc(40px + env(safe-area-inset-top));background:transparent}
 .appbar{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
 .appbar .logo{height:34px;display:block}
 .appbar .right{display:flex;align-items:center;gap:16px;color:var(--verde-oscuro)}
