@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="version.js"></script>
+<title>TerraTech Agro — Nosotros (móvil)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mobile.css">
+<style>
+  .nos{padding:44px 30px 46px}
+  .nos > .chip{margin-bottom:2px}
+  .chip-sep{margin-top:40px}
+  .mv{display:flex;flex-direction:column;gap:16px;margin-top:22px;margin-bottom:6px}
+  .mv-card{background:rgba(123,194,80,.09);border-radius:20px;padding:26px 24px}
+  .mv-chip{display:inline-block;background:rgba(123,194,80,.16);color:#6aa63c;font-family:var(--display);font-size:17px;border-radius:999px;padding:8px 22px}
+  .mv-text{margin-top:18px;font-size:16px;line-height:1.4;color:#043120;font-weight:400}
+  .mv-text .hl{color:#6aa63c;font-weight:400}
+  .team{display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;margin-top:24px}
+  .tcard{text-align:center}
+  .tcard-solo{grid-column:1 / -1;justify-self:center;width:calc(50% - 8px)}
+  .tphoto{width:100%;aspect-ratio:1/1;border-radius:16px;overflow:hidden;background:#e7ece8}
+  .tphoto img{width:100%;height:100%;object-fit:cover;display:block}
+  .tname{display:block;margin-top:11px;font-family:var(--font);font-weight:400;font-size:15px;color:#008340;line-height:1.25}
+  .trole{display:block;font-family:var(--font);font-weight:700;font-size:15px;color:#008340;margin-top:2px;line-height:1.25}
+</style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="appbar">
+        <a href="index.html"><img class="logo" src="assets/logo-dark.webp" alt="TerraTech Agro"></a>
+        <div class="right">
+          <button class="search-btn" type="button" aria-label="Buscar en el sitio"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg></button>
+          <button class="burger" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+      <nav class="mmenu" id="mmenu" hidden>
+        <a href="index.html">Inicio</a>
+        <a class="active" href="nosotros.html">Nosotros</a>
+        <a href="que-hacemos.html">¿Qué hacemos?</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="contacto.html">Contacto</a>
+        <div class="mlang">
+          <span class="mlang-opt is-active">Esp</span>
+          <span class="mlang-opt mlang-soon" aria-disabled="true">Eng <em>Coming soon</em></span>
+        </div>
+      </nav>
+    </div>
+
+    <main class="nos">
+      <span class="chip">Nosotros</span>
+
+      <div class="mv">
+        <article class="mv-card">
+          <span class="mv-chip">Misión</span>
+          <p class="mv-text">Ejecutar y operar proyectos agrícolas sostenibles bajo estándares <span class="hl">productivos y criterios ESG</span>, garantizando alimentos <span class="hl">sanos y trazables</span> a nuestros consumidores en los mercados mundiales.</p>
+        </article>
+        <article class="mv-card">
+          <span class="mv-chip">Visión</span>
+          <p class="mv-text">Contribuir al desarrollo agroexportador junto con aliados estratégicos mediante prácticas <span class="hl">modernas, tecnológicas y sostenibles</span> que generen resultados económicos en armonía y respeto con el entorno.</p>
+        </article>
+      </div>
+
+      <span class="chip chip-sep">Equipo</span>
+      <div class="team">
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/michael.webp" alt="Michael Grasty C."></div><figcaption><span class="tname">Michael Grasty C.</span><span class="trole">Presidente</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/tomas.webp" alt="Tomás Bottiger M."></div><figcaption><span class="tname">Tomás Bottiger M.</span><span class="trole">Director</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/german.webp" alt="Germán Wielandt N."></div><figcaption><span class="tname">Germán Wielandt N.</span><span class="trole">Vicepresidente Ejecutivo</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/sin-foto.webp" alt=""></div><figcaption><span class="tname">Fernando Cisternas L.</span><span class="trole">Director</span></figcaption></figure>
+        <figure class="tcard tcard-solo"><div class="tphoto"><img src="assets/equipo/sin-foto.webp" alt=""></div><figcaption><span class="tname">Isabel Quiroz</span><span class="trole">Directora</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/pedro.webp" alt="Pedro Barros O."></div><figcaption><span class="tname">Pedro Barros O.</span><span class="trole">Ejecutivo Control de Gestión</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/paula.webp" alt="Paula López G."></div><figcaption><span class="tname">Paula López G.</span><span class="trole">Community Manager</span></figcaption></figure>
+        <figure class="tcard tcard-solo"><div class="tphoto"><img src="assets/equipo/rafael.webp" alt="Rafael Guerrero"></div><figcaption><span class="tname">Rafael Guerrero</span><span class="trole">Administrador Fundo SurAndina</span></figcaption></figure>
+      </div>
+
+      <span class="chip chip-sep">Asesorías técnicas externas</span>
+      <div class="team">
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/sin-foto.webp" alt=""></div><figcaption><span class="tname">Jose M. Astorga</span><span class="trole">Ciruelos</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/sin-foto.webp" alt=""></div><figcaption><span class="tname">NN.</span><span class="trole">Cítricos y Paltos</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/sin-foto.webp" alt=""></div><figcaption><span class="tname">Manuel Palacios</span><span class="trole">Cítricos y Paltos</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/sin-foto.webp" alt=""></div><figcaption><span class="tname">Francisco García Huidobro</span><span class="trole">Nogales</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/sin-foto.webp" alt=""></div><figcaption><span class="tname">NN.</span><span class="trole">Avellanos</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="assets/equipo/sin-foto.webp" alt=""></div><figcaption><span class="tname">Cristian Cobo Z.</span><span class="trole">Hidrología</span></figcaption></figure>
+      </div>
+    </main>
+
+    <footer class="foot light">
+      <p class="company">TERRATECH AGRO</p>
+      <p class="tag">Empresa gestora de proyectos agrícolas sustentables</p>
+      <div class="social">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-3-1.8-3s-2.1 1.43-2.1 2.9V21h-4z"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5.2-6.8L5.3 22H2l7.8-8.9L1.5 2h6.8l4.7 6.2L18.9 2zm-2.3 18h1.8L7.5 3.9H5.6z"/></svg></a>
+      </div>
+      <div class="col"><h3>Dirección</h3><p class="addr">Santiago, Chile<br>Isidora Goyenechea 3162,<br>Of. 902, Las Condes</p></div>
+      <div class="cols2">
+        <div class="col"><h3>Recursos</h3><a class="link" href="index.html">Inicio</a><a class="link" href="nosotros.html">Nosotros</a><a class="link q-link" href="que-hacemos.html">¿<span>Qué hacemos</span>?</a></div>
+        <div class="col"><h3>Ayuda</h3><a class="link" href="contacto.html">Contacto</a></div>
+      </div>
+    </footer>
+  </div>
+  <script src="mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="version.js"></script>
+<title>TerraTech Agro — Home móvil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Batica Sans (titulares y chips), igual que en desktop */
+  @font-face{
+    font-family:'Batica Sans';
+    src:url('assets/fonts/BaticaSans-Regular.woff2') format('woff2'),
+        url('assets/fonts/BaticaSans-Regular.woff') format('woff');
+    font-weight:400;font-style:normal;font-display:swap;
+  }
+  @font-face{
+    font-family:'Batica Sans';
+    src:url('assets/fonts/BaticaSans-Bold.ttf') format('truetype');
+    font-weight:700;font-style:normal;font-display:swap;
+  }
+  :root{
+    --verde-oscuro:#01302b;
+    --verde-fondo:#043120;
+    --verde-claro-bg:#f3faef;
+    --amarillo:#f4df57;
+    --amarillo-90:rgba(244,223,87,.9);
+    --blanco-suave:#f8f9f9;
+    --texto-claro:#eaf4f0;
+    --texto-footer:rgba(234,244,240,.8);
+    --borde-chip:#c2cfcd;
+    --borde-pill:rgba(194,207,205,.72);
+    --hoja-clara:#7BC250;
+    --hoja-media:#0D7233;
+    --hoja-oscura:#043120;
+    --font:'Outfit',sans-serif;
+    --display:'Batica Sans','Outfit',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:#dfe3e0;color:#111;display:flex;justify-content:center}
+  /* Página móvil (columna) */
+  .app{width:100%;max-width:430px;min-height:100vh;background:#fff;position:relative;overflow-x:hidden;box-shadow:0 0 60px rgba(0,0,0,.12)}
+
+  /* ---------- header frosted (con espacio superior, sin barra de estado) ---------- */
+  .topbar{
+    position:absolute;top:0;left:0;right:0;z-index:40;padding-top:40px;
+    background:transparent;
+  }
+  .appbar{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
+  .appbar .logo{height:34px;display:block}
+  .appbar .logo-fallback{font-family:var(--display);font-weight:700;color:var(--verde-oscuro);font-size:18px;letter-spacing:.5px}
+  .appbar .right{display:flex;align-items:center;gap:16px;color:#fff}
+  .appbar .icon{width:23px;height:23px;display:block}
+  .burger{display:flex;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:2px}
+  .burger span{width:27px;height:2.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s}
+  .burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+  /* en Inicio el menú cae sobre la foto del hero: sin blur y con fondo sólido para que se lea */
+  .mmenu{position:absolute;left:16px;right:16px;top:100%;margin-top:6px;z-index:60;background:rgba(255,255,255,.97);border-radius:25px;box-shadow:0 6px 24px rgba(0,0,0,.12);display:flex;flex-direction:column;padding:20px 28px}
+  .mmenu[hidden]{display:none}
+  .mmenu a{font-family:var(--font);font-weight:400;font-size:16.3px;letter-spacing:-.4075px;line-height:1.4;color:#000;text-decoration:none;text-align:center;padding:14px 0}
+  .mmenu a.active{color:#F9BD23}
+  .mmenu .mlang{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px;padding-top:14px;border-top:1px solid rgba(194,207,205,.5)}
+  .mlang-opt{font-family:var(--font);font-size:16.3px;letter-spacing:-.4075px;font-weight:400;color:#9aa5a1;padding:6px 10px;border-radius:9px}
+  .mlang-opt.is-active{font-weight:500;color:#0d7233}
+  .mlang-soon{display:inline-flex;align-items:center;gap:8px;cursor:default}
+  .mlang-soon em{font-style:normal;font-size:10px;font-weight:500;letter-spacing:.02em;text-transform:uppercase;color:#0d7233;background:var(--verde-claro-bg);padding:2px 8px;border-radius:999px;white-space:nowrap}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;min-height:600px;padding:124px 34px 48px;color:#fff;overflow:hidden;
+    display:flex;flex-direction:column;
+    background:linear-gradient(180deg,rgba(3,30,20,.30) 0%,rgba(3,30,20,.74) 100%),
+               url('assets/hero-bg.webp') center/cover no-repeat,#043120;
+  }
+  .hero h2{font-family:var(--display);font-weight:700;font-size:40px;line-height:.97;letter-spacing:-.5px}
+  .hero h2 .acc{color:var(--amarillo)}
+  .hero .hero-bottom{margin-top:auto;padding-top:38px}
+  .hero .copy{font-size:14px;line-height:1.45;font-weight:400;color:var(--texto-claro);text-align:justify}
+  .hero .copy b{color:var(--amarillo);font-weight:700}
+  .hero .btn-contact{margin-top:26px;display:inline-block;background:var(--amarillo);color:var(--verde-oscuro);font-size:12px;font-weight:400;padding:8px 22px;border-radius:13px;text-decoration:none;letter-spacing:-.3px}
+
+  /* ---------- chips ---------- */
+  .chip{
+    display:inline-flex;align-items:center;justify-content:center;
+    background:var(--blanco-suave);border:1px solid var(--borde-chip);
+    border-radius:18px 0 18px 0;padding:8px 19px;
+    font-family:var(--display);font-size:14px;color:var(--verde-oscuro);letter-spacing:-.12px;
+  }
+
+  /* ---------- nuestro enfoque ---------- */
+  .enfoque{background:var(--verde-claro-bg);padding:44px 34px 44px}
+  .enfoque .txt{margin-top:22px;font-size:16px;line-height:1.4;color:#000;font-weight:400}
+  .enfoque .txt b{font-weight:600}
+  .btn-green{display:inline-block;margin-top:26px;background:var(--hoja-clara);color:#fff;font-size:12px;font-weight:400;padding:8px 20px;border-radius:13px;text-decoration:none;letter-spacing:-.3px}
+
+  /* ---------- pilares (fondo blanco) ---------- */
+  .flow{background:#fff}
+  .pilares{background:#fff;padding:44px 34px 12px}
+  .pilares .lead{margin:16px 0 18px;font-size:13.5px;color:#5a6b62;font-weight:300}
+  .pill{border:1px solid var(--borde-pill);border-radius:13px;margin-bottom:12px;overflow:hidden;background:#fff}
+  .pill summary{list-style:none;cursor:pointer;height:50px;display:flex;align-items:center;gap:12px;padding:0 18px;font-size:17.5px;font-weight:500;color:var(--verde-oscuro);letter-spacing:-.4px}
+  .pill summary::-webkit-details-marker{display:none}
+  .leaf{width:15px;height:15px;border-radius:50%;flex:none}
+  .l-ma{background:var(--hoja-clara)}
+  .l-so{background:var(--hoja-media)}
+  .l-go{background:var(--hoja-oscura)}
+  .chev{margin-left:auto;color:#8fa39a;transition:transform .3s;font-size:15px}
+  .pill[open] .chev{transform:rotate(90deg)}
+  .pill .body{padding:2px 18px 16px 45px;background:#fff}
+  .pill .body li{list-style:none;position:relative;font-size:14px;line-height:1.7;color:#3c4b45;font-weight:300}
+  .pill .body li::before{content:"";position:absolute;left:-15px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--hoja-media)}
+  .pill.p-ma .body li::before{background:var(--hoja-clara)}
+  .pill.p-so .body li::before{background:var(--hoja-media)}
+  .pill.p-go .body li::before{background:var(--hoja-oscura)}
+
+  /* ---------- experiencia: foto Figma + degradado (empieza aquí), con botón + ---------- */
+  .exp{
+    padding:40px 30px 50px;color:#fff;
+    background:
+      linear-gradient(180deg,
+        #ffffff 0%,
+        rgba(255,255,255,0) 14%,
+        rgba(4,49,32,.55) 40%,
+        #043120 60%),
+      url('assets/pilares-bg.webp') center top/cover no-repeat,
+      #043120;
+  }
+  .exp .stats{margin-top:24px}
+  .stat{text-align:center;padding:26px 8px;cursor:pointer;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+  .stat:hover{transform:translateY(-10px)}
+  .stat .num{font-family:var(--font);font-size:64px;line-height:1;color:var(--amarillo);font-weight:400}
+  .stat .num .plus{font-size:30px;font-weight:700;vertical-align:15px}
+  .stat .num .suf{font-size:44px}
+  .stat-3 .num .plus{display:inline-block;width:.6em;margin-left:-.6em} /* +25 centrado, como en desktop */
+  .stat .lab{margin:12px auto 0;font-size:15px;font-weight:300;color:var(--texto-claro);max-width:250px}
+  .stat .more{margin-top:16px;width:30px;height:30px;border:0;border-radius:50%;background:var(--amarillo);color:var(--verde-oscuro);font-size:20px;line-height:1;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
+  .stat:hover .more{transform:scale(1.35);box-shadow:0 0 0 6px rgba(244,223,87,.25)}
+  .stat .more:hover{transform:scale(1.5)}
+  .stat-cta{display:block;margin-top:8px;font-family:var(--font);font-size:13px;font-weight:400;letter-spacing:.3px;color:var(--amarillo)}
+  .stat:active .stat-cta{text-decoration:underline}
+
+  /* ---------- footer (#043120, como en desktop) ---------- */
+  .foot{background:var(--verde-fondo);color:var(--texto-footer);padding:38px 30px 30px}
+  .foot .company{font-family:var(--display);font-weight:400;font-size:20px;color:var(--amarillo-90);letter-spacing:-.36px}
+  .foot .tag{font-size:13px;font-weight:500;margin-top:6px;line-height:1.4;color:var(--texto-footer);max-width:230px}
+  .foot .social{display:flex;gap:16px;margin:22px 0}
+  .foot .social a{width:20px;height:20px;color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center}
+  .foot .social a svg{width:19px;height:19px}
+  .foot .col{margin-bottom:20px}
+  .foot h3{color:var(--amarillo-90);font-size:14px;font-weight:600;margin-bottom:8px;letter-spacing:-.08px}
+  .foot .addr{font-size:13px;line-height:1.5;font-weight:500}
+  .foot a.link{display:block;color:rgba(243,250,239,.8);text-decoration:underline;font-size:13px;font-weight:500;padding:3px 0}
+  .foot a.link.q-link{text-decoration:none}
+  .foot a.link.q-link span{text-decoration:underline;text-underline-position:from-font}
+  .foot .cols2{display:flex;gap:44px}
+  .foot .cols2 .col{margin-bottom:0}
+  .foot .divider{border-top:1px solid rgba(243,250,239,.26);margin-top:6px;padding-top:16px;font-size:11px;font-weight:300;opacity:.65}
+
+  /* ---------- modal experiencia (adaptado a móvil) ---------- */
+  .modal{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:100;display:flex;justify-content:center}
+  .modal[hidden]{display:none}
+  .m-backdrop{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,49,32,.80),rgba(4,49,32,.93));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);animation:bfade .35s ease}
+  @keyframes bfade{from{opacity:0}to{opacity:1}}
+  .m-panel{position:relative;width:100%;max-width:430px;height:100%;color:#fff;overflow-y:auto;padding:62px 34px 34px}
+  .m-close{position:absolute;top:16px;right:18px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1;cursor:pointer;z-index:3;transition:transform .2s,background .2s}
+  .m-close:hover{background:var(--amarillo);color:var(--verde-oscuro);transform:rotate(90deg)}
+  .m-view{animation:mfade .32s ease}
+  @keyframes mfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .m-title{font-family:var(--display);font-size:24px;font-weight:400;color:var(--amarillo);margin-bottom:18px}
+  [data-view="esquema"] .m-title{color:#fff;font-size:28px;line-height:1;margin-bottom:8px}
+  /* collage: tarjetas full-width (formato móvil) — foto limpia + vidrio esmerilado + título */
+  .gcards{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+  .gcard{position:relative;width:100%;aspect-ratio:1000/494;border:0;padding:0;border-radius:18px;overflow:hidden;cursor:pointer;background:#022016;transition:transform .28s cubic-bezier(.22,.61,.36,1)}
+  .gcard:active{transform:scale(.985)}
+  .gcard .cover{width:100%;height:100%;object-fit:cover;display:block}
+  .gcard .gtitle{position:absolute;right:0;bottom:24px;z-index:2;width:51%;padding:0 14px;font-family:var(--display);font-size:19px;line-height:1.14;color:#EAF4F0;text-align:center;pointer-events:none}
+  /* gallery */
+  .m-view[data-view="gallery"]:not([hidden]){min-height:74vh;display:flex;flex-direction:column;justify-content:center}
+  .g-back{background:none;border:0;color:var(--texto-claro);font-size:14px;cursor:pointer;margin-bottom:12px;display:inline-flex;align-items:center;gap:5px}
+  .g-title{font-family:var(--display);font-size:22px;font-weight:400;color:var(--amarillo);margin-bottom:14px}
+  .g-stage{position:relative;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#022016}
+  .g-stage img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .35s ease}
+  .g-zone{position:absolute;top:0;bottom:0;width:50%;cursor:pointer;z-index:2;background:none;border:0}
+  .g-zone-prev{left:0}
+  .g-zone-next{right:0}
+  .g-dots{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:18px}
+  .g-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:background .25s,transform .25s;border:0;padding:0}
+  .g-dot.active{background:var(--amarillo);transform:scale(1.3)}
+  /* esquema */
+  .m-sub{display:inline-block;margin:8px 0 28px;background:var(--amarillo);border-radius:18px 0 18px 0;padding:8px 24px;font-family:var(--display);font-size:17px;color:#01302b}
+  .esq-list{list-style:none}
+  .esq-list li{position:relative;display:grid;grid-template-columns:34px 1fr;column-gap:18px;align-items:start;padding-bottom:22px}
+  .esq-num{width:34px;height:34px;border-radius:50%;background:var(--amarillo);color:#043120;display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:13px;letter-spacing:-.12px}
+  .esq-list li::after{content:"";position:absolute;left:16px;top:40px;bottom:0;width:2px;background:linear-gradient(to bottom,#fff,rgba(255,255,255,.35))}
+  .esq-list li:last-child::after{display:none}
+  .esq-list li p{margin:0;font-size:15px;line-height:1.45;color:#eef5f1;font-weight:300;padding-top:7px}
+  /* logos: sin recuadro, marquee centrado verticalmente, con desvanecido en bordes (como desktop) */
+  .m-view[data-view="logos"]:not([hidden]){min-height:72vh;display:flex;align-items:center}
+  .logos-marquee{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent)}
+  .logos-track{display:flex;align-items:center;width:max-content;animation:marq 22s linear infinite;list-style:none;padding:0;margin:0}
+  .logos-track li{flex:none;padding-right:38px}
+  .logos-track img{height:auto;width:auto;max-height:54px;display:block;opacity:.92}
+  @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+</head>
+<body>
+  <div class="app">
+
+    <!-- header frosted (espacio superior, navbar grande) -->
+    <div class="topbar">
+      <div class="appbar">
+        <img class="logo" src="assets/logo-light.png" alt="TerraTech Agro"
+             onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=\'logo-fallback\'>TERRATECH AGRO</span>')">
+        <div class="right">
+          <button class="search-btn" type="button" aria-label="Buscar en el sitio"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg></button>
+          <button class="burger" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+      <nav class="mmenu" id="mmenu" hidden>
+        <a class="active" href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="que-hacemos.html">¿Qué hacemos?</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="contacto.html">Contacto</a>
+        <div class="mlang">
+          <span class="mlang-opt is-active">Esp</span>
+          <span class="mlang-opt mlang-soon" aria-disabled="true">Eng <em>Coming soon</em></span>
+        </div>
+      </nav>
+    </div>
+
+    <!-- hero -->
+    <section class="hero">
+      <h2>Gestión trazable<br>para una<br>agricultura<br><span class="acc">sostenible</span></h2>
+      <div class="hero-bottom">
+        <p class="copy">Diseñamos, implementamos y operamos proyectos <b>agrícolas bajo criterios ESG de manera sustentable</b> con gestión institucional trazable y altos estándares de producción.</p>
+      </div>
+    </section>
+
+    <!-- nuestro enfoque -->
+    <section class="enfoque">
+      <span class="chip">Nuestro enfoque</span>
+      <p class="txt">TerraTech Agro es una gestora agroindustrial que integra su vasta experiencia en el <b>sector agroexportador</b>, desde una <b>gestión hídrica</b>, <b>administración financiera empresarial</b> y <b>estructuración de predios con producción, control y gestión sustentable entre otros.</b></p>
+    </section>
+
+    <!-- fondo continuo: pilares + experiencia -->
+    <div class="flow">
+      <!-- pilares -->
+      <section class="pilares" id="pilares">
+        <span class="chip">Pilares bajo criterios ESG</span>
+        <p class="lead">Toca cada pilar para ver su detalle.</p>
+
+        <details class="pill p-ma" open>
+          <summary>Medio ambiente<span class="chev">›</span></summary>
+          <ul class="body">
+            <li>Uso trazable y eficiente del agua</li>
+            <li>Gestión de residuos</li>
+            <li>Producción limpia con certificado Global G.A.P.</li>
+          </ul>
+        </details>
+
+        <details class="pill p-so">
+          <summary>Social<span class="chev">›</span></summary>
+          <ul class="body">
+            <li>Integridad y ética</li>
+            <li>Equidad laboral</li>
+            <li>Remuneraciones justas</li>
+            <li>Capacitaciones continuas</li>
+            <li>Infraestructura segura</li>
+          </ul>
+        </details>
+
+        <details class="pill p-go">
+          <summary>Gobernanza<span class="chev">›</span></summary>
+          <ul class="body">
+            <li>Directorio independiente</li>
+            <li>Transparencia financiera</li>
+            <li>Gestión de riesgos</li>
+          </ul>
+        </details>
+      </section>
+
+      <!-- experiencia -->
+      <section class="exp">
+        <span class="chip">Experiencia</span>
+        <div class="stats">
+          <article class="stat stat-1">
+            <p class="num"><span class="plus">+</span>60<span class="suf">k</span></p>
+            <p class="lab">Hectáreas desarrolladas en conjunto para distintos rubros</p>
+            <button class="more" aria-label="Ver más">+</button><span class="stat-cta">Ver más</span>
+          </article>
+          <article class="stat stat-2">
+            <p class="num">KPI<span class="suf">s</span></p>
+            <p class="lab">Gestión agrícola con trazabilidad</p>
+            <button class="more" aria-label="Ver más">+</button><span class="stat-cta">Ver más</span>
+          </article>
+          <article class="stat stat-3">
+            <p class="num"><span class="plus">+</span>25</p>
+            <p class="lab">Años de alianzas y proveedores estratégicos</p>
+            <button class="more" aria-label="Ver más">+</button><span class="stat-cta">Ver más</span>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- footer -->
+    <footer class="foot">
+      <p class="company">TERRATECH AGRO</p>
+      <p class="tag">Empresa gestora de proyectos agrícolas sustentables</p>
+      <div class="social">
+        <a href="#" aria-label="Instagram"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-3-1.8-3s-2.1 1.43-2.1 2.9V21h-4z"/></svg></a>
+        <a href="#" aria-label="X"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5.2-6.8L5.3 22H2l7.8-8.9L1.5 2h6.8l4.7 6.2L18.9 2zm-2.3 18h1.8L7.5 3.9H5.6z"/></svg></a>
+      </div>
+      <div class="col">
+        <h3>Dirección</h3>
+        <p class="addr">Santiago, Chile<br>Isidora Goyenechea 3162,<br>Of. 902, Las Condes</p>
+      </div>
+      <div class="cols2">
+        <div class="col">
+          <h3>Recursos</h3>
+          <a class="link" href="#">Inicio</a>
+          <a class="link" href="#">Nosotros</a>
+          <a class="link q-link" href="que-hacemos.html">¿<span>Qué hacemos</span>?</a>
+        </div>
+        <div class="col">
+          <h3>Ayuda</h3>
+          <a class="link" href="#">Contacto</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== modal experiencia (adaptado a móvil) ===== -->
+    <div class="modal" id="modal" hidden role="dialog" aria-label="Experiencia">
+      <div class="m-backdrop" data-close></div>
+      <div class="m-panel">
+        <button class="m-close" data-close aria-label="Cerrar">&times;</button>
+
+        <!-- +60k: collage de categorías -->
+        <div class="m-view" data-view="collage" hidden>
+          <div class="gcards">
+            <button class="gcard g-cultivos" data-cat="cultivos"><img class="cover" src="assets/galerias/cultivos/portada.webp" alt=""><span class="gtitle">Cultivos</span></button>
+            <button class="gcard g-frutales" data-cat="frutales"><img class="cover" src="assets/galerias/frutales/portada.webp" alt=""><span class="gtitle">Frutales</span></button>
+            <button class="gcard g-riego" data-cat="riego"><img class="cover" src="assets/galerias/riego/portada.webp" alt=""><span class="gtitle">Gestión<br>hídrica</span></button>
+            <button class="gcard g-innovacion" data-cat="innovacion"><img class="cover" src="assets/galerias/innovacion/portada.webp" alt=""><span class="gtitle">Innovación<br>agrícola</span></button>
+            <button class="gcard g-impacto" data-cat="impacto"><img class="cover" src="assets/galerias/impacto/portada.webp" alt=""><span class="gtitle">Impacto<br>ambiental</span></button>
+          </div>
+        </div>
+
+        <!-- galería de fotos -->
+        <div class="m-view" data-view="gallery" hidden>
+          <h3 class="g-title"></h3>
+          <div class="g-stage">
+            <img class="g-img" src="" alt="">
+            <button class="g-zone g-zone-prev" aria-label="Anterior"></button>
+            <button class="g-zone g-zone-next" aria-label="Siguiente"></button>
+          </div>
+          <div class="g-dots"></div>
+        </div>
+
+        <!-- KPIs: esquema de gestión (lista vertical) -->
+        <div class="m-view" data-view="esquema" hidden>
+          <h3 class="m-title">Control de<br>gestión productiva</h3>
+          <span class="m-sub">Administrativa contable</span>
+          <ol class="esq-list">
+            <li><span class="esq-num">01</span><p>Determinación de presupuestos</p></li>
+            <li><span class="esq-num">02</span><p>Definición de plan de cuentas</p></li>
+            <li><span class="esq-num">03</span><p>Centralización y control de adquisiciones</p></li>
+            <li><span class="esq-num">04</span><p>Control de inventario</p></li>
+            <li><span class="esq-num">05</span><p>Control de maquinaria</p></li>
+            <li><span class="esq-num">06</span><p>Control de riego</p></li>
+            <li><span class="esq-num">07</span><p>Trazabilidad en asignación de aplicaciones y faenas</p></li>
+            <li><span class="esq-num">08</span><p>Reportería mensual con KPI's de gestión económicos</p></li>
+          </ol>
+        </div>
+
+        <!-- +25: logos de alianzas -->
+        <div class="m-view" data-view="logos" hidden>
+          <div class="logos-marquee">
+            <ul class="logos-track">
+              <li><img src="assets/logos/logo-1.webp" alt="Aliado 1"></li>
+              <li><img src="assets/logos/logo-2.webp" alt="Aliado 2"></li>
+              <li><img src="assets/logos/logo-3.webp" alt="Aliado 3"></li>
+              <li><img src="assets/logos/logo-4.webp" alt="Aliado 4"></li>
+              <li><img src="assets/logos/logo-5.webp" alt="Aliado 5"></li>
+              <li aria-hidden="true"><img src="assets/logos/logo-1.webp" alt=""></li>
+              <li aria-hidden="true"><img src="assets/logos/logo-2.webp" alt=""></li>
+              <li aria-hidden="true"><img src="assets/logos/logo-3.webp" alt=""></li>
+              <li aria-hidden="true"><img src="assets/logos/logo-4.webp" alt=""></li>
+              <li aria-hidden="true"><img src="assets/logos/logo-5.webp" alt=""></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="mobile.js"></script>
+  <script>
+  (function(){
+    var GAL={
+      cultivos:{t:'Cultivos',f:['cultivos/foto1.webp','cultivos/foto2.webp','cultivos/foto3.webp']},
+      frutales:{t:'Frutales',f:['frutales/foto1.webp','frutales/foto2.webp','frutales/foto3.webp','frutales/foto4.webp','frutales/foto5.webp']},
+      riego:{t:'Gestión hídrica',f:['riego/foto1.webp','riego/foto2.webp','riego/foto3.webp']},
+      innovacion:{t:'Innovación agrícola',f:['innovacion/foto1.webp','innovacion/foto2.webp','innovacion/foto3.webp','innovacion/foto4.webp']},
+      impacto:{t:'Impacto ambiental',f:['impacto/foto1.webp','impacto/foto2.webp']}
+    };
+    var BASE='assets/galerias/';
+    var modal=document.getElementById('modal');
+    var views={};
+    modal.querySelectorAll('.m-view').forEach(function(v){views[v.dataset.view]=v;});
+    var cur=[],idx=0;
+    var img=modal.querySelector('.g-img'), gtitle=modal.querySelector('.g-title'), dotsBox=modal.querySelector('.g-dots');
+    var autoT=null;
+    function stopAuto(){ if(autoT){clearInterval(autoT);autoT=null;} }
+    function startAuto(){ stopAuto(); if(cur.length>1) autoT=setInterval(function(){ go(idx+1); }, 3000); }
+    function show(name){for(var k in views){views[k].hidden=(k!==name);} if(name!=='gallery') stopAuto();}
+    function animateEsquema(){
+      modal.querySelectorAll('.esq-list li').forEach(function(li,i){
+        var base=0.15+i*0.26;
+        [[li.querySelector('.esq-num'),0],[li.querySelector('p'),0.12]].forEach(function(pair){
+          var el=pair[0],off=pair[1];if(!el)return;
+          el.style.transition='none';el.style.opacity=0;el.style.transform='translateY(6px)';
+          requestAnimationFrame(function(){
+            var d=(base+off).toFixed(2);
+            el.style.transition='opacity .5s ease '+d+'s, transform .5s ease '+d+'s';
+            el.style.opacity=1;el.style.transform='none';
+          });
+        });
+      });
+    }
+    function open(view){show(view);modal.hidden=false;document.body.style.overflow='hidden';if(view==='esquema')animateEsquema();}
+    function close(){modal.hidden=true;document.body.style.overflow='';stopAuto();}
+    function smartClose(){ if(!views.gallery.hidden){ show('collage'); } else { close(); } }
+    function buildDots(){var h='';for(var i=0;i<cur.length;i++){h+='<button class="g-dot" data-i="'+i+'" aria-label="Foto '+(i+1)+'"></button>';}dotsBox.innerHTML=h;}
+    function render(){img.src=BASE+cur[idx];var ds=dotsBox.children;for(var i=0;i<ds.length;i++){ds[i].classList.toggle('active',i===idx);}}
+    function go(n){idx=(n+cur.length)%cur.length;render();startAuto();}
+    function openGallery(cat){var g=GAL[cat];if(!g)return;cur=g.f;idx=0;gtitle.textContent=g.t;buildDots();render();show('gallery');startAuto();}
+    // disparadores por stat
+    modal.parentNode.querySelector('.stat-1').addEventListener('click',function(){open('collage');});
+    modal.parentNode.querySelector('.stat-2').addEventListener('click',function(){open('esquema');});
+    modal.parentNode.querySelector('.stat-3').addEventListener('click',function(){open('logos');});
+    // tiles -> galería
+    modal.querySelectorAll('.gcard').forEach(function(t){t.addEventListener('click',function(){openGallery(t.dataset.cat);});});
+    // navegación galería: click en mitad izq/der + puntos
+    modal.querySelector('.g-zone-prev').addEventListener('click',function(){go(idx-1);});
+    modal.querySelector('.g-zone-next').addEventListener('click',function(){go(idx+1);});
+    dotsBox.addEventListener('click',function(e){var b=e.target.closest('.g-dot');if(b)go(+b.dataset.i);});
+    if(window.TT&&TT.swipe) TT.swipe(modal.querySelector('.g-stage'),function(){go(idx-1);},function(){go(idx+1);});
+    // cerrar: la X vuelve a categorías si estamos en una galería; si no, cierra el modal
+    modal.querySelector('.m-close').addEventListener('click',smartClose);
+    modal.querySelector('.m-backdrop').addEventListener('click',close);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)smartClose();});
+  })();
+  </script>
+</body>
+</html>
