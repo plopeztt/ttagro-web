@@ -36,10 +36,10 @@ body{font-family:var(--font);background:#dfe3e0;color:#111;display:flex;justify-
 .topbar{position:relative;z-index:40;padding-top:calc(40px + env(safe-area-inset-top));background:transparent}
 .appbar{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
 .appbar .logo{height:34px;display:block}
-.appbar .right{display:flex;align-items:center;gap:16px;color:var(--verde-oscuro)}
+.appbar .right{display:flex;align-items:center;gap:16px;color:var(--hoja-media)}
 .appbar .icon{width:23px;height:23px;display:block}
 .burger{display:flex;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:2px}
-.burger span{width:27px;height:2.5px;background:var(--verde-oscuro);border-radius:2px;transition:transform .3s,opacity .3s}
+.burger span{width:27px;height:2.5px;background:var(--hoja-media);border-radius:2px;transition:transform .3s,opacity .3s}
 .burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
 .burger.open span:nth-child(2){opacity:0}
 .burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
