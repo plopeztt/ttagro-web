@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
       playEsquema();
     };
 
-    const GAL_DUR = 3200;
+    const GAL_DUR = 2600;
     const galQuieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const galThumbs = modal.querySelector('.gal-thumbs');
     const galSegs   = modal.querySelector('.gal-segs');
@@ -337,8 +337,6 @@ document.addEventListener('DOMContentLoaded', () => {
       dialog.classList.add('in-gallery');
       showFoto(0, noFade);
       startGalAuto();
-      // el visor acaba de aparecer: recién en el próximo cuadro :hover es fiable
-      requestAnimationFrame(() => requestAnimationFrame(corregirGalPausa));
     };
 
     // Expande SOLO la foto (limpia, sin texto) desde la tarjeta clicada hasta llenar
@@ -467,26 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.querySelector('.gal-zone-next').addEventListener('click', () => goGal(idx + 1));
     if (galThumbs) galThumbs.addEventListener('click', e => { const b = e.target.closest('.gal-thumb'); if (b) goGal(+b.dataset.i); });
 
-    /* Pausa del automático: solo sobre las flechas y las miniaturas, no sobre toda
-       la foto. Si abarcara la foto entera, cualquier posición del mouse la congelaría. */
-    const galPausaZonas = [
-      modal.querySelector('.gal-zone-prev'),
-      modal.querySelector('.gal-zone-next'),
-      galThumbs
-    ].filter(Boolean);
-
-    const setGalPausa = enPausa => {
-      galleryView.classList.toggle('pausa', enPausa);
-      if (enPausa) stopGalAuto(); else startGalAuto();
-    };
-    galPausaZonas.forEach(z => {
-      z.addEventListener('mouseenter', () => setGalPausa(true));
-      z.addEventListener('mouseleave', () => setGalPausa(false));
-    });
-    /* Al abrir, el cursor puede estar ya sobre una flecha: entonces mouseenter no
-       vuelve a dispararse y quedaría trabado hasta mover el mouse. Se consulta el
-       estado real con :hover en vez de esperar el evento. */
-    const corregirGalPausa = () => setGalPausa(galPausaZonas.some(z => z.matches(':hover')));
+    /* El automático corre de forma continua: no se pausa al pasar el mouse. */
 
     document.addEventListener('keydown', e => {
       if (!modal.classList.contains('open')) return;
@@ -529,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fotos.forEach(src => { new Image().src = src; });   // precarga
 
     // puntos + auto-avance + click en mitades
-    const PROY_DUR = 3200;
+    const PROY_DUR = 2600;
     const proySegs = document.getElementById('proySegs');
     const proyQuieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     proySlider.style.setProperty('--proy-dur', PROY_DUR + 'ms');
