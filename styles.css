@@ -1446,10 +1446,8 @@ a { text-decoration: none; color: inherit; }
 .gal-seg.done { background: rgba(255, 255, 255, 0.75); }
 .gal-seg.now { width: 56px; background: rgba(255, 255, 255, 0.3); }
 .gal-seg i { display: block; height: 100%; width: 0; border-radius: 999px; background: var(--amarillo); }
-.gal-seg.now i { animation: galLlenar var(--gal-dur, 3200ms) linear forwards; }
+.gal-seg.now i { animation: galLlenar var(--gal-dur, 2600ms) linear forwards; }
 @keyframes galLlenar { from { width: 0; } to { width: 100%; } }
-/* con el mouse sobre la foto o las miniaturas se congela: no cambia lo que estás mirando */
-.exp-gallery.pausa .gal-seg.now i { animation-play-state: paused; }
 
 /* Miniaturas: muestran cuántas fotos hay y permiten saltar directo */
 .gal-thumbs { display: flex; justify-content: center; gap: 10px; margin-top: 22px; }
@@ -1830,7 +1828,7 @@ body.modal-open { overflow: hidden; }
 .proy-seg.done { background: rgba(255, 255, 255, 0.8); }
 .proy-seg.now { width: 58px; background: rgba(255, 255, 255, 0.32); }
 .proy-seg i { display: block; height: 100%; width: 0; border-radius: 999px; background: #fff; }
-.proy-seg.now i { animation: proyLlenar var(--proy-dur, 3200ms) linear forwards; }
+.proy-seg.now i { animation: proyLlenar var(--proy-dur, 2600ms) linear forwards; }
 @keyframes proyLlenar { from { width: 0; } to { width: 100%; } }
 /* con el mouse encima se congela: no cambia la foto que estás mirando */
 .proy-slider.pausa .proy-seg.now i { animation-play-state: paused; }
