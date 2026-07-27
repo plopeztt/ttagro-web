@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+._*
+
+# Archivos no usados, respaldos y duplicados (no se suben a GitHub)
+_no-usados/
+
+# Guías y referencias pesadas (por si vuelven a aparecer)
+*.mov
+
+# Referencias de diseño sueltas en la carpeta móvil (no las usa ninguna página)
+web-mobile/Rectangle 105.png
+web-mobile/_montage.png
+web-mobile/titulo esquema kpi.png
+web-mobile/*.svg

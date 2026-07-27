@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
       playEsquema();
     };
 
-    const GAL_DUR = 2600;
+    const GAL_DUR = 1800;
     const galQuieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const galThumbs = modal.querySelector('.gal-thumbs');
     const galSegs   = modal.querySelector('.gal-segs');
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fotos.forEach(src => { new Image().src = src; });   // precarga
 
     // puntos + auto-avance + click en mitades
-    const PROY_DUR = 2600;
+    const PROY_DUR = 1800;
     const proySegs = document.getElementById('proySegs');
     const proyQuieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     proySlider.style.setProperty('--proy-dur', PROY_DUR + 'ms');
@@ -532,22 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
       proySegs.innerHTML = h;
       proySegs.addEventListener('click', e => { const b = e.target.closest('.proy-seg'); if (b) goProy(+b.dataset.i); });
     }
-    /* Pausa solo sobre las flechas y los puntos, no sobre toda la foto: si abarcara
-       la foto entera, cualquier posición del mouse congelaría el avance. */
-    const proyPausaZonas = [
-      proySlider.querySelector('.proy-zone-prev'),
-      proySlider.querySelector('.proy-zone-next'),
-      proySegs
-    ].filter(Boolean);
-
-    const setProyPausa = enPausa => {
-      proySlider.classList.toggle('pausa', enPausa);
-      if (enPausa) stopProyAuto(); else startProyAuto();
-    };
-    proyPausaZonas.forEach(z => {
-      z.addEventListener('mouseenter', () => setProyPausa(true));
-      z.addEventListener('mouseleave', () => setProyPausa(false));
-    });
+    /* El automático corre de forma continua: no se pausa al pasar el mouse. */
     proySlider.querySelector('.proy-zone-prev').addEventListener('click', () => goProy(f - 1));
     proySlider.querySelector('.proy-zone-next').addEventListener('click', () => goProy(f + 1));
 

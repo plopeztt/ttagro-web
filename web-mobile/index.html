@@ -202,9 +202,12 @@
          background:rgba(255,255,255,.35);transition:width .35s ease,background .35s ease}
   .g-seg.done{background:rgba(255,255,255,.6)}
   .g-seg.now{width:52px;background:rgba(255,255,255,.25)}
-  .g-seg i{display:block;height:100%;width:0;border-radius:999px;background:var(--amarillo);transition:width .3s ease}
-  .g-seg.now i{width:100%}
-  @media (prefers-reduced-motion: reduce){ .g-seg{transition:none} }
+  .g-seg i{display:block;height:100%;width:0;border-radius:999px;background:var(--amarillo)}
+  .g-seg.done i{width:100%}
+  /* el segmento activo se llena durante el intervalo: cuenta regresiva del avance auto */
+  .g-seg.now i{animation:gLlenar var(--gdur,1800ms) linear forwards}
+  @keyframes gLlenar{from{width:0}to{width:100%}}
+  @media (prefers-reduced-motion: reduce){ .g-seg{transition:none} .g-seg.now i{animation:none;width:100%} }
   .g-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
   .g-title{flex:1;font-family:var(--display);font-size:20px;font-weight:400;color:#fff}
   .g-count{font-size:13px;color:rgba(255,255,255,.72);font-variant-numeric:tabular-nums}
@@ -391,7 +394,6 @@
           </div>
           <div class="g-track"></div>
           <div class="g-thumbs"></div>
-          <p class="g-hint">Desliza para ver más</p>
         </div>
 
         <!-- KPIs: esquema de gestión (lista vertical) -->
@@ -453,7 +455,7 @@
     var gtitle=modal.querySelector('.g-title'), gcount=modal.querySelector('.g-count');
     var track=modal.querySelector('.g-track'), thumbs=modal.querySelector('.g-thumbs'), segsBox=modal.querySelector('.g-segs');
     var cardsBox=modal.querySelector('.gcards');
-    function show(name){for(var k in views){views[k].hidden=(k!==name);}}
+    function show(name){for(var k in views){views[k].hidden=(k!==name);} if(name!=='gallery'&&typeof gStop==='function') gStop();}
 
     // tarjetas de categoría: portada = primera foto real (las 'portada-base' traen
     // el vidrio horneado y chocarían con el que dibujamos en CSS)
@@ -482,13 +484,25 @@
       });
     }
     function open(view){show(view);modal.hidden=false;document.body.style.overflow='hidden';if(view==='esquema')animateEsquema();}
-    function close(){modal.hidden=true;document.body.style.overflow='';}
+    function close(){modal.hidden=true;document.body.style.overflow='';if(typeof gStop==='function')gStop();}
     function smartClose(){ if(!views.gallery.hidden){ show('collage'); } else { close(); } }
 
-    // sin avance automático: el ritmo lo marca quien mira
+    // avance automático continuo (no se detiene al tocar); igual que en desktop
+    var GDUR=1800, gAuto=null;
+    var gQuieto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    modal.querySelector('.g-segs').style.setProperty('--gdur', GDUR+'ms');
+    function gStop(){ if(gAuto){clearTimeout(gAuto);gAuto=null;} }
+    // reinicia el timer de inmediato (no espera a que asiente el scroll): el intervalo
+    // real queda igual a GDUR y la barra de cuenta regresiva queda sincronizada.
+    function gStart(){ gStop(); if(!gQuieto && cur.length>1) gAuto=setTimeout(gNext, GDUR); }
+    function gNext(){ idx=(idx+1)%cur.length; track.scrollTo({left:idx*track.clientWidth,behavior:'smooth'}); sync(); gStart(); }
     function sync(){
       gcount.textContent=(idx+1)+' / '+cur.length;
-      [].forEach.call(segsBox.children,function(s,i){s.className='g-seg'+(i<idx?' done':i===idx?' now':'');});
+      [].forEach.call(segsBox.children,function(s,i){
+        s.className='g-seg'+(i<idx?' done':i===idx?' now':'');
+        // reinicia el llenado del segmento activo (la cuenta regresiva)
+        if(i===idx){var b=s.firstElementChild;b.style.animation='none';void b.offsetWidth;b.style.animation='';}
+      });
       [].forEach.call(thumbs.children,function(t,i){t.classList.toggle('active',i===idx);});
     }
     function openGallery(cat){
@@ -497,7 +511,7 @@
       track.innerHTML =cur.map(function(f){return '<div class="g-slide"><img src="'+BASE+f+'" alt=""></div>';}).join('');
       thumbs.innerHTML=cur.map(function(f,i){return '<button class="g-thumb" data-i="'+i+'" aria-label="Foto '+(i+1)+'"><img src="'+BASE+f+'" alt=""></button>';}).join('');
       segsBox.innerHTML=cur.map(function(){return '<span class="g-seg"><i></i></span>';}).join('');
-      show('gallery'); track.scrollLeft=0; sync();
+      show('gallery'); track.scrollLeft=0; sync(); gStart();
     }
     // disparadores por stat
     modal.parentNode.querySelector('.stat-1').addEventListener('click',function(){open('collage');});
@@ -505,20 +519,23 @@
     modal.parentNode.querySelector('.stat-3').addEventListener('click',function(){open('logos');});
     // tarjetas -> galería
     modal.querySelectorAll('.gcard').forEach(function(t){t.addEventListener('click',function(){openGallery(t.dataset.cat);});});
-    // el índice sale del scroll nativo: el swipe lo resuelve el navegador
+    // el índice sale del scroll nativo: el swipe lo resuelve el navegador. Tras cada
+    // asentamiento (manual o automático) se reinicia el ciclo para que nunca se frene.
     var tick;
     track.addEventListener('scroll',function(){
       clearTimeout(tick);
       tick=setTimeout(function(){
         var n=Math.round(track.scrollLeft/track.clientWidth);
-        if(n!==idx){idx=n;sync();}
-      },60);
+        // sólo un swipe manual (n distinto del índice esperado) reinicia el ciclo;
+        // el scroll programático del auto-avance no lo toca
+        if(n!==idx){ idx=n; sync(); if(!views.gallery.hidden) gStart(); }
+      },80);
     });
     thumbs.addEventListener('click',function(e){
       var b=e.target.closest('.g-thumb'); if(!b) return;
       idx=+b.dataset.i;
       track.scrollTo({left:idx*track.clientWidth,behavior:'smooth'});
-      sync();
+      sync(); gStart();
     });
     // volver a categorías: lo hace la X del modal (smartClose)
     // cerrar: la X vuelve a categorías si estamos en una galería; si no, cierra el modal

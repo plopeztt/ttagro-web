@@ -25,7 +25,7 @@
   .proy .seg.done{background:rgba(4,49,32,.4)}
   .proy .seg.now{width:52px;background:rgba(4,49,32,.15)}
   .proy .seg i{display:block;height:100%;width:0;border-radius:999px;background:var(--hoja-media)}
-  .proy .seg.now i{animation:proyLlenar var(--dur,3000ms) linear forwards}
+  .proy .seg.now i{animation:proyLlenar var(--dur,1800ms) linear forwards}
   @keyframes proyLlenar{from{width:0}to{width:100%}}
   @media (prefers-reduced-motion: reduce){
     .proy .seg{transition:none}
@@ -94,7 +94,7 @@
   <script>
   (function(){
     var fotos=['carrusel-1.webp','carrusel-2.webp','carrusel-3.webp','carrusel-4.webp','carrusel-5.webp','carrusel-6.webp'];
-    var DUR=3000;
+    var DUR=1800;
     var i=0, img=document.getElementById('proyImg'), segs=document.getElementById('proySegs'), autoT=null;
     document.querySelector('.proy').style.setProperty('--dur', DUR+'ms');
     function stopAuto(){ if(autoT){clearInterval(autoT);autoT=null;} }
