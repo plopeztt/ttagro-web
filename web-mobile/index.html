@@ -55,10 +55,10 @@
   .appbar .right{display:flex;align-items:center;gap:16px;color:#fff}
   .appbar .icon{width:23px;height:23px;display:block}
   .burger{display:flex;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:2px}
-  .burger span{width:27px;height:2.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s}
-  .burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+  .burger span{width:27px;height:2px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s} /* mismo grosor que el trazo de la lupa */
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   .burger.open span:nth-child(2){opacity:0}
-  .burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
   /* en Inicio el menú cae sobre la foto del hero: sin blur y con fondo sólido para que se lea */
   .mmenu{position:absolute;left:16px;right:16px;top:100%;margin-top:6px;z-index:60;background:rgba(255,255,255,.97);border-radius:25px;box-shadow:0 6px 24px rgba(0,0,0,.12);display:flex;flex-direction:column;padding:20px 28px}
   .mmenu[hidden]{display:none}
