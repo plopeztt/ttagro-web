@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="mobile.css">
 <style>
   .proy{padding:44px 30px 46px}
-  .proy .stage{position:relative;margin-top:22px;width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:#022016}
+  .proy .stage{position:relative;margin-top:22px;width:100%;aspect-ratio:4/3;border-radius:26px;overflow:hidden;background:#022016} /* mismo radio que .card */
   .proy .stage img{width:100%;height:100%;object-fit:cover;display:block}
   .proy .zone{position:absolute;top:0;bottom:0;width:50%;cursor:pointer;z-index:2;background:none;border:0}
   .proy .zone-prev{left:0}
@@ -31,7 +31,7 @@
     .proy .seg{transition:none}
     .proy .seg.now i{animation:none;width:100%}
   }
-  .proy .card{margin-top:28px;background:#F3FAEF;border-radius:28px;padding:30px 26px}
+  .proy .card{margin-top:28px;background:#F3FAEF;border-radius:26px;padding:30px 26px}
   .proy .card p{font-size:16px;line-height:1.4;color:#0d7233;font-weight:400;text-align:center;letter-spacing:-.2px}
   .proy .card strong{font-weight:500}
 </style>
@@ -93,7 +93,7 @@
   <script src="mobile.js"></script>
   <script>
   (function(){
-    var fotos=['carrusel-1.webp','carrusel-2.webp','carrusel-3.webp','carrusel-4.webp','carrusel-5.webp','carrusel-6.webp'];
+    var fotos=['carrusel-1.webp','carrusel-2.webp','carrusel-3.webp','carrusel-4.webp','carrusel-5.webp','carrusel-6.webp','carrusel-7.webp','carrusel-8.webp'];
     var DUR=1800;
     var i=0, img=document.getElementById('proyImg'), segs=document.getElementById('proySegs'), autoT=null;
     document.querySelector('.proy').style.setProperty('--dur', DUR+'ms');

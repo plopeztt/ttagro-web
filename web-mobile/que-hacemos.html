@@ -17,7 +17,9 @@
   /* proceso: tarjetas verde claro sobre la foto, apiladas (igual al desktop) */
   .proceso{position:relative;margin-top:28px;padding:26px 24px 40px}
   .proceso-bg{position:absolute;inset:0;background:url('assets/quehacemos-bg2.webp') center/cover no-repeat}
-  .proceso-grid{position:relative;display:flex;flex-direction:column;gap:14px}
+  /* grid de una columna con filas iguales: todas las tarjetas toman la altura
+     de la más alta, sin importar si el texto ocupa una o dos líneas */
+  .proceso-grid{position:relative;display:grid;grid-template-columns:1fr;grid-auto-rows:1fr;gap:14px}
   .paso{background:#e9f4e1;border-radius:20px;padding:22px 22px}
   .paso:nth-child(2),.paso:nth-child(4),.paso:nth-child(5),.paso:nth-child(7){background:#F3FAEF}
   .paso-num{display:block;font-family:var(--font);font-weight:400;font-size:42px;line-height:1;color:#0d7233;margin-bottom:12px}
