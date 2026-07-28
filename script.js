@@ -487,7 +487,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'assets/proyectos/carrusel-5.webp',
       'assets/proyectos/carrusel-6.webp',
       'assets/proyectos/carrusel-7.webp',
-      'assets/proyectos/carrusel-8.webp'
+      'assets/proyectos/carrusel-8.webp',
+      'assets/proyectos/carrusel-9.webp'
     ];
     const pA = proySlider.querySelector('.proy-a');
     const pB = proySlider.querySelector('.proy-b');
