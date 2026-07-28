@@ -141,7 +141,8 @@
   .stat .num .suf{font-size:44px}
   .stat-3 .num .plus{display:inline-block;width:.6em;margin-left:-.6em} /* +25 centrado, como en desktop */
   .stat .lab{margin:12px auto 0;font-size:15px;font-weight:300;color:var(--texto-claro);max-width:250px}
-  .stat .more{margin-top:16px;width:30px;height:30px;border:0;border-radius:50%;background:var(--amarillo);color:var(--verde-oscuro);font-size:20px;line-height:1;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
+  .stat .more{margin-top:16px;width:30px;height:30px;border:0;border-radius:50%;background:var(--amarillo);color:var(--verde-oscuro);cursor:pointer;transition:transform .25s ease,box-shadow .25s ease;display:grid;place-items:center}
+  .stat .more svg{width:15px;height:15px;display:block}
   .stat:hover .more{transform:scale(1.35);box-shadow:0 0 0 6px rgba(244,223,87,.25)}
   .stat .more:hover{transform:scale(1.5)}
   .stat-cta{display:block;margin-top:8px;font-family:var(--font);font-size:13px;font-weight:400;letter-spacing:.3px;color:var(--amarillo)}
@@ -170,7 +171,8 @@
   .m-backdrop{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,49,32,.80),rgba(4,49,32,.93));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);animation:bfade .35s ease}
   @keyframes bfade{from{opacity:0}to{opacity:1}}
   .m-panel{position:relative;width:100%;max-width:430px;height:100%;color:#fff;overflow-y:auto;padding:62px 34px 34px}
-  .m-close{position:absolute;top:16px;right:18px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1;cursor:pointer;z-index:3;transition:transform .2s,background .2s}
+  .m-close{position:absolute;top:16px;right:18px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;z-index:3;transition:transform .2s,background .2s;display:grid;place-items:center}
+  .m-close svg{width:17px;height:17px;display:block}
   .m-close:hover{background:var(--amarillo);color:var(--verde-oscuro);transform:rotate(90deg)}
   .m-close.is-back{display:grid;place-items:center}
   .m-close.is-back svg{width:18px;height:18px;position:relative;left:-1px;stroke-width:2.7}
@@ -336,17 +338,17 @@
           <article class="stat stat-1">
             <p class="num"><span class="plus">+</span>60<span class="suf">k</span></p>
             <p class="lab">Hectáreas desarrolladas en conjunto para distintos rubros</p>
-            <button class="more" aria-label="Ver más">+</button><span class="stat-cta">Ver más</span>
+            <button class="more" aria-label="Ver más"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="stat-cta">Ver más</span>
           </article>
           <article class="stat stat-2">
             <p class="num">KPI<span class="suf">s</span></p>
             <p class="lab">Gestión agrícola con trazabilidad</p>
-            <button class="more" aria-label="Ver más">+</button><span class="stat-cta">Ver más</span>
+            <button class="more" aria-label="Ver más"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="stat-cta">Ver más</span>
           </article>
           <article class="stat stat-3">
             <p class="num"><span class="plus">+</span>25</p>
             <p class="lab">Años de alianzas y proveedores estratégicos</p>
-            <button class="more" aria-label="Ver más">+</button><span class="stat-cta">Ver más</span>
+            <button class="more" aria-label="Ver más"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="stat-cta">Ver más</span>
           </article>
         </div>
       </section>
@@ -384,7 +386,7 @@
     <div class="modal" id="modal" hidden role="dialog" aria-label="Experiencia">
       <div class="m-backdrop" data-close></div>
       <div class="m-panel">
-        <button class="m-close" data-close aria-label="Cerrar">&times;</button>
+        <button class="m-close" data-close aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
 
         <!-- +60k: collage de categorías -->
         <div class="m-view" data-view="collage" hidden>
@@ -464,11 +466,12 @@
     var cardsBox=modal.querySelector('.gcards');
     // la X del modal pasa a flecha cuando estamos dentro de una galería
     var mClose=modal.querySelector('.m-close');
+    var M_X='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>';
     var M_ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>';
     function setCloseIcon(back){
       if(!mClose) return;
       mClose.classList.toggle('is-back', !!back);
-      mClose.innerHTML = back ? M_ARROW : '&times;';
+      mClose.innerHTML = back ? M_ARROW : M_X;
       mClose.setAttribute('aria-label', back ? 'Volver a categorías' : 'Cerrar');
     }
     function show(name){for(var k in views){views[k].hidden=(k!==name);} if(name!=='gallery'&&typeof gStop==='function') gStop(); setCloseIcon(name==='gallery');}

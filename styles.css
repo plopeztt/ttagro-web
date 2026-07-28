@@ -867,11 +867,12 @@ a { text-decoration: none; color: inherit; }
   border-radius: 50%;
   background: var(--amarillo);
   color: var(--verde-oscuro);
-  font-size: 18px;
-  line-height: 1;
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: grid;
+  place-items: center;
 }
+.stat-more svg { width: 13px; height: 13px; display: block; }
 
 /* Al pasar el mouse por cualquier parte del bloque, el botón crece e invita a clickear */
 .stat:hover .stat-more {
@@ -1010,12 +1011,13 @@ a { text-decoration: none; color: inherit; }
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
-  font-size: 21px;
-  line-height: 1;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
   z-index: 10;
+  display: grid;
+  place-items: center;
 }
+.exp-close svg { width: 15px; height: 15px; display: block; }
 .exp-close:hover { background: var(--amarillo); color: var(--verde-oscuro); transform: rotate(90deg); }
 
 /* Collage: mosaico exacto del diseño (posiciones en % del frame 1000x486) */
