@@ -109,7 +109,10 @@
   .l-ma{background:var(--hoja-clara)}
   .l-so{background:var(--hoja-media)}
   .l-go{background:var(--hoja-oscura)}
-  .chev{margin-left:auto;color:#8fa39a;transition:transform .3s;font-size:15px}
+  /* mismo trazo que las flechas de las galerias (stroke 2.2); la caja cuadrada
+     deja el giro de 90deg centrado al abrir el acordeon */
+  .chev{margin-left:auto;color:#8fa39a;transition:transform .3s;display:grid;place-items:center;width:18px;height:18px;flex:none}
+  .chev svg{width:100%;height:100%;display:block}
   .pill[open] .chev{transform:rotate(90deg)}
   .pill .body{padding:2px 18px 16px 45px;background:#fff}
   .pill .body li{list-style:none;position:relative;font-size:14px;line-height:1.7;color:#3c4b45;font-weight:300}
@@ -297,7 +300,7 @@
         <p class="lead">Toca cada pilar para ver su detalle.</p>
 
         <details class="pill p-ma" open>
-          <summary>Medio ambiente<span class="chev">›</span></summary>
+          <summary>Medio ambiente<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></span></summary>
           <ul class="body">
             <li>Uso trazable y eficiente del agua</li>
             <li>Gestión de residuos</li>
@@ -306,7 +309,7 @@
         </details>
 
         <details class="pill p-so">
-          <summary>Social<span class="chev">›</span></summary>
+          <summary>Social<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></span></summary>
           <ul class="body">
             <li>Integridad y ética</li>
             <li>Equidad laboral</li>
@@ -317,7 +320,7 @@
         </details>
 
         <details class="pill p-go">
-          <summary>Gobernanza<span class="chev">›</span></summary>
+          <summary>Gobernanza<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></span></summary>
           <ul class="body">
             <li>Directorio independiente</li>
             <li>Transparencia financiera</li>
