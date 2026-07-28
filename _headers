@@ -1,0 +1,21 @@
+## Cabeceras de Cloudflare Pages
+##
+## Problema que resuelve: las paginas de web-mobile/ llevan el CSS inline, asi que
+## no se pueden versionar con ?v= como styles.css. Safari cachea el HTML de forma
+## agresiva y sigue mostrando la version anterior aunque el deploy ya este arriba.
+##
+## Solucion: el HTML nunca se guarda en cache (siempre se revalida contra el
+## servidor), mientras que imagenes y fuentes -que si cambian de nombre o de
+## contenido cuando se reemplazan- se cachean por un ano.
+
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fotos equipo/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/batica-modern-sans-serif-font-2026-04-07-06-19-09-utc/*
+  Cache-Control: public, max-age=31536000, immutable
