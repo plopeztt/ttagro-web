@@ -298,7 +298,7 @@ a { text-decoration: none; color: inherit; }
 .hero-content h1 .accent { color: var(--amarillo); }
 
 .hero-copy {
-  max-width: 400px;         /* caja del subtítulo: 28% del ancho del diseño de 1440 */
+  max-width: 460px;         /* caja del subtítulo */
   margin-left: auto;
   margin-top: auto;         /* empuja el subtítulo abajo-derecha, como en la guía */
   font-size: 19px;          /* Outfit Mixed 19, line-height auto, letter-spacing 0% */
@@ -315,7 +315,7 @@ a { text-decoration: none; color: inherit; }
 .scroll-hint {
   position: absolute;
   left: 50%;
-  bottom: 64px;
+  bottom: 34px;
   transform: translateX(-50%);
   z-index: 4;
   line-height: 0;
