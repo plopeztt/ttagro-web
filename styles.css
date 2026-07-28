@@ -100,7 +100,7 @@ a { text-decoration: none; color: inherit; }
   border-bottom-right-radius: 18px;
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
-  font-size: clamp(15px, 1.4vw, 20px);
+  font-size: clamp(14px, 1.28vw, 18px);
   letter-spacing: -0.16px;
   color: var(--verde-oscuro);
 }
@@ -281,8 +281,10 @@ a { text-decoration: none; color: inherit; }
   display: flex;              /* columna: título arriba, subtítulo abajo */
   flex-direction: column;
   width: 100%;
-  /* alineado al margen de contenido (como el título del logo en la guía) */
-  padding: clamp(140px, 14vw, 178px) clamp(24px, 10.94vw, 140px) clamp(72px, 8vw, 104px);
+  /* alineado al margen de contenido (como el título del logo en la guía).
+     Vertical en vh para respetar la proporción del diseño: el título arranca
+     ~26% bajo el borde superior y el subtítulo cierra ~16% sobre el inferior. */
+  padding: clamp(150px, 26vh, 280px) clamp(24px, 10.94vw, 140px) clamp(80px, 16vh, 175px);
 }
 
 .hero-content h1 {
@@ -297,7 +299,7 @@ a { text-decoration: none; color: inherit; }
 .hero-content h1 .accent { color: var(--amarillo); }
 
 .hero-copy {
-  max-width: 341px;         /* caja del subtítulo (Figma) */
+  max-width: 400px;         /* caja del subtítulo: 28% del ancho del diseño de 1440 */
   margin-left: auto;
   margin-top: auto;         /* empuja el subtítulo abajo-derecha, como en la guía */
   font-size: clamp(16px, 1.35vw, 19px);          /* Outfit Mixed 19, line-height auto, letter-spacing 0% */
@@ -1414,7 +1416,8 @@ a { text-decoration: none; color: inherit; }
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.gal-close:hover span { background: var(--amarillo); color: var(--verde-oscuro); transform: rotate(90deg); }
+.gal-close span svg { width: 17px; height: 17px; position: relative; left: -1px; stroke-width: 2.8; }
+.gal-close:hover span { background: var(--amarillo); color: var(--verde-oscuro); transform: translateX(-2px); }
 
 /* Carrusel galería: sin flechas, click en mitades + puntos */
 .gal-nav { display: none; }
@@ -1575,7 +1578,7 @@ body.modal-open { overflow: hidden; }
 .mv-text {
   font-family: var(--font);           /* Outfit Regular 24 */
   font-weight: 400;
-  font-size: clamp(17px, 1.65vw, 24px);
+  font-size: clamp(17px, 1.6vw, 23px);
   line-height: 1.23;                   /* 123% */
   letter-spacing: -0.24px;             /* -1% */
   color: #043120;
@@ -1705,6 +1708,13 @@ body.modal-open { overflow: hidden; }
   letter-spacing: -0.2px;      /* -1% */
   color: #0d7233;
   max-width: 700px;
+}
+
+/* palabras destacadas en Outfit Medium dentro del intro de Qué hacemos */
+.qh-intro p .hl-med {
+  font-family: var(--font);
+  font-weight: 600;
+  color: inherit;
 }
 
 /* Proceso: tarjetas 266x226 (r20, gap 12/23) sobre la foto.

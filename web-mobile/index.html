@@ -134,7 +134,7 @@
   .stat{text-align:center;padding:26px 8px;cursor:pointer;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
   .stat:hover{transform:translateY(-10px)}
   .stat .num{font-family:var(--font);font-size:64px;line-height:1;color:var(--amarillo);font-weight:400}
-  .stat .num .plus{font-size:30px;font-weight:700;vertical-align:15px}
+  .stat .num .plus{font-size:30px;font-weight:700;vertical-align:12px} /* 12/64 = misma proporción que desktop (19/100) */
   .stat .num .suf{font-size:44px}
   .stat-3 .num .plus{display:inline-block;width:.6em;margin-left:-.6em} /* +25 centrado, como en desktop */
   .stat .lab{margin:12px auto 0;font-size:15px;font-weight:300;color:var(--texto-claro);max-width:250px}
@@ -169,6 +169,9 @@
   .m-panel{position:relative;width:100%;max-width:430px;height:100%;color:#fff;overflow-y:auto;padding:62px 34px 34px}
   .m-close{position:absolute;top:16px;right:18px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1;cursor:pointer;z-index:3;transition:transform .2s,background .2s}
   .m-close:hover{background:var(--amarillo);color:var(--verde-oscuro);transform:rotate(90deg)}
+  .m-close.is-back{display:grid;place-items:center}
+  .m-close.is-back svg{width:18px;height:18px;position:relative;left:-1px;stroke-width:2.7}
+  .m-close.is-back:hover{transform:translateX(-2px)}
   .m-view{animation:mfade .32s ease}
   @keyframes mfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   .m-title{font-family:var(--display);font-size:24px;font-weight:400;color:var(--amarillo);margin-bottom:18px}
@@ -283,7 +286,7 @@
     <!-- nuestro enfoque -->
     <section class="enfoque">
       <span class="chip">Nuestro enfoque</span>
-      <p class="txt">TerraTech Agro es una gestora agroindustrial que integra su vasta experiencia en el <b>sector agroexportador</b>, desde una <b>gestión hídrica</b>, <b>administración financiera empresarial</b> y <b>estructuración de predios con producción, control y gestión sustentable entre otros.</b></p>
+      <p class="txt">TerraTech Agro es una gestora agroindustrial que integra su vasta experiencia en el <b>sector agroexportador</b>, desde una <b>gestión hídrica</b>, <b>administración financiera empresarial</b> y <b>estructuración de predios con producción</b>, <b>control</b> y <b>gestión sustentable</b> entre otros.</p>
     </section>
 
     <!-- fondo continuo: pilares + experiencia -->
@@ -361,10 +364,11 @@
       </div>
       <div class="cols2">
         <div class="col">
-          <h3>Recursos</h3>
+          <h3>Explorar</h3>
           <a class="link" href="index.html">Inicio</a>
           <a class="link" href="nosotros.html">Nosotros</a>
           <a class="link q-link" href="que-hacemos.html">¿<span>Qué hacemos</span>?</a>
+          <a class="link" href="proyectos.html">Proyectos</a>
         </div>
         <div class="col">
           <h3>Ayuda</h3>
@@ -455,7 +459,16 @@
     var gtitle=modal.querySelector('.g-title'), gcount=modal.querySelector('.g-count');
     var track=modal.querySelector('.g-track'), thumbs=modal.querySelector('.g-thumbs'), segsBox=modal.querySelector('.g-segs');
     var cardsBox=modal.querySelector('.gcards');
-    function show(name){for(var k in views){views[k].hidden=(k!==name);} if(name!=='gallery'&&typeof gStop==='function') gStop();}
+    // la X del modal pasa a flecha cuando estamos dentro de una galería
+    var mClose=modal.querySelector('.m-close');
+    var M_ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>';
+    function setCloseIcon(back){
+      if(!mClose) return;
+      mClose.classList.toggle('is-back', !!back);
+      mClose.innerHTML = back ? M_ARROW : '&times;';
+      mClose.setAttribute('aria-label', back ? 'Volver a categorías' : 'Cerrar');
+    }
+    function show(name){for(var k in views){views[k].hidden=(k!==name);} if(name!=='gallery'&&typeof gStop==='function') gStop(); setCloseIcon(name==='gallery');}
 
     // tarjetas de categoría: portada = primera foto real (las 'portada-base' traen
     // el vidrio horneado y chocarían con el que dibujamos en CSS)
