@@ -869,7 +869,7 @@ a { text-decoration: none; color: inherit; }
   color: var(--verde-oscuro);
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  display: grid;
+  display: inline-grid;
   place-items: center;
 }
 .stat-more svg { width: 13px; height: 13px; display: block; }
