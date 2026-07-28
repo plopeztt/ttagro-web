@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     frutales:   { titulo: EN ? 'Fruit trees' : 'Frutales',                    fotos: ['frutales/foto1.webp', 'frutales/foto2.webp', 'frutales/foto3.webp', 'frutales/foto4.webp', 'frutales/foto5.webp'] },
     riego:      { titulo: EN ? 'Water management' : 'Gestión hídrica',         fotos: ['riego/foto1.webp', 'riego/foto2.webp', 'riego/foto3.webp'] },
     innovacion: { titulo: EN ? 'Agricultural innovation' : 'Innovación agrícola', fotos: ['innovacion/foto1.webp', 'innovacion/foto2.webp', 'innovacion/foto3.webp', 'innovacion/foto4.webp'] },
-    impacto:    { titulo: EN ? 'Environmental impact' : 'Impacto ambiental',  fotos: ['impacto/foto1.webp', 'impacto/foto2.webp'] }
+    impacto:    { titulo: EN ? 'Environmental impact' : 'Impacto ambiental',  fotos: ['impacto/foto1.webp', 'impacto/foto2.webp', 'impacto/foto3.webp', 'impacto/foto4.webp', 'impacto/foto5.webp', 'impacto/foto6.webp'] }
   };
   const BASE = 'assets/collage/galerias/';
 

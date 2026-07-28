@@ -1115,10 +1115,19 @@ a { text-decoration: none; color: inherit; }
   clip-path: path('M1.04033e-05 121C4.65772e-06 186.722 53.2781 240 119 240L187 240C205.225 240 220 225.225 220 207L220 33C220 14.7746 205.225 2.68258e-06 187 1.08927e-06L2.09815e-05 -1.52588e-05L1.04033e-05 121Z');
 }
 
+/* Impacto ambiental es la unica portada que NO trae el vidrio horneado, asi que
+   aca se dibuja con CSS. Las medidas van en % y cqw (no en px) para que escale
+   igual que el vidrio horneado de las demas al cambiar el ancho del collage.
+   La forma del diseno es un rectangulo con la esquina superior izquierda muy
+   redondeada (119 sobre base 1000 = 11.9cqw) y las inferiores a 33 (3.3cqw). */
 .t-impacto .tile-glass {
-  left: 0; bottom: 0; width: 240px; height: 194px;
+  display: block;
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 39.6%;
   background: rgba(244, 223, 87, 0.4);
-  clip-path: path('M119 1.5605e-05C53.2781 6.98658e-06 -6.98658e-06 53.2781 -1.5605e-05 119L-2.11126e-05 161C-2.35026e-05 179.225 14.7746 194 33 194L207 194C225.225 194 240 179.225 240 161L240 3.14722e-05L119 1.5605e-05Z');
+  border-radius: 11.9cqw 0 3.3cqw 3.3cqw;
+  overflow: hidden;
 }
 
 .t-riego .tile-glass {
