@@ -1125,9 +1125,18 @@ a { text-decoration: none; color: inherit; }
   left: 0; bottom: 0;
   width: 100%; height: 39.6%;
   background: rgba(244, 223, 87, 0.4);
-  border-radius: 11.9cqw 0 3.3cqw 3.3cqw;
+  /* Forma del diseno sobre una caja de 240x194: esquina superior izquierda con
+     radio 119 e inferiores con 33. Los porcentajes de border-radius se miden
+     sobre cada eje por separado, de ahi la sintaxis con barra (h / v).
+     119/240=49.6% y 119/194=61.3%; 33/240=13.8% y 33/194=17%. */
+  border-radius: 49.6% 0 13.8% 13.8% / 61.3% 0 17% 17%;
+  /* overflow no basta: backdrop-filter escapa del recorte del padre y pintaba el
+     desenfoque como rectangulo completo. clip-path si recorta a los hijos. */
+  clip-path: inset(0 round 49.6% 0 13.8% 13.8% / 61.3% 0 17% 17%);
   overflow: hidden;
 }
+
+.t-impacto .tile-glass::before { border-radius: inherit; }
 
 .t-riego .tile-glass {
   left: 0; top: 0; width: 265px; height: 240px;
