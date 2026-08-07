@@ -1762,11 +1762,10 @@ body.modal-open { overflow: hidden; }
 .proceso-grid {
   position: relative;
   display: grid;
-  /* Las tarjetas crecen con la pagina pero se frenan en 295px para no quedar
-     apaisadas: el sobrante se reparte como separacion entre columnas. */
-  grid-template-columns: repeat(3, minmax(0, 295px));
-  gap: 23px;
-  justify-content: space-between;
+  /* Ocupan el ancho de la pagina con la separacion original. Para que no queden
+     apaisadas, la altura la fija la proporcion del diseno en .paso. */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 23px 12px;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 clamp(24px, 10.94vw, 140px);
@@ -1775,6 +1774,7 @@ body.modal-open { overflow: hidden; }
 .paso {
   display: flex;
   flex-direction: column;
+  aspect-ratio: 266 / 226;   /* proporcion del diseno: crece a lo alto con el ancho */
   min-height: 226px;
   background: #e9f4e1;          /* verde claro de las tarjetas */
   border-radius: 20px;
@@ -1803,13 +1803,13 @@ body.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 920px) {
-  .proceso-grid { grid-template-columns: repeat(2, minmax(0, 295px)); }
+  .proceso-grid { grid-template-columns: repeat(2, 1fr); }
   .proceso-bg { height: 100%; top: 0; }
   .qh-intro { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 620px) {
-  .proceso-grid { grid-template-columns: minmax(0, 295px); justify-content: center; }
+  .proceso-grid { grid-template-columns: 1fr; }
 }
 
 /* ---------- PROYECTOS (slider: foto con flechas + tarjeta de texto) ---------- */
