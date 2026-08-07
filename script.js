@@ -635,58 +635,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ----- Contacto: validación + envío del formulario por correo -----
+  // ----- Contacto: arma el correo y abre el gestor del visitante -----
   //
-  // El envío lo hace Web3Forms: recibe los datos y los reenvía a la casilla que
-  // quedó asociada a la clave. Para activarlo hay que pegar abajo la clave que
-  // llega por correo al registrarse en web3forms.com con plopez@ttagro.cl.
-  // Mientras esté vacía, el formulario avisa en pantalla en vez de fallar en
-  // silencio, que es peor: la persona creería que su mensaje se envió.
-  const WEB3FORMS_KEY = '';
+  // El sitio es estatico y no puede enviar correo por si solo. Al pulsar Enviar
+  // se arma un enlace mailto con los datos del formulario y se abre el programa
+  // de correo del visitante, que es quien finalmente lo envia.
+  const CONTACTO_DESTINO = 'plopez@ttagro.cl';
 
   const contactoForm = document.querySelector('.contacto-form');
   if (contactoForm) {
-    const aviso   = contactoForm.querySelector('.cf-success');
-    const boton   = contactoForm.querySelector('.cf-enviar');
-    const textoOk = aviso.textContent;
+    const aviso = contactoForm.querySelector('.cf-success');
 
-    const mostrar = (mensaje, error) => {
-      aviso.textContent = mensaje;
-      aviso.hidden = false;
-      aviso.classList.toggle('cf-error', !!error);
-    };
-
-    contactoForm.addEventListener('submit', async e => {
+    contactoForm.addEventListener('submit', e => {
       e.preventDefault();
       if (!contactoForm.reportValidity()) return;
 
-      if (!WEB3FORMS_KEY) {
-        mostrar('El formulario aún no está conectado al correo. Escríbenos a plopez@ttagro.cl.', true);
-        return;
-      }
+      const d = new FormData(contactoForm);
+      const sel = contactoForm.querySelector('#cf-area');
+      // del desplegable interesa la etiqueta visible, no el valor interno
+      const area = sel && sel.selectedIndex > -1 ? sel.options[sel.selectedIndex].text.trim() : '';
 
-      const datos = new FormData(contactoForm);
-      datos.append('access_key', WEB3FORMS_KEY);
-      datos.append('subject', 'Contacto web TerraTech: ' + (datos.get('asunto') || 'sin asunto'));
-      datos.append('from_name', 'Sitio TerraTech Agro');
+      const asunto = (d.get('asunto') || '').trim();
+      const cuerpo = [
+        'Nombre: '   + (d.get('nombre') || '').trim(),
+        'Email: '    + (d.get('email') || '').trim(),
+        'Teléfono: ' + ((d.get('telefono') || '').trim() || '—'),
+        'Área de contacto: ' + (area || '—'),
+        '',
+        'Mensaje:',
+        (d.get('mensaje') || '').trim(),
+        '',
+        '—',
+        'Enviado desde el formulario de contacto de terratechagro.cl'
+      ].join('\r\n');   // \r\n: es el salto de linea que respetan todos los gestores
 
-      boton.disabled = true;
-      const textoBoton = boton.textContent;
-      boton.textContent = 'Enviando...';
+      const enlace = 'mailto:' + CONTACTO_DESTINO
+        + '?subject=' + encodeURIComponent('Contacto web: ' + (asunto || 'consulta'))
+        + '&body='    + encodeURIComponent(cuerpo);
 
-      try {
-        const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: datos });
-        const j = await r.json();
-        if (!j.success) throw new Error(j.message || 'error');
-        mostrar(textoOk, false);
-        contactoForm.reset();
-        boton.textContent = 'Enviado';
-      } catch (err) {
-        // el botón vuelve a habilitarse: si falla la red, hay que poder reintentar
-        mostrar('No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos a plopez@ttagro.cl.', true);
-        boton.disabled = false;
-        boton.textContent = textoBoton;
-      }
+      window.location.href = enlace;
+
+      aviso.textContent = 'Abrimos tu programa de correo con el mensaje listo. Revísalo y pulsa enviar para que nos llegue.';
+      aviso.hidden = false;
     });
   }
 });
