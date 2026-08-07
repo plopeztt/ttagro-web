@@ -759,6 +759,7 @@ a { text-decoration: none; color: inherit; }
   font-size: 17px;
   color: #0d7233;
 }
+.cf-success.cf-error { color: #b3261e; }
 
 @media (max-width: 860px) {
   .contacto-form { padding-top: 40px; }
