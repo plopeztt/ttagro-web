@@ -1591,7 +1591,7 @@ body.modal-open { overflow: hidden; }
   display: inline-block;
   font-family: var(--font-display);   /* Batica Sans Regular 20 */
   font-weight: 400;
-  font-size: clamp(16px, 1.4vw, 20px);
+  font-size: clamp(13.98px, 1.271vw, 18.3px);   /* escala 1100 -> 1440 */
   color: #6aa63c;
   background: rgba(123, 194, 80, 0.16);
   padding: 9px 28px;
@@ -1601,7 +1601,7 @@ body.modal-open { overflow: hidden; }
 .mv-text {
   font-family: var(--font);           /* Outfit Regular 24 */
   font-weight: 400;
-  font-size: clamp(17px, 1.6vw, 23px);
+  font-size: clamp(16.04px, 1.458vw, 21px);   /* escala 1100 -> 1440 */
   line-height: 1.23;                   /* 123% */
   letter-spacing: -0.24px;             /* -1% */
   color: #043120;
