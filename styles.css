@@ -1794,7 +1794,7 @@ body.modal-open { overflow: hidden; }
 .paso-text {
   font-family: var(--font);     /* Outfit Regular 20 */
   font-weight: 400;
-  font-size: clamp(16px, 1.5vw, 21px);
+  font-size: clamp(16px, 1.6vw, 22.5px);
   line-height: 1.3;
   letter-spacing: -0.2px;
   color: #0d7233;
