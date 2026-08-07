@@ -1755,14 +1755,14 @@ body.modal-open { overflow: hidden; }
   top: 128px;
   left: 0;
   right: 0;
-  height: 489px;
+  bottom: 0;   /* antes 489px fijos, calculados para 2 filas */
   background: url('assets/quehacemos-bg2.webp') center / cover no-repeat;
 }
 
 .proceso-grid {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 266px);
+  grid-template-columns: repeat(3, 266px);
   gap: 23px 12px;
   justify-content: center;
 }
@@ -1798,7 +1798,7 @@ body.modal-open { overflow: hidden; }
   color: #0d7233;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 920px) {
   .proceso-grid { grid-template-columns: repeat(2, 266px); }
   .proceso-bg { height: 100%; top: 0; }
   .qh-intro { grid-template-columns: 1fr; }
