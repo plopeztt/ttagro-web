@@ -1615,7 +1615,10 @@ body.modal-open { overflow: hidden; }
   flex-wrap: wrap;
   gap: 29px;                  /* 3×314 + 2×29 = 1000 (fila de 3); 2×314 + 29 = 657 (fila de 2) */
   max-width: 1000px;
-  margin: 40px auto 0;
+  /* 88px tras el chip de seccion: antes eran 40, menos que los 64 que separan
+     dos filas del mismo grupo, asi que la etiqueta quedaba mas pegada a la
+     grilla que las filas entre si */
+  margin: 88px auto 0;
 }
 .team-row-sep { margin-top: 64px; }
 .team-card {
