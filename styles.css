@@ -1803,13 +1803,16 @@ body.modal-open { overflow: hidden; }
 @media (max-width: 820px) {
   /* al bajar de columnas la tarjeta se ensancharia en vez de encoger:
      se le pone tope y el grid se centra */
-  .proceso-grid { grid-template-columns: repeat(2, minmax(0, 320px)); justify-content: center; }
+  .proceso-grid { grid-template-columns: repeat(2, minmax(0, 360px)); justify-content: center; }
+  /* aca la altura la manda el texto: manteniendo la proporcion cuadrada quedaba
+     mucho aire debajo, porque el texto ocupa solo dos lineas */
+  .paso { aspect-ratio: auto; min-height: 0; }
   .proceso-bg { height: 100%; top: 0; }
   .qh-intro { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 620px) {
-  .proceso-grid { grid-template-columns: minmax(0, 320px); justify-content: center; }
+  .proceso-grid { grid-template-columns: minmax(0, 360px); justify-content: center; }
 }
 
 /* ---------- PROYECTOS (slider: foto con flechas + tarjeta de texto) ---------- */
