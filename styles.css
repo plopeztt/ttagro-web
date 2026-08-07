@@ -1786,7 +1786,7 @@ body.modal-open { overflow: hidden; }
 .paso-num {
   font-family: var(--font);     /* Outfit Regular 48 */
   font-weight: 400;
-  font-size: clamp(39.72px, 3.611vw, 52px);   /* escala 1100 -> 1440 */
+  font-size: clamp(37.43px, 3.403vw, 49px);   /* escala 1100 -> 1440 */
   line-height: 1;
   color: #0d7233;
   margin-bottom: 32px;          /* el texto arranca a una altura fija en todas las tarjetas */
