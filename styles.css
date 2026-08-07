@@ -1717,7 +1717,7 @@ body.modal-open { overflow: hidden; }
 .qh-intro h1 {
   font-family: var(--font);
   font-weight: 500;                /* Outfit Medium */
-  font-size: clamp(23px, 2.1vw, 30.39px);
+  font-size: clamp(23px, 2.15vw, 31px);
   line-height: 1.4;
   letter-spacing: -0.3039px;   /* -1% */
   color: #0d7233;
@@ -1726,7 +1726,7 @@ body.modal-open { overflow: hidden; }
 .qh-intro p {
   font-family: var(--font);
   font-weight: 400;
-  font-size: clamp(16px, 1.4vw, 20px);
+  font-size: clamp(16px, 1.53vw, 22px);
   line-height: 1.4;
   letter-spacing: -0.2px;      /* -1% */
   color: #0d7233;
