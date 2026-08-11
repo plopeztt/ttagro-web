@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Mapa del sitio de ttagro.cl
+
+  Lista SOLO las 5 URLs canonicas, que son las de escritorio. Las de
+  /web-mobile/ no van aqui: apuntan con <link rel="canonical"> a estas
+  mismas, asi que incluirlas seria pedirle a Google que indexe dos veces
+  el mismo contenido, justo lo que se quiere evitar.
+
+  Tampoco van los prototipos ni /_ingles-standby/, que llevan noindex.
+
+  <priority> y <changefreq> se omiten a proposito: Google declaro
+  publicamente que los ignora, y un archivo mas corto es mas facil de
+  mantener al dia. Lo unico que si usa es <lastmod>, y solo si es honesto:
+  hay que actualizarlo cuando el contenido de la pagina cambie de verdad,
+  no en cada publicacion.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://ttagro.cl/</loc>
+    <lastmod>2026-08-11</lastmod>
+  </url>
+
+  <url>
+    <loc>https://ttagro.cl/nosotros.html</loc>
+    <lastmod>2026-08-11</lastmod>
+  </url>
+
+  <url>
+    <loc>https://ttagro.cl/que-hacemos.html</loc>
+    <lastmod>2026-08-11</lastmod>
+  </url>
+
+  <url>
+    <loc>https://ttagro.cl/proyectos.html</loc>
+    <lastmod>2026-08-11</lastmod>
+  </url>
+
+  <url>
+    <loc>https://ttagro.cl/contacto.html</loc>
+    <lastmod>2026-08-11</lastmod>
+  </url>
+
+</urlset>

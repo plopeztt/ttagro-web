@@ -1,0 +1,45 @@
+# robots.txt — ttagro.cl
+#
+# Este archivo le dice a los rastreadores que pueden entrar a todo el sitio.
+# Los buscadores tradicionales (Google, Bing) y los de IA quedan permitidos
+# de forma explicita: para que nos citen, primero tienen que poder leernos.
+
+User-agent: *
+Allow: /
+
+# --- Buscadores de IA, declarados uno por uno ---
+# Con "User-agent: *" ya alcanzaria, pero nombrarlos deja constancia de que
+# permitirles el paso es una decision tomada, no un descuido.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# --- Nota importante sobre lo que NO se bloquea aqui ---
+#
+# Las paginas de /web-mobile/, /_ingles-standby/ y los prototipos NO se
+# bloquean en este archivo a proposito, aunque no queramos que aparezcan
+# en los resultados de busqueda.
+#
+# El motivo: bloquear una carpeta aqui impide que el buscador la LEA, y si
+# no la lee tampoco ve la etiqueta <meta name="robots" content="noindex">
+# ni el <link rel="canonical"> que llevan dentro. El resultado seria el
+# contrario al buscado: la URL igual puede aparecer en Google (basta con
+# que alguien la enlace), pero sin titulo ni descripcion, porque el buscador
+# nunca pudo entrar a mirar.
+#
+# Por eso se deja pasar al rastreador: entra, lee la instruccion que lleva
+# cada pagina y la respeta.
+#   - /web-mobile/       -> canonical hacia la version de escritorio
+#   - /_ingles-standby/  -> noindex, nofollow
+#   - los prototipos     -> noindex, nofollow
+
+Sitemap: https://ttagro.cl/sitemap.xml
