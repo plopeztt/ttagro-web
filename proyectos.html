@@ -54,11 +54,19 @@
 
   <main class="proy-main">
     <div class="container">
-      <span class="chip" id="proyChip">Sur Andina</span>
+      <h1 class="chip" id="proyChip">Sur Andina</h1>
 
       <div class="proy-slider">
         <div class="proy-media">
-          <img class="proy-photo proy-a is-active" src="" alt="Sur Andina">
+          <!-- La primera foto viene escrita en el HTML a proposito: los buscadores y
+               los crawlers de IA no ejecutan JavaScript, asi que si la dejamos vacia
+               esta pagina no tiene ni una sola imagen para ellos. script.js reasigna
+               este mismo archivo al arrancar, sin descarga extra. -->
+          <img class="proy-photo proy-a is-active"
+               src="assets/proyectos/carrusel-1.webp"
+               alt="Predio agrícola de Sur Andina en Olmos, Perú: 500 hectáreas de cítricos y cultivos con riego tecnificado"
+               width="1912" height="1600"
+               fetchpriority="high">
           <img class="proy-photo proy-b" src="" alt="" aria-hidden="true">
           <button class="proy-zone proy-zone-prev" aria-label="Foto anterior"><span class="z-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span></button>
           <button class="proy-zone proy-zone-next" aria-label="Foto siguiente"><span class="z-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span></button>
@@ -90,18 +98,18 @@
 
       <nav class="footer-nav" aria-label="Enlaces del pie de página">
         <div class="footer-col footer-col-wide">
-          <h3>Dirección</h3>
+          <p class="footer-title">Dirección</p>
           <p>Santiago, Chile<br>Isidora Goyenechea 3162,<br>Of. 902, Las Condes</p>
         </div>
         <div class="footer-col">
-          <h3>Explorar</h3>
+          <p class="footer-title">Explorar</p>
           <a href="index.html">Inicio</a>
           <a href="nosotros.html">Nosotros</a>
           <a class="q-underline" href="que-hacemos.html">¿<span>Qué hacemos</span>?</a>
           <a href="proyectos.html">Proyectos</a>
         </div>
         <div class="footer-col">
-          <h3>Ayuda</h3>
+          <p class="footer-title">Ayuda</p>
           <a href="contacto.html">Contacto</a>
         </div>
       </nav>

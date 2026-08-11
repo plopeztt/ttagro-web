@@ -11,10 +11,9 @@
 /*
   Cache-Control: public, max-age=0, must-revalidate
 
+## Las fotos del equipo vivian en "/fotos equipo/" y necesitaban su propia regla.
+## Ahora estan en /assets/equipo/, asi que las cubre la regla de /assets/*.
 /assets/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/fotos equipo/*
   Cache-Control: public, max-age=31536000, immutable
 
 /batica-modern-sans-serif-font-2026-04-07-06-19-09-utc/*

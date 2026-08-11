@@ -87,8 +87,12 @@ a { text-decoration: none; color: inherit; }
 
 .btn { font-family: var(--font); font-weight: 400; }
 
+/* Los chips ahora son encabezados reales (h1/h2/h3) para que los buscadores
+   entiendan la estructura de cada pagina. Fijamos el peso para que un <h2>
+   se siga viendo igual que el <span> que habia antes. */
 .chip {
   font-family: var(--font-display);
+  font-weight: 400;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -943,7 +947,11 @@ a { text-decoration: none; color: inherit; }
 .footer-col { display: flex; flex-direction: column; gap: 8px; width: 130px; }
 .footer-col-wide { width: 258px; }
 
-.footer-col h3 {
+/* Los titulos del pie dejaron de ser <h3> (competian con la jerarquia del
+   contenido) y pasaron a <p class="footer-title">. Se mantiene el selector h3
+   para las paginas de web-mobile/, que aun no se migran. */
+.footer-col h3,
+.footer-col .footer-title {
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.08px;
@@ -1690,7 +1698,8 @@ body.modal-open { overflow: hidden; }
 .footer-light { background: #fff; }
 .footer-light .footer-inner { border-top-color: rgba(0, 0, 0, 0.15); }
 .footer-light .footer-logo { color: #000; }
-.footer-light .footer-col h3 { color: #000; }
+.footer-light .footer-col h3,
+.footer-light .footer-col .footer-title { color: #000; }
 .footer-light .footer-tagline,
 .footer-light .footer-col p,
 .footer-light .footer-col a { color: rgba(0, 0, 0, 0.6); }

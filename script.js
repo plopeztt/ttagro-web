@@ -494,11 +494,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const pB = proySlider.querySelector('.proy-b');
     let activeP = pA, f = 0;
 
+    // Alt con el lugar, no solo el numero: sirve igual de guia al navegar y ademas
+    // le dice a buscadores y lectores de pantalla que muestra la foto.
+    const altProy = i => EN
+      ? `Sur Andina, Olmos (Peru) — photo ${i + 1} of ${fotos.length}`
+      : `Sur Andina, Olmos (Perú) — foto ${i + 1} de ${fotos.length}`;
+
     const showProy = i => {
       f = (i + fotos.length) % fotos.length;
       const incoming = activeP === pA ? pB : pA;
       incoming.src = fotos[f];
-      incoming.alt = EN ? `Sur Andina — photo ${f + 1} of ${fotos.length}` : `Sur Andina — foto ${f + 1} de ${fotos.length}`;
+      incoming.alt = altProy(f);
       const activate = () => {
         activeP.classList.remove('is-active');
         incoming.classList.add('is-active');
@@ -539,9 +545,13 @@ document.addEventListener('DOMContentLoaded', () => {
     proySlider.querySelector('.proy-zone-prev').addEventListener('click', () => goProy(f - 1));
     proySlider.querySelector('.proy-zone-next').addEventListener('click', () => goProy(f + 1));
 
-    // primera foto (capa A ya es la activa)
-    pA.src = fotos[0];
-    pA.alt = (EN ? 'Sur Andina — photo 1 of ' : 'Sur Andina — foto 1 de ') + fotos.length;
+    // Primera foto (capa A ya es la activa). Ahora viene escrita en el HTML para que
+    // los crawlers sin JavaScript tambien la vean, asi que solo la rellenamos si
+    // faltara. Si el HTML ya trae un alt descriptivo, se respeta.
+    if (!pA.getAttribute('src')) {
+      pA.src = fotos[0];
+      pA.alt = altProy(0);
+    }
     updateProySegs();
     startProyAuto();
   }
