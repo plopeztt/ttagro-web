@@ -130,29 +130,48 @@ de escritorio, el rastreador podría no verlo nunca. El plan original de esta ta
 | `knowsAbout`, `areaServed` | ✅ Puesto |
 | `url`, `logo`, `image` | ✅ Puesto |
 | `AboutPage` con las 8 personas del equipo | ✅ Puesto |
+| `sameAs` (LinkedIn) | ✅ **Puesto el 17 ago** — era el que más pesaba |
 | `identifier` (RUT) | ⏳ Falta |
 | `contactPoint` (teléfono, email) | ⏳ Falta |
-| `sameAs` (LinkedIn) | ⏳ Falta — el más importante |
 
-### ⚠️ Los tres campos que faltan se OMITIERON, no se pusieron con datos de ejemplo
+### `sameAs` — resuelto el mismo día
 
-El código de más abajo trae `"value": "XX.XXX.XXX-X"`, `contacto@ttagro.cl` y una URL de
-LinkedIn. **Nada de eso se publicó.** Publicar un RUT inventado, un correo que no existe o un
-perfil que devuelve 404 es peor que no declarar nada: Google intenta verificarlo, falla, y la
-señal de identidad queda dañada justo en lo que esta tarea viene a arreglar.
+`https://www.linkedin.com/company/terratech-agro/` — comprobado que responde `200` antes de
+declararlo. Es el campo que el manual daba por más importante: le permite a un buscador
+**confirmar** la entidad cruzando una fuente independiente, en vez de solo creerle al sitio.
 
-Los tres campos están anotados en un comentario dentro del HTML de cada página, para que
-quien los tenga sepa dónde van.
+Para que rinda al máximo falta una cosa que no es código: **que las 8 personas del equipo
+declaren la empresa como empleador en sus perfiles de LinkedIn.** Eso convierte una fuente en
+nueve que se respaldan entre sí.
 
-### Lo que hay que conseguir para cerrarla del todo
+### ⚠️ Los campos que faltan se OMITEN, no se ponen con datos de ejemplo
 
-1. **Página de LinkedIn de empresa** — la señal más fuerte. Idealmente, que las 8 personas
-   del equipo la declaren como empleador en sus perfiles.
+El código de más abajo trae `"value": "XX.XXX.XXX-X"` y `contacto@ttagro.cl`. **Nada de eso
+se publicó.** Publicar un RUT inventado o un correo que no existe es peor que no declarar
+nada: Google intenta verificarlo, falla, y la señal de identidad queda dañada justo en lo que
+esta tarea viene a arreglar.
+
+Los dos campos están anotados en un comentario dentro del HTML de cada página, para que quien
+los tenga sepa dónde van.
+
+### Lo que falta para cerrarla del todo
+
+1. ✅ ~~Página de LinkedIn de empresa~~ — **hecho el 17 de agosto de 2026.** Queda el paso
+   humano: que el equipo la declare como empleador en sus perfiles.
 2. **Email corporativo** (`contacto@ttagro.cl` o similar). Ver también la Tarea 8: hoy el
    formulario de contacto llega a un correo personal.
 3. **Teléfono de la empresa**, si se decide publicar uno.
 4. **RUT de la sociedad** — es público (está en el Diario Oficial) y es el desambiguador
    definitivo: ninguna otra Terra Tech del mundo comparte el RUT.
+
+### 🟡 Pendiente de decisión: el ícono de LinkedIn en el pie
+
+Ahora que el perfil existe, el pie de página podría enlazarlo. Los íconos de redes sociales
+están en el HTML de las 20 páginas, **comentados** desde antes. Descomentarlos y apuntar el de
+LinkedIn al perfil real sumaría un enlace visible, que refuerza lo que declara el `sameAs`.
+
+**No se hizo**, porque es un cambio visible y el contenido del sitio ya pasó por el
+directorio. Si se aprueba, es descomentar un bloque y cambiar un `href`.
 
 ### Nota sobre `foundingDate`
 
@@ -1343,9 +1362,10 @@ Marca solo cuando hayas verificado con evidencia, no cuando creas que quedó.
 | 1 | Schema Organization en las 20 páginas | 24 bloques JSON-LD, todos parsean sin error | ✅ |
 | 1 | Schema también en `/web-mobile/` | Puesto: es lo que Google lee (mobile-first) | ✅ |
 | 1 | Sin datos de ejemplo publicados | 0 apariciones de RUT/email/LinkedIn falsos | ✅ |
+| 1 | `sameAs` con URLs funcionales | LinkedIn de empresa, comprobado que responde 200 | ✅ |
+| 1 | El equipo declara la empresa en LinkedIn | 8 perfiles apuntando a la página. **Paso humano** | ☐ |
 | 1 | `identifier` (RUT) | ⏳ Falta el dato real | ☐ |
 | 1 | `contactPoint` (email corporativo) | ⏳ Falta el dato real | ☐ |
-| 1 | `sameAs` con URLs funcionales | ⏳ Falta el LinkedIn. Clic en cada una, todas abren | ☐ |
 | 2 | H1 en las 5 páginas de escritorio | `Ctrl+U` → `<h1` da 1/1 | ✅ |
 | 2 | H1 en las páginas **móviles** | 🔴 Medido 17 ago: 4 de 5 dan 0. Ver **Tarea 13** | ☐ |
 | 2 | Jerarquía sin saltos | H1→H2→H3 correlativos | ✅ |
