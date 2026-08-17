@@ -164,14 +164,28 @@ los tenga sepa dónde van.
 4. **RUT de la sociedad** — es público (está en el Diario Oficial) y es el desambiguador
    definitivo: ninguna otra Terra Tech del mundo comparte el RUT.
 
-### 🟡 Pendiente de decisión: el ícono de LinkedIn en el pie
+### ✅ El ícono de LinkedIn en el pie — hecho (17 ago 2026)
 
-Ahora que el perfil existe, el pie de página podría enlazarlo. Los íconos de redes sociales
-están en el HTML de las 20 páginas, **comentados** desde antes. Descomentarlos y apuntar el de
-LinkedIn al perfil real sumaría un enlace visible, que refuerza lo que declara el `sameAs`.
+Ahora que el perfil existe, el pie lo enlaza. Es un enlace visible que refuerza lo que declara
+el `sameAs`: una cosa es decir "este es nuestro LinkedIn" en metadata, otra es enlazarlo de
+verdad desde todas las páginas.
 
-**No se hizo**, porque es un cambio visible y el contenido del sitio ya pasó por el
-directorio. Si se aprueba, es descomentar un bloque y cambiar un `href`.
+Los íconos de redes estaban en el HTML **comentados** desde antes. Se descomentaron dejando
+**solo LinkedIn**: Instagram y X salieron, porque esos perfiles no existen y un ícono que
+lleva a ninguna parte resta más de lo que suma.
+
+| Dónde | Ícono |
+|---|---|
+| Pie oscuro (Inicio, escritorio y móvil) | `assets/png/social-li-claro.png` |
+| Pie claro (las otras 4, escritorio y móvil) | `assets/png/social-li-gris.png` |
+
+**Escritorio y móvil usan el mismo archivo.** El móvil traía un SVG dibujado a mano que no
+coincidía con el ícono del diseño; se reemplazó por el PNG, que las páginas móviles cargan
+desde `../assets/png/` igual que ya cargaban las fotos del equipo. En `mobile.css` la regla
+`.foot .social a svg` pasó a ser `.foot .social a img`.
+
+Los enlaces llevan `target="_blank"` y `rel="noopener"`, y un `aria-label` descriptivo en cada
+idioma ("TerraTech Agro en LinkedIn" / "on LinkedIn") en vez del escueto "LinkedIn" que tenían.
 
 ### Nota sobre `foundingDate`
 
