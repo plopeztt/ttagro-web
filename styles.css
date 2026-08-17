@@ -253,29 +253,6 @@ a { text-decoration: none; color: inherit; }
 .lang-opt.is-active { font-weight: 500; color: #0d7233; }
 .lang-opt:disabled { color: #9aa5a1; cursor: default; }
 
-/* Inglés en stand-by: ítem no navegable con badge "Coming soon" */
-.lang-opt.lang-soon {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  color: #9aa5a1;
-  cursor: default;
-}
-.lang-opt.lang-soon:hover { background: none; }
-.lang-opt.lang-soon em {
-  font-style: normal;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: #0d7233;
-  background: var(--verde-claro-bg);
-  padding: 2px 8px;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
 .menu-toggle { display: none; }
 
 .hero-content {
@@ -2079,26 +2056,12 @@ body.modal-open { overflow: hidden; }
     padding-top: 16px;
     border-top: 1px solid rgba(194, 207, 205, 0.5);
   }
-  .main-nav .nav-lang .lang-es { font-weight: 500; color: #0d7233; }
-  .main-nav .nav-lang .lang-en {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+  .main-nav .nav-lang a {
     color: #9aa5a1;
-    cursor: default;
+    padding: 6px 10px;
+    border-radius: 9px;
   }
-  .main-nav .nav-lang .lang-en em {
-    font-style: normal;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #0d7233;
-    background: var(--verde-claro-bg);
-    padding: 2px 8px;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
+  .main-nav .nav-lang a.is-active { font-weight: 500; color: #0d7233; }
 
   .menu-toggle {
     display: flex;

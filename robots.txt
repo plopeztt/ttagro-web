@@ -25,9 +25,8 @@ Allow: /
 
 # --- Nota importante sobre lo que NO se bloquea aqui ---
 #
-# Las paginas de /web-mobile/, /_ingles-standby/ y los prototipos NO se
-# bloquean en este archivo a proposito, aunque no queramos que aparezcan
-# en los resultados de busqueda.
+# Las paginas de /web-mobile/ y los prototipos NO se bloquean en este archivo
+# a proposito, aunque no queramos que aparezcan en los resultados de busqueda.
 #
 # El motivo: bloquear una carpeta aqui impide que el buscador la LEA, y si
 # no la lee tampoco ve la etiqueta <meta name="robots" content="noindex">
@@ -38,8 +37,11 @@ Allow: /
 #
 # Por eso se deja pasar al rastreador: entra, lee la instruccion que lleva
 # cada pagina y la respeta.
-#   - /web-mobile/       -> canonical hacia la version de escritorio
-#   - /_ingles-standby/  -> noindex, nofollow
-#   - los prototipos     -> noindex, nofollow
+#   - /web-mobile/   -> canonical hacia la version de escritorio (ES y EN)
+#   - los prototipos -> noindex, nofollow
+#
+# El sitio esta en dos idiomas, uno por URL: las paginas *-en.html son las
+# de ingles y SI deben indexarse. Cada par se declara con hreflang en su
+# <head> y en el sitemap.
 
 Sitemap: https://ttagro.cl/sitemap.xml

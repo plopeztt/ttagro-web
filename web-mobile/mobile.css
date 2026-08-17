@@ -49,10 +49,10 @@ body{font-family:var(--font);background:#dfe3e0;color:#111;display:flex;justify-
 .mmenu a{font-family:var(--font);font-weight:400;font-size:16.3px;letter-spacing:-.4075px;line-height:1.4;color:#000;text-decoration:none;text-align:center;padding:14px 0}
 .mmenu a.active{color:#F9BD23}
 .mmenu .mlang{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px;padding-top:14px;border-top:1px solid rgba(194,207,205,.5)}
-.mlang-opt{font-family:var(--font);font-size:16.3px;letter-spacing:-.4075px;font-weight:400;color:#9aa5a1;padding:6px 10px;border-radius:9px}
-.mlang-opt.is-active{font-weight:500;color:#0d7233}
-.mlang-soon{display:inline-flex;align-items:center;gap:8px;cursor:default}
-.mlang-soon em{font-style:normal;font-size:10px;font-weight:500;letter-spacing:.02em;text-transform:uppercase;color:#0d7233;background:var(--verde-claro-bg);padding:2px 8px;border-radius:999px;white-space:nowrap}
+/* los enlaces del selector van dentro de .mmenu, asi que necesitan el mismo
+   peso de selector (.mmenu a) para poder pisarle color y espaciado */
+.mmenu .mlang a{font-size:16.3px;letter-spacing:-.4075px;font-weight:400;color:#9aa5a1;padding:6px 10px;border-radius:9px}
+.mmenu .mlang a.is-active{font-weight:500;color:#0d7233}
 
 /* chip (esquinas asimétricas) */
 .chip{display:inline-flex;align-items:center;justify-content:center;background:var(--blanco-suave);border:1px solid var(--borde-chip);border-radius:18px 0 18px 0;padding:8px 19px;font-family:var(--display);font-size:14px;color:var(--verde-oscuro);letter-spacing:-.12px}

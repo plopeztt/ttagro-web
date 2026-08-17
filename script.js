@@ -160,10 +160,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // ----- Modal Experiencia: +60k abre el collage; cada categoría, su galería -----
   const GALERIAS = {
     cultivos:   { titulo: EN ? 'Crops' : 'Cultivos',                          fotos: ['cultivos/foto1.webp', 'cultivos/foto2.webp', 'cultivos/foto3.webp'] },
-    frutales:   { titulo: EN ? 'Fruit trees' : 'Frutales',                    fotos: ['frutales/foto1.webp', 'frutales/foto2.webp', 'frutales/foto3.webp', 'frutales/foto4.webp', 'frutales/foto5.webp'] },
+    frutales:   { titulo: EN ? 'Fruit orchards' : 'Frutales',                  fotos: ['frutales/foto1.webp', 'frutales/foto2.webp', 'frutales/foto3.webp', 'frutales/foto4.webp', 'frutales/foto5.webp'] },
     riego:      { titulo: EN ? 'Water management' : 'Gestión hídrica',         fotos: ['riego/foto1.webp', 'riego/foto2.webp', 'riego/foto3.webp'] },
     innovacion: { titulo: EN ? 'Agricultural innovation' : 'Innovación agrícola', fotos: ['innovacion/foto1.webp', 'innovacion/foto2.webp', 'innovacion/foto3.webp', 'innovacion/foto4.webp'] },
-    impacto:    { titulo: EN ? 'Environmental impact' : 'Impacto ambiental',  fotos: ['impacto/foto1.webp', 'impacto/foto2.webp', 'impacto/foto3.webp', 'impacto/foto4.webp', 'impacto/foto5.webp', 'impacto/foto6.webp'] }
+    impacto:    { titulo: EN ? 'Environmental stewardship' : 'Impacto ambiental', fotos: ['impacto/foto1.webp', 'impacto/foto2.webp', 'impacto/foto3.webp', 'impacto/foto4.webp', 'impacto/foto5.webp', 'impacto/foto6.webp'] }
   };
   const BASE = 'assets/collage/galerias/';
 
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const src = BASE + fotos[idx];
       const incoming = activeGal === galA ? galB : galA;
       incoming.src = src;
-      incoming.alt = `${titulo} ${idx + 1} de ${fotos.length}`;
+      incoming.alt = `${titulo} ${idx + 1} ${EN ? 'of' : 'de'} ${fotos.length}`;
 
       const activate = () => {
         activeGal.classList.remove('is-active');
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.querySelector('.gal-name').textContent = titulo;
       if (galThumbs) {
         let h = '';
-        for (let k = 0; k < fotos.length; k++) h += '<button class="gal-thumb" data-i="' + k + '" aria-label="Foto ' + (k + 1) + '"><img src="' + BASE + fotos[k] + '" alt=""></button>';
+        for (let k = 0; k < fotos.length; k++) h += '<button class="gal-thumb" data-i="' + k + '" aria-label="' + (EN ? 'Photo ' : 'Foto ') + (k + 1) + '"><img src="' + BASE + fotos[k] + '" alt=""></button>';
         galThumbs.innerHTML = h;
       }
       if (galSegs) {
@@ -537,7 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (proySegs) {
       let h = '';
-      for (let k = 0; k < fotos.length; k++) h += '<button class="proy-seg" data-i="' + k + '" aria-label="Foto ' + (k + 1) + '"><i></i></button>';
+      for (let k = 0; k < fotos.length; k++) h += '<button class="proy-seg" data-i="' + k + '" aria-label="' + (EN ? 'Photo ' : 'Foto ') + (k + 1) + '"><i></i></button>';
       proySegs.innerHTML = h;
       proySegs.addEventListener('click', e => { const b = e.target.closest('.proy-seg'); if (b) goProy(+b.dataset.i); });
     }
@@ -579,26 +579,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (searchBtns.length) {
     const INDICE = EN ? [
       { t: 'Home', d: 'Main page — traceable management for sustainable agriculture', u: 'index-en.html' },
-      { t: 'ESG Pillars — Environment', d: 'Traceable and efficient water use, waste management, clean production Global G.A.P.', u: 'index-en.html#que-hacemos' },
-      { t: 'ESG Pillars — Social', d: 'Integrity and ethics, labor equity, fair compensation, ongoing training', u: 'index-en.html#que-hacemos' },
-      { t: 'ESG Pillars — Governance', d: 'Independent board, financial transparency, risk management', u: 'index-en.html#que-hacemos' },
-      { t: 'Experience', d: '+60k hectares: crops, fruit trees, water management, innovation, environmental impact; KPIs; +30 years', u: 'index-en.html#proyectos' },
-      { t: 'About us', d: 'Mission, vision and team of TerraTech Agro', u: 'nosotros-en.html' },
+      { t: 'ESG Pillars — Environment', d: 'Traceable and efficient water use, waste management, sustainable production certified by GLOBALG.A.P.', u: 'index-en.html#que-hacemos' },
+      { t: 'ESG Pillars — Social', d: 'Integrity and ethics, workplace equity, fair compensation, ongoing training, safe infrastructure', u: 'index-en.html#que-hacemos' },
+      { t: 'ESG Pillars — Governance', d: 'Independent board of directors, financial transparency, risk management', u: 'index-en.html#que-hacemos' },
+      { t: 'Experience', d: '+60k hectares: crops, fruit orchards, water management, agricultural innovation, environmental stewardship; KPIs; +25 years', u: 'index-en.html#proyectos' },
+      { t: 'About Us', d: 'Mission, vision and team of TerraTech Agro', u: 'nosotros-en.html' },
       { t: 'Team', d: 'Michael Grasty, Tomás Bottiger, Germán Wielandt, Fernando Cisternas, Isabel Quiroz, Pedro Barros, Paula López, Rafael Guerrero', u: 'nosotros-en.html' },
-      { t: 'External technical advisors', d: 'Plums, citrus and avocados, walnuts, hazelnuts, hydrology', u: 'nosotros-en.html' },
-      { t: 'What we do?', d: '8-step process: from understanding the client to permanent operational support', u: 'que-hacemos-en.html' },
-      { t: 'Projects — Sur Andina', d: '500-hectare agro-industrial project in Olmos, Peru: citrus and crops', u: 'proyectos-en.html' },
+      { t: 'External Technical Advisors', d: 'Citrus and avocados, walnuts, hydrology', u: 'nosotros-en.html' },
+      { t: 'What We Do', d: '9-step value chain: from the client needs assessment to ongoing operational support', u: 'que-hacemos-en.html' },
+      { t: 'Projects — Sur Andina', d: '500-hectare agribusiness project in Olmos, Peru: citrus orchards and crops', u: 'proyectos-en.html' },
       { t: 'Contact', d: 'Form: agricultural production, administration and accounting, procurement, public relations', u: 'contacto-en.html' }
     ] : [
       { t: 'Inicio', d: 'Página principal — gestión trazable para una agricultura sostenible', u: 'index.html' },
-      { t: 'Pilares ESG — Medio Ambiente', d: 'Uso trazable y eficiente del agua, gestión de residuos, producción limpia Global G.A.P.', u: 'index.html#que-hacemos' },
+      { t: 'Pilares ESG — Medio Ambiente', d: 'Uso trazable y eficiente del agua, gestión de residuos, producción limpia GLOBALG.A.P.', u: 'index.html#que-hacemos' },
       { t: 'Pilares ESG — Social', d: 'Integridad y ética, equidad laboral, remuneraciones justas, capacitaciones continuas', u: 'index.html#que-hacemos' },
       { t: 'Pilares ESG — Gobernanza', d: 'Directorio independiente, transparencia financiera, gestión de riesgos', u: 'index.html#que-hacemos' },
-      { t: 'Experiencia', d: '+60k hectáreas: cultivos, frutales, gestión hídrica, innovación, impacto ambiental; KPIs; +30 años', u: 'index.html#proyectos' },
+      { t: 'Experiencia', d: '+60k hectáreas: cultivos, frutales, gestión hídrica, innovación, impacto ambiental; KPIs; +25 años', u: 'index.html#proyectos' },
       { t: 'Nosotros', d: 'Misión, visión y equipo de TerraTech Agro', u: 'nosotros.html' },
       { t: 'Equipo', d: 'Michael Grasty, Tomás Bottiger, Germán Wielandt, Fernando Cisternas, Isabel Quiroz, Pedro Barros, Paula López, Rafael Guerrero', u: 'nosotros.html' },
-      { t: 'Asesorías técnicas externas', d: 'Ciruelos, cítricos y paltos, nogales, avellanos, hidrología', u: 'nosotros.html' },
-      { t: '¿Qué hacemos?', d: 'Proceso en 8 pasos: desde el entendimiento del cliente hasta el soporte permanente de la operación', u: 'que-hacemos.html' },
+      { t: 'Asesorías técnicas externas', d: 'Cítricos y paltos, nogales, hidrología', u: 'nosotros.html' },
+      { t: '¿Qué hacemos?', d: 'Cadena de valor en 9 pasos: desde el entendimiento del cliente hasta el soporte permanente de la operación', u: 'que-hacemos.html' },
       { t: 'Proyectos — Sur Andina', d: 'Proyecto agroindustrial de 500 hectáreas en Olmos, Perú: cítricos y cultivos', u: 'proyectos.html' },
       { t: 'Contacto', d: 'Formulario: consultas productiva agrícola, administrativa contable, adquisiciones, relaciones públicas', u: 'contacto.html' }
     ];
@@ -666,7 +666,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const area = sel && sel.selectedIndex > -1 ? sel.options[sel.selectedIndex].text.trim() : '';
 
       const asunto = (d.get('asunto') || '').trim();
-      const cuerpo = [
+      const cuerpo = (EN ? [
+        'Name: '   + (d.get('nombre') || '').trim(),
+        'Email: '  + (d.get('email') || '').trim(),
+        'Phone: '  + ((d.get('telefono') || '').trim() || '—'),
+        'Contact area: ' + (area || '—'),
+        '',
+        'Message:',
+        (d.get('mensaje') || '').trim(),
+        '',
+        '—',
+        'Sent from the contact form at ttagro.cl'
+      ] : [
         'Nombre: '   + (d.get('nombre') || '').trim(),
         'Email: '    + (d.get('email') || '').trim(),
         'Teléfono: ' + ((d.get('telefono') || '').trim() || '—'),
@@ -676,16 +687,22 @@ document.addEventListener('DOMContentLoaded', () => {
         (d.get('mensaje') || '').trim(),
         '',
         '—',
-        'Enviado desde el formulario de contacto de terratechagro.cl'
-      ].join('\r\n');   // \r\n: es el salto de linea que respetan todos los gestores
+        'Enviado desde el formulario de contacto de ttagro.cl'
+      ]).join('\r\n');   // \r\n: es el salto de linea que respetan todos los gestores
+
+      const asuntoMail = EN
+        ? 'Website enquiry: ' + (asunto || 'general')
+        : 'Contacto web: ' + (asunto || 'consulta');
 
       const enlace = 'mailto:' + CONTACTO_DESTINO
-        + '?subject=' + encodeURIComponent('Contacto web: ' + (asunto || 'consulta'))
+        + '?subject=' + encodeURIComponent(asuntoMail)
         + '&body='    + encodeURIComponent(cuerpo);
 
       window.location.href = enlace;
 
-      aviso.textContent = 'Abrimos tu programa de correo con el mensaje listo. Revísalo y pulsa enviar para que nos llegue.';
+      aviso.textContent = EN
+        ? 'We opened your email app with the message ready. Review it and hit send so it reaches us.'
+        : 'Abrimos tu programa de correo con el mensaje listo. Revísalo y pulsa enviar para que nos llegue.';
       aviso.hidden = false;
     });
   }

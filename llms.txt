@@ -33,7 +33,7 @@ exportador, y soporte permanente de la operación.
 Opera bajo tres pilares ESG declarados:
 
 - **Medio ambiente** — uso trazable y eficiente del agua, gestión de residuos y
-  producción limpia con certificado Global G.A.P.
+  producción limpia con certificado GLOBALG.A.P.
 - **Social** — integridad y ética, equidad laboral, remuneraciones justas,
   capacitaciones continuas e infraestructura segura.
 - **Gobernanza** — directorio independiente, transparencia financiera y gestión
@@ -61,10 +61,21 @@ a mercados de agroexportación.
 - [Proyectos](https://ttagro.cl/proyectos.html): el caso Sur Andina, 500 ha en Olmos, Perú
 - [Contacto](https://ttagro.cl/contacto.html): formulario por área (productiva agrícola, administrativa contable, adquisiciones, relaciones públicas)
 
+## Pages (English)
+
+El sitio está publicado en español e inglés, un idioma por URL. Las páginas en
+inglés son traducción del mismo contenido, no versiones distintas:
+
+- [Home](https://ttagro.cl/index-en.html)
+- [About Us](https://ttagro.cl/nosotros-en.html)
+- [What We Do](https://ttagro.cl/que-hacemos-en.html)
+- [Projects](https://ttagro.cl/proyectos-en.html)
+- [Contact](https://ttagro.cl/contacto-en.html)
+
 ## Datos de la organización
 
 - Razón social: TERRATECH AGRO SpA
 - Nombres alternativos: TT Agro, TTAGRO
 - Domicilio: Isidora Goyenechea 3162, Oficina 902, Las Condes, Santiago, Chile
 - Sitio oficial: https://ttagro.cl/
-- Idioma del sitio: español (es-CL)
+- Idiomas del sitio: español (es-CL, por defecto) e inglés (en)

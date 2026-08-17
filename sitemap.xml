@@ -2,12 +2,17 @@
 <!--
   Mapa del sitio de ttagro.cl
 
-  Lista SOLO las 5 URLs canonicas, que son las de escritorio. Las de
-  /web-mobile/ no van aqui: apuntan con <link rel="canonical"> a estas
-  mismas, asi que incluirlas seria pedirle a Google que indexe dos veces
-  el mismo contenido, justo lo que se quiere evitar.
+  Lista SOLO las URLs canonicas, que son las de escritorio: 5 en espanol y
+  5 en ingles. Las de /web-mobile/ no van aqui: apuntan con
+  <link rel="canonical"> a estas mismas, asi que incluirlas seria pedirle a
+  Google que indexe dos veces el mismo contenido, justo lo que se quiere
+  evitar. Tampoco van los prototipos, que llevan noindex.
 
-  Tampoco van los prototipos ni /_ingles-standby/, que llevan noindex.
+  Cada par espanol/ingles se declara con <xhtml:link rel="alternate"
+  hreflang="...">, ademas de las mismas etiquetas que ya lleva cada pagina en
+  su <head>. Es la forma que recomienda Google para que trate las dos como el
+  mismo contenido en distinto idioma y no como duplicados. x-default apunta al
+  espanol, que es la version por defecto.
 
   <priority> y <changefreq> se omiten a proposito: Google declaro
   publicamente que los ignora, y un archivo mas corto es mas facil de
@@ -15,31 +20,91 @@
   hay que actualizarlo cuando el contenido de la pagina cambie de verdad,
   no en cada publicacion.
 -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ===================== Espanol ===================== -->
 
   <url>
     <loc>https://ttagro.cl/</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/index-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/"/>
   </url>
 
   <url>
     <loc>https://ttagro.cl/nosotros.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/nosotros.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/nosotros-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/nosotros.html"/>
   </url>
 
   <url>
     <loc>https://ttagro.cl/que-hacemos.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/que-hacemos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/que-hacemos-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/que-hacemos.html"/>
   </url>
 
   <url>
     <loc>https://ttagro.cl/proyectos.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/proyectos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/proyectos-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/proyectos.html"/>
   </url>
 
   <url>
     <loc>https://ttagro.cl/contacto.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/contacto-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/contacto.html"/>
+  </url>
+
+  <!-- ===================== Ingles ===================== -->
+
+  <url>
+    <loc>https://ttagro.cl/index-en.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/index-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/"/>
+  </url>
+
+  <url>
+    <loc>https://ttagro.cl/nosotros-en.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/nosotros.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/nosotros-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/nosotros.html"/>
+  </url>
+
+  <url>
+    <loc>https://ttagro.cl/que-hacemos-en.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/que-hacemos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/que-hacemos-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/que-hacemos.html"/>
+  </url>
+
+  <url>
+    <loc>https://ttagro.cl/proyectos-en.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/proyectos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/proyectos-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/proyectos.html"/>
+  </url>
+
+  <url>
+    <loc>https://ttagro.cl/contacto-en.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttagro.cl/contacto-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttagro.cl/contacto.html"/>
   </url>
 
 </urlset>

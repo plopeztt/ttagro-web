@@ -4,11 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="version.js"></script>
+<!-- Un idioma por URL, con traduccion profesional en los dos. Esta etiqueta le
+     pide al navegador que NO ofrezca su traduccion automatica: sin ella, Chrome
+     le propone al visitante una version de maquina en vez de la que ya existe
+     (y traduce hasta el selector: "Eng" salia como "Ingeniero"). -->
+<meta name="google" content="notranslate">
 <title>Nosotros — TerraTech Agro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="mobile.css">
+<link rel="stylesheet" href="mobile.css?v=2">
 <style>
   .nos{padding:44px 30px 46px}
   .nos > .chip{margin-bottom:2px}
@@ -66,14 +71,10 @@
         <a href="que-hacemos.html">¿Qué hacemos?</a>
         <a href="proyectos.html">Proyectos</a>
         <a href="contacto.html">Contacto</a>
-        <!-- Selector de idioma en stand by hasta que exista la version en ingles
-             (las paginas traducidas estan en _ingles-standby/). Para volver a
-             mostrarlo: borrar esta linea y la de cierre del comentario.
         <div class="mlang">
-          <span class="mlang-opt is-active">Esp</span>
-          <span class="mlang-opt mlang-soon" aria-disabled="true">Eng <em>Coming soon</em></span>
+          <a class="mlang-opt is-active" href="nosotros.html">Esp</a>
+          <a class="mlang-opt" href="nosotros-en.html">Eng</a>
         </div>
-        -->
       </nav>
     </div>
 
@@ -129,6 +130,6 @@
       </div>
     </footer>
   </div>
-  <script src="mobile.js"></script>
+  <script src="mobile.js?v=2"></script>
 </body>
 </html>

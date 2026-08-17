@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Version en ingles todavia sin terminar (los enlaces del menu apuntan a las
-     paginas en espanol). Hasta que se publique de verdad, no debe indexarse. -->
-<meta name="robots" content="noindex, nofollow">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="version.js"></script>
+  <!-- Un idioma por URL, con traduccion profesional en los dos. Esta etiqueta le
+       pide al navegador que NO ofrezca su traduccion automatica: sin ella, Chrome
+       le propone al visitante una version de maquina en vez de la que ya existe
+       (y traduce hasta el selector: "Eng" salia como "Ingeniero"). -->
+  <meta name="google" content="notranslate">
   <title>Contact — TerraTech Agro</title>
-  <meta name="description" content="Contact us: fill out the form and the TerraTech Agro team will get in touch with you.">
+  <meta name="description" content="Get in touch: complete the form and the TerraTech Agro team will contact you.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="font" type="font/woff2" crossorigin href="batica-modern-sans-serif-font-2026-04-07-06-19-09-utc/Web-TT/BaticaSans-Regular.woff2">
   <link rel="preload" as="font" type="font/ttf" crossorigin href="batica-modern-sans-serif-font-2026-04-07-06-19-09-utc/OpenType-TT/BaticaSans-Bold.ttf">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=76">
+
+  <link rel="canonical" href="https://ttagro.cl/contacto-en.html">
+  <!-- La version movil vive en otra URL. Este par de etiquetas le dice a Google
+       que son la MISMA pagina: indexa esta, sirve la movil a los celulares. -->
+  <link rel="alternate" media="only screen and (max-width: 820px)" href="https://ttagro.cl/web-mobile/contacto-en.html">
+
+  <!-- Un idioma por URL. hreflang le dice a Google que esta pagina y su gemela en
+       espanol son el mismo contenido en otro idioma, para que no las trate como
+       duplicadas. x-default apunta al espanol, que es la version por defecto. -->
+  <link rel="alternate" hreflang="es-cl" href="https://ttagro.cl/contacto.html">
+  <link rel="alternate" hreflang="en" href="https://ttagro.cl/contacto-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://ttagro.cl/contacto.html">
+
+  <!-- Open Graph: como se ve el enlace al compartirlo en WhatsApp, LinkedIn o Slack.
+       Sin esto aparece un link pelado, sin imagen ni descripcion. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_CL">
+  <meta property="og:site_name" content="TerraTech Agro">
+  <meta property="og:url" content="https://ttagro.cl/contacto-en.html">
+  <meta property="og:title" content="Contact — TerraTech Agro">
+  <meta property="og:description" content="Get in touch: complete the form and the TerraTech Agro team will contact you.">
+  <meta property="og:image" content="https://ttagro.cl/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TerraTech Agro — sustainable agribusiness management">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact — TerraTech Agro">
+  <meta name="twitter:description" content="Get in touch: complete the form and the TerraTech Agro team will contact you.">
+  <meta name="twitter:image" content="https://ttagro.cl/assets/og-image.jpg">
 </head>
 <body class="page-nosotros page-contacto">
 
@@ -24,9 +58,11 @@
 
     <nav class="main-nav" aria-label="Main navigation">
       <a href="index-en.html">Home</a>
-      <a href="nosotros-en.html">About us</a>
-      <a href="que-hacemos-en.html">What we do?</a>
+      <a href="nosotros-en.html">About Us</a>
+      <a href="que-hacemos-en.html">What We Do</a>
       <a href="proyectos-en.html">Projects</a>
+      <a class="nav-contact" href="contacto-en.html">Contact</a>
+      <span class="nav-lang"><a class="lang-es" href="contacto.html">Esp</a><a class="lang-en is-active" href="contacto-en.html">Eng</a></span>
     </nav>
 
     <div class="header-actions">
@@ -54,23 +90,23 @@
 
   <main class="contacto-main">
     <div class="container">
-      <span class="chip">We're here to help</span>
+      <h1 class="chip">We're here to help</h1>
     </div>
 
-    <!-- Intro band -->
+    <!-- Franja de introducción -->
     <div class="contacto-banda">
       <div class="container">
-        <p>Do you have questions about our company or services? Fill out the form and our team will get in touch with you.</p>
+        <p>Do you have any questions about our company or services? Complete the form and our team will get in touch with you.</p>
       </div>
     </div>
 
-    <!-- Form -->
+    <!-- Formulario -->
     <div class="container">
       <form class="contacto-form" novalidate>
-        <h2 class="cf-heading">Personal information</h2>
+        <h2 class="cf-heading">Personal Information</h2>
 
         <div class="cf-field">
-          <label for="cf-nombre">Full name</label>
+          <label for="cf-nombre">Full Name</label>
           <input type="text" id="cf-nombre" name="nombre" autocomplete="name" required>
         </div>
         <div class="cf-field">
@@ -82,7 +118,7 @@
           <input type="tel" id="cf-telefono" name="telefono" autocomplete="tel">
         </div>
 
-        <h2 class="cf-heading cf-heading-sep">Contact area</h2>
+        <h2 class="cf-heading cf-heading-sep">Contact Area</h2>
 
         <div class="cf-field">
           <label for="cf-area">Select an option:</label>
@@ -110,7 +146,7 @@
 
         <label class="cf-consent">
           <input type="checkbox" name="consentimiento" required>
-          <span>I agree that TerraTech may process my personal information in accordance with its Privacy Policy</span>
+          <span>I agree that TerraTech may process my personal information in accordance with its Privacy Policy.</span>
         </label>
 
         <button type="submit" class="btn btn-yellow cf-enviar">Send</button>
@@ -120,38 +156,42 @@
     </div>
   </main>
 
-  <!-- Footer (light version) -->
+  <!-- Footer (versión clara) -->
   <footer class="site-footer footer-light">
     <div class="container footer-inner">
       <div class="footer-brand">
         <p class="footer-logo">TERRATECH AGRO</p>
         <p class="footer-tagline">Sustainable agricultural project management company</p>
+        <!-- Redes sociales ocultas por ahora: para volver a mostrarlas, borrar
+             esta linea y la de cierre del comentario
         <div class="social-links">
           <a href="#" aria-label="Instagram"><img src="assets/png/social-ig-gris.png" alt="" width="24" height="24"></a>
           <a href="#" aria-label="LinkedIn"><img src="assets/png/social-li-gris.png" alt="" width="24" height="24"></a>
           <a href="#" aria-label="X"><img src="assets/png/social-x-gris.png" alt="" width="24" height="24"></a>
         </div>
+        -->
       </div>
 
       <nav class="footer-nav" aria-label="Footer links">
         <div class="footer-col footer-col-wide">
-          <h3>Address</h3>
-          <p>Santiago, Chile<br>Isidora Goyenechea 3162,<br>Of. 902, Las Condes</p>
+          <p class="footer-title">Address</p>
+          <p>Santiago, Chile<br>Isidora Goyenechea 3162,<br>Office 902, Las Condes</p>
         </div>
         <div class="footer-col">
-          <h3>Resources</h3>
+          <p class="footer-title">Explore</p>
           <a href="index-en.html">Home</a>
-          <a href="nosotros-en.html">About us</a>
-          <a href="que-hacemos-en.html">What we do?</a>
+          <a href="nosotros-en.html">About Us</a>
+          <a href="que-hacemos-en.html">What We Do</a>
+          <a href="proyectos-en.html">Projects</a>
         </div>
         <div class="footer-col">
-          <h3>Help</h3>
+          <p class="footer-title">Support</p>
           <a href="contacto-en.html">Contact</a>
         </div>
       </nav>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=40"></script>
 </body>
 </html>

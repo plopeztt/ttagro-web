@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="version.js"></script>
+<!-- Un idioma por URL, con traduccion profesional en los dos. Esta etiqueta le
+     pide al navegador que NO ofrezca su traduccion automatica: sin ella, Chrome
+     le propone al visitante una version de maquina en vez de la que ya existe
+     (y traduce hasta el selector: "Eng" salia como "Ingeniero"). -->
+<meta name="google" content="notranslate">
+<title>About Us — TerraTech Agro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mobile.css?v=2">
+<style>
+  .nos{padding:44px 30px 46px}
+  .nos > .chip{margin-bottom:2px}
+  .chip-sep{margin-top:40px}
+  .mv{display:flex;flex-direction:column;gap:16px;margin-top:22px;margin-bottom:6px}
+  .mv-card{background:rgba(123,194,80,.09);border-radius:26px;padding:26px 24px}
+  .mv-chip{display:inline-block;background:rgba(123,194,80,.16);color:#6aa63c;font-family:var(--display);font-size:14px;border-radius:999px;padding:.45em 1.4em} /* 14/16 = misma relacion que desktop (20/23): el texto pesa mas que el titulo */
+  .mv-text{margin-top:18px;font-size:16px;line-height:1.4;color:#043120;font-weight:400}
+  .mv-text .hl{color:#6aa63c;font-weight:400}
+  .team{display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;margin-top:24px}
+  .tcard{text-align:center}
+  .tcard-solo{grid-column:1 / -1;justify-self:center;width:calc(50% - 8px)}
+  .tphoto{width:100%;aspect-ratio:314/336;border-radius:26px;overflow:hidden;background:#e7ece8} /* mismo marco que desktop: las fotos son 0.935, no se recortan */
+  .tphoto img{width:100%;height:100%;object-fit:cover;display:block}
+  .tname{display:block;margin-top:11px;font-family:var(--font);font-weight:400;font-size:15px;color:#008340;line-height:1.25}
+  .trole{display:block;font-family:var(--font);font-weight:700;font-size:15px;color:#008340;margin-top:2px;line-height:1.25}
+</style>
+
+<meta name="description" content="Mission, vision and team of TerraTech Agro, a sustainable agricultural project management company.">
+<!-- Apunta a la version de escritorio: es la misma pagina y es la que debe
+     indexarse. Sin esto Google ve dos sitios duplicados. -->
+<link rel="canonical" href="https://ttagro.cl/nosotros-en.html">
+
+<!-- Open Graph: como se ve el enlace al compartirlo en WhatsApp, LinkedIn o Slack.
+     Sin esto aparece un link pelado, sin imagen ni descripcion. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_CL">
+<meta property="og:site_name" content="TerraTech Agro">
+<meta property="og:url" content="https://ttagro.cl/nosotros-en.html">
+<meta property="og:title" content="About Us — TerraTech Agro">
+<meta property="og:description" content="Mission, vision and team of TerraTech Agro, a sustainable agricultural project management company.">
+<meta property="og:image" content="https://ttagro.cl/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TerraTech Agro — sustainable agribusiness management">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About Us — TerraTech Agro">
+<meta name="twitter:description" content="Mission, vision and team of TerraTech Agro, a sustainable agricultural project management company.">
+<meta name="twitter:image" content="https://ttagro.cl/assets/og-image.jpg">
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="appbar">
+        <a href="index-en.html"><img class="logo" src="assets/logo.svg" alt="TerraTech Agro" width="90" height="34"></a>
+        <div class="right">
+          <button class="search-btn" type="button" aria-label="Search the site"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg></button>
+          <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+      <nav class="mmenu" id="mmenu" hidden>
+        <a href="index-en.html">Home</a>
+        <a class="active" href="nosotros-en.html">About Us</a>
+        <a href="que-hacemos-en.html">What We Do</a>
+        <a href="proyectos-en.html">Projects</a>
+        <a href="contacto-en.html">Contact</a>
+        <div class="mlang">
+          <a class="mlang-opt" href="nosotros.html">Esp</a>
+          <a class="mlang-opt is-active" href="nosotros-en.html">Eng</a>
+        </div>
+      </nav>
+    </div>
+
+    <main class="nos">
+      <span class="chip">About Us</span>
+
+      <div class="mv">
+        <article class="mv-card">
+          <span class="mv-chip">Mission</span>
+          <p class="mv-text">To develop and operate sustainable agricultural projects under <span class="hl">high production standards and ESG principles</span>, ensuring <span class="hl">sustainable, traceable production</span> aligned with the requirements of global markets.</p>
+        </article>
+        <article class="mv-card">
+          <span class="mv-chip">Vision</span>
+          <p class="mv-text">To contribute to the development of the agro-export sector alongside strategic partners through <span class="hl">modern, technology-driven and sustainable</span> practices that generate economic value while respecting and protecting the environment.</p>
+        </article>
+      </div>
+
+      <span class="chip chip-sep">Team</span>
+      <div class="team">
+        <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/michael-grasty.webp" alt="Michael Grasty C., Chairman of TerraTech Agro" width="700" height="749"></div><figcaption><span class="tname">Michael Grasty C.</span><span class="trole">Chairman</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/tomas-bottiger.webp" alt="Tomás Bottiger M., Director of TerraTech Agro" width="700" height="749"></div><figcaption><span class="tname">Tomás Bottiger M.</span><span class="trole">Director</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/german-wielandt.webp" alt="Germán Wielandt N., Executive Vice President of TerraTech Agro" width="700" height="749" loading="lazy"></div><figcaption><span class="tname">Germán Wielandt N.</span><span class="trole">Executive Vice President</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/fernando-cisternas.webp" alt="Fernando Cisternas L., Director of TerraTech Agro" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Fernando Cisternas L.</span><span class="trole">Director</span></figcaption></figure>
+        <figure class="tcard tcard-solo"><div class="tphoto"><img src="../assets/equipo/isabel-quiroz.webp" alt="Isabel Quiroz, Director of TerraTech Agro" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Isabel Quiroz</span><span class="trole">Director</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/pedro-barros.webp" alt="Pedro Barros O., Management Control Executive of TerraTech Agro" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Pedro Barros O.</span><span class="trole">Management Control Executive</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/paula-lopez.webp" alt="Paula López G., Community Manager of TerraTech Agro" width="700" height="749" loading="lazy"></div><figcaption><span class="tname">Paula López G.</span><span class="trole">Community Manager</span></figcaption></figure>
+        <figure class="tcard tcard-solo"><div class="tphoto"><img src="../assets/equipo/rafael-guerrero.webp" alt="Rafael Guerrero, SurAndina Farm Manager" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Rafael Guerrero</span><span class="trole">SurAndina Farm Manager</span></figcaption></figure>
+      </div>
+
+      <span class="chip chip-sep">External Technical Advisors</span>
+      <div class="team">
+                <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/manuel-palacios.webp" alt="Manuel Palacios, technical advisor on citrus and avocados in Peru" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Manuel Palacios</span><span class="trole">Citrus &amp; Avocados / Peru</span></figcaption></figure>
+        <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/francisco-garcia-huidobro.webp" alt="Francisco García Huidobro, technical advisor on walnuts" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Francisco García Huidobro</span><span class="trole">Walnuts</span></figcaption></figure>
+                <figure class="tcard tcard-solo"><div class="tphoto"><img src="../assets/equipo/cristian-cobo.webp" alt="Cristian Cobo Z., technical advisor on hydrology" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Cristian Cobo Z.</span><span class="trole">Hydrology</span></figcaption></figure>
+      </div>
+    </main>
+
+    <footer class="foot light">
+      <p class="company">TERRATECH AGRO</p>
+      <p class="tag">Sustainable agricultural project management company</p>
+      <!-- Redes sociales ocultas por ahora: para volver a mostrarlas, borrar
+           esta linea y la de cierre del comentario
+      <div class="social">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-3-1.8-3s-2.1 1.43-2.1 2.9V21h-4z"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5.2-6.8L5.3 22H2l7.8-8.9L1.5 2h6.8l4.7 6.2L18.9 2zm-2.3 18h1.8L7.5 3.9H5.6z"/></svg></a>
+      </div>
+      -->
+      <div class="col"><h3>Address</h3><p class="addr">Santiago, Chile<br>Isidora Goyenechea 3162,<br>Office 902, Las Condes</p></div>
+      <div class="cols2">
+        <div class="col"><h3>Explore</h3><a class="link" href="index-en.html">Home</a><a class="link" href="nosotros-en.html">About Us</a><a class="link" href="que-hacemos-en.html">What We Do</a><a class="link" href="proyectos-en.html">Projects</a></div>
+        <div class="col"><h3>Support</h3><a class="link" href="contacto-en.html">Contact</a></div>
+      </div>
+    </footer>
+  </div>
+  <script src="mobile.js?v=2"></script>
+</body>
+</html>
