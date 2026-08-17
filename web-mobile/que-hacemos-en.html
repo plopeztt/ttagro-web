@@ -54,6 +54,57 @@
 <meta name="twitter:title" content="What We Do — TerraTech Agro">
 <meta name="twitter:description" content="TerraTech Agro's value chain: a traceable process designed to create value in agribusiness projects.">
 <meta name="twitter:image" content="https://ttagro.cl/assets/og-image.jpg">
+<!-- Datos estructurados (Schema.org). Le dicen a buscadores y modelos de IA
+     que esta entidad es TERRATECH AGRO SpA y no la otra empresa de nombre
+     parecido que vende fertilizantes.
+
+     FALTAN A PROPOSITO tres campos, hasta que existan los datos reales:
+       - identifier (RUT)        -> es el desambiguador definitivo
+       - contactPoint (email)    -> hoy no hay correo corporativo
+       - sameAs (LinkedIn)       -> es el campo mas importante que falta
+     Se agregan despues sin rehacer nada. Ver Tarea 1 del manual. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://ttagro.cl/#organization",
+  "name": "TerraTech Agro",
+  "legalName": "TERRATECH AGRO SpA",
+  "alternateName": [
+    "TT Agro",
+    "TTAGRO"
+  ],
+  "url": "https://ttagro.cl/",
+  "logo": "https://ttagro.cl/assets/png/logo.png",
+  "image": "https://ttagro.cl/assets/og-image.jpg",
+  "description": "Chilean agribusiness management company that designs, implements and operates sustainable agricultural projects under ESG criteria, with traceable institutional management and a focus on export markets. It does not manufacture, import or sell fertilizers, biostimulants or any other agricultural input.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Isidora Goyenechea 3162, Oficina 902",
+    "addressLocality": "Las Condes",
+    "addressRegion": "Región Metropolitana",
+    "addressCountry": "CL"
+  },
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "Chile"
+    },
+    {
+      "@type": "Country",
+      "name": "Peru"
+    }
+  ],
+  "knowsAbout": [
+    "Agricultural water management",
+    "ESG criteria in agriculture",
+    "Agricultural exports",
+    "Agricultural traceability",
+    "Farm development",
+    "GLOBALG.A.P."
+  ]
+}
+</script>
 </head>
 <body>
   <div class="app">

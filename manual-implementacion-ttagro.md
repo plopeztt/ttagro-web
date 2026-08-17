@@ -101,14 +101,73 @@ exactamente lo que está publicado, y el circuito Paula → desarrollador está 
 
 ---
 
-## ⏸️ TAREA 1 — Datos estructurados (Schema.org) — **EN ESPERA**
-**Impacto: máximo · Dificultad: baja · Tiempo: 45 min**
+## 🟡 TAREA 1 — Datos estructurados (Schema.org) — **VERSIÓN PARCIAL IMPLEMENTADA** (17 ago 2026)
+**Impacto: máximo · Dificultad: baja**
 
-> **Decisión del 11 de agosto de 2026: se pospone hasta que exista el LinkedIn de empresa.**
+> **Decisión del 17 de agosto de 2026: se implementó la versión parcial descrita más abajo,
+> sin esperar al LinkedIn.**
 >
-> La empresa **no tiene todavía** teléfono ni email corporativos —solo personales— ni página
+> El sitio pasó de **cero datos estructurados** a declarar la identidad de la empresa con
+> todo lo que ya es público. Faltan tres campos —RUT, `contactPoint` y `sameAs`— que se
+> agregan después sin rehacer nada.
+
+### Qué quedó implementado
+
+Un bloque `Organization` en las **20 páginas** (10 en español + 10 en inglés, escritorio y
+móvil), más un `AboutPage` con el equipo en las cuatro versiones de *Nosotros*. Son 24
+bloques JSON-LD en total, todos validados.
+
+**Va también en `/web-mobile/`, y eso es deliberado.** La Tarea 6 demostró que Google rastrea
+con *mobile-first* y que `version.js` lo manda ahí. Si el schema viviera solo en las páginas
+de escritorio, el rastreador podría no verlo nunca. El plan original de esta tarea decía "las
+5 páginas" y arrastraba el mismo punto ciego que la Tarea 2 (ver Tarea 13).
+
+| Campo | Estado |
+|---|---|
+| `name`, `legalName`, `alternateName` | ✅ Puesto |
+| `address` | ✅ Puesto (el del pie de página) |
+| `description` con la negación de fertilizantes | ✅ Puesto — es la parte que desambigua |
+| `knowsAbout`, `areaServed` | ✅ Puesto |
+| `url`, `logo`, `image` | ✅ Puesto |
+| `AboutPage` con las 8 personas del equipo | ✅ Puesto |
+| `identifier` (RUT) | ⏳ Falta |
+| `contactPoint` (teléfono, email) | ⏳ Falta |
+| `sameAs` (LinkedIn) | ⏳ Falta — el más importante |
+
+### ⚠️ Los tres campos que faltan se OMITIERON, no se pusieron con datos de ejemplo
+
+El código de más abajo trae `"value": "XX.XXX.XXX-X"`, `contacto@ttagro.cl` y una URL de
+LinkedIn. **Nada de eso se publicó.** Publicar un RUT inventado, un correo que no existe o un
+perfil que devuelve 404 es peor que no declarar nada: Google intenta verificarlo, falla, y la
+señal de identidad queda dañada justo en lo que esta tarea viene a arreglar.
+
+Los tres campos están anotados en un comentario dentro del HTML de cada página, para que
+quien los tenga sepa dónde van.
+
+### Lo que hay que conseguir para cerrarla del todo
+
+1. **Página de LinkedIn de empresa** — la señal más fuerte. Idealmente, que las 8 personas
+   del equipo la declaren como empleador en sus perfiles.
+2. **Email corporativo** (`contacto@ttagro.cl` o similar). Ver también la Tarea 8: hoy el
+   formulario de contacto llega a un correo personal.
+3. **Teléfono de la empresa**, si se decide publicar uno.
+4. **RUT de la sociedad** — es público (está en el Diario Oficial) y es el desambiguador
+   definitivo: ninguna otra Terra Tech del mundo comparte el RUT.
+
+### Nota sobre `foundingDate`
+
+El código de ejemplo traía `"foundingDate": "2026"`. **No se publicó**, porque no está
+verificado y además choca con lo que dice el propio sitio: "+25 años de alianzas y proveedores
+estratégicos". Si la SpA se constituyó en 2026 pero el equipo arrastra 25 años de relaciones,
+son dos cosas distintas y conviene declarar la correcta. Está en el Diario Oficial.
+
+---
+
+### Contexto original de la tarea (11 de agosto)
+
+> La empresa **no tenía** teléfono ni email corporativos —solo personales— ni página
 > de LinkedIn. Publicar datos personales de alguien del equipo como si fueran de contacto
-> corporativo no corresponde, así que se espera.
+> corporativo no corresponde, así que se esperó.
 
 ### Por qué esperar tiene sentido acá
 
@@ -1281,8 +1340,12 @@ Marca solo cuando hayas verificado con evidencia, no cuando creas que quedó.
 | # | Tarea | Verificación | ✅ |
 |---|---|---|---|
 | 0 | Entornos aclarados | ttagro.cl abre sin contraseña. Falso positivo | ✅ |
-| 1 | Schema Organization en 5 páginas | validator.schema.org sin errores | ☐ |
-| 1 | `sameAs` con URLs funcionales | Clic en cada una, todas abren | ☐ |
+| 1 | Schema Organization en las 20 páginas | 24 bloques JSON-LD, todos parsean sin error | ✅ |
+| 1 | Schema también en `/web-mobile/` | Puesto: es lo que Google lee (mobile-first) | ✅ |
+| 1 | Sin datos de ejemplo publicados | 0 apariciones de RUT/email/LinkedIn falsos | ✅ |
+| 1 | `identifier` (RUT) | ⏳ Falta el dato real | ☐ |
+| 1 | `contactPoint` (email corporativo) | ⏳ Falta el dato real | ☐ |
+| 1 | `sameAs` con URLs funcionales | ⏳ Falta el LinkedIn. Clic en cada una, todas abren | ☐ |
 | 2 | H1 en las 5 páginas de escritorio | `Ctrl+U` → `<h1` da 1/1 | ✅ |
 | 2 | H1 en las páginas **móviles** | 🔴 Medido 17 ago: 4 de 5 dan 0. Ver **Tarea 13** | ☐ |
 | 2 | Jerarquía sin saltos | H1→H2→H3 correlativos | ✅ |
