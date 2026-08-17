@@ -82,8 +82,8 @@
     background:linear-gradient(180deg,rgba(3,30,20,.30) 0%,rgba(3,30,20,.74) 100%),
                url('assets/hero-bg.webp') center/cover no-repeat,#043120;
   }
-  .hero h2{font-family:var(--display);font-weight:700;font-size:40px;line-height:.97;letter-spacing:-.5px}
-  .hero h2 .acc{color:var(--amarillo)}
+  .hero h1{font-family:var(--display);font-weight:700;font-size:40px;line-height:.97;letter-spacing:-.5px}
+  .hero h1 .acc{color:var(--amarillo)}
   .hero .hero-bottom{margin-top:auto;padding-top:38px}
   .hero .copy{font-size:14px;line-height:1.45;font-weight:400;color:var(--texto-claro);text-align:justify}
   .hero .copy b{color:var(--amarillo);font-weight:700}
@@ -91,7 +91,7 @@
 
   /* ---------- chips ---------- */
   .chip{
-    display:inline-flex;align-items:center;justify-content:center;
+    display:inline-flex;align-items:center;justify-content:center;font-weight:400;
     background:var(--blanco-suave);border:1px solid var(--borde-chip);
     border-radius:18px 0 18px 0;padding:8px 19px;
     font-family:var(--display);font-size:14px;color:var(--verde-oscuro);letter-spacing:-.12px;
@@ -164,7 +164,7 @@
   .foot .social a{width:20px;height:20px;color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center}
   .foot .social a img{width:100%;height:100%;display:block}
   .foot .col{margin-bottom:20px}
-  .foot h3{color:var(--amarillo-90);font-size:14px;font-weight:600;margin-bottom:8px;letter-spacing:-.08px}
+  .foot .foot-title{color:var(--amarillo-90);font-size:14px;font-weight:600;margin-bottom:8px;letter-spacing:-.08px}
   .foot .addr{font-size:13px;line-height:1.5;font-weight:500}
   .foot a.link{display:block;color:rgba(243,250,239,.8);text-decoration:underline;font-size:13px;font-weight:500;padding:3px 0}
   .foot a.link.q-link{text-decoration:none}
@@ -367,7 +367,7 @@
 
     <!-- hero -->
     <section class="hero">
-      <h2>Traceable<br>management for<br><span class="acc">sustainable</span><br>agriculture</h2>
+      <h1>Traceable<br>management for<br><span class="acc">sustainable</span><br>agriculture</h1>
       <div class="hero-bottom">
         <p class="copy">We design, implement and operate <b>agricultural projects under ESG criteria</b>, combining sustainable practices, traceable institutional management and high production standards.</p>
       </div>
@@ -375,7 +375,7 @@
 
     <!-- nuestro enfoque -->
     <section class="enfoque">
-      <span class="chip">Our approach</span>
+      <h2 class="chip">Our approach</h2>
       <p class="txt">TerraTech Agro is an agribusiness management company with extensive experience in the <b>agro-export sector</b>, integrating <b>water management</b>, <b>corporate financial management</b>, <b>farm development</b>, <b>production control</b> and <b>sustainable resource management</b>.</p>
     </section>
 
@@ -383,7 +383,7 @@
     <div class="flow">
       <!-- pilares -->
       <section class="pilares" id="pilares">
-        <span class="chip">Pillars under ESG principles</span>
+        <h2 class="chip">Pillars under ESG principles</h2>
         <p class="lead">Tap each pillar to see the details.</p>
 
         <details class="pill p-ma" open>
@@ -418,7 +418,7 @@
 
       <!-- experiencia -->
       <section class="exp">
-        <span class="chip">Experience</span>
+        <h2 class="chip">Experience</h2>
         <div class="stats">
           <article class="stat stat-1">
             <p class="num"><span class="plus">+</span><span class="count" data-target="60">60</span><span class="suf">k</span></p>
@@ -447,19 +447,19 @@
         <a href="https://www.linkedin.com/company/terratech-agro/" aria-label="TerraTech Agro on LinkedIn" target="_blank" rel="noopener"><img src="../assets/png/social-li-claro.png" alt="" width="20" height="20"></a>
       </div>
       <div class="col">
-        <h3>Address</h3>
+        <p class="foot-title">Address</p>
         <p class="addr">Santiago, Chile<br>Isidora Goyenechea 3162,<br>Office 902, Las Condes</p>
       </div>
       <div class="cols2">
         <div class="col">
-          <h3>Explore</h3>
+          <p class="foot-title">Explore</p>
           <a class="link" href="index-en.html">Home</a>
           <a class="link" href="nosotros-en.html">About Us</a>
           <a class="link" href="que-hacemos-en.html">What We Do</a>
           <a class="link" href="proyectos-en.html">Projects</a>
         </div>
         <div class="col">
-          <h3>Support</h3>
+          <p class="foot-title">Support</p>
           <a class="link" href="contacto-en.html">Contact</a>
         </div>
       </div>

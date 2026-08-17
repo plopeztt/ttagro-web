@@ -82,8 +82,8 @@
     background:linear-gradient(180deg,rgba(3,30,20,.30) 0%,rgba(3,30,20,.74) 100%),
                url('assets/hero-bg.webp') center/cover no-repeat,#043120;
   }
-  .hero h2{font-family:var(--display);font-weight:700;font-size:40px;line-height:.97;letter-spacing:-.5px}
-  .hero h2 .acc{color:var(--amarillo)}
+  .hero h1{font-family:var(--display);font-weight:700;font-size:40px;line-height:.97;letter-spacing:-.5px}
+  .hero h1 .acc{color:var(--amarillo)}
   .hero .hero-bottom{margin-top:auto;padding-top:38px}
   .hero .copy{font-size:14px;line-height:1.45;font-weight:400;color:var(--texto-claro);text-align:justify}
   .hero .copy b{color:var(--amarillo);font-weight:700}
@@ -91,7 +91,7 @@
 
   /* ---------- chips ---------- */
   .chip{
-    display:inline-flex;align-items:center;justify-content:center;
+    display:inline-flex;align-items:center;justify-content:center;font-weight:400;
     background:var(--blanco-suave);border:1px solid var(--borde-chip);
     border-radius:18px 0 18px 0;padding:8px 19px;
     font-family:var(--display);font-size:14px;color:var(--verde-oscuro);letter-spacing:-.12px;
@@ -164,7 +164,7 @@
   .foot .social a{width:20px;height:20px;color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center}
   .foot .social a img{width:100%;height:100%;display:block}
   .foot .col{margin-bottom:20px}
-  .foot h3{color:var(--amarillo-90);font-size:14px;font-weight:600;margin-bottom:8px;letter-spacing:-.08px}
+  .foot .foot-title{color:var(--amarillo-90);font-size:14px;font-weight:600;margin-bottom:8px;letter-spacing:-.08px}
   .foot .addr{font-size:13px;line-height:1.5;font-weight:500}
   .foot a.link{display:block;color:rgba(243,250,239,.8);text-decoration:underline;font-size:13px;font-weight:500;padding:3px 0}
   .foot a.link.q-link{text-decoration:none}
@@ -366,7 +366,7 @@
 
     <!-- hero -->
     <section class="hero">
-      <h2>Gestión trazable<br>para una<br>agricultura<br><span class="acc">sostenible</span></h2>
+      <h1>Gestión trazable<br>para una<br>agricultura<br><span class="acc">sostenible</span></h1>
       <div class="hero-bottom">
         <p class="copy">Diseñamos, implementamos y operamos proyectos <b>agrícolas bajo criterios ESG de manera sustentable</b> con gestión institucional trazable y altos estándares de producción.</p>
       </div>
@@ -374,7 +374,7 @@
 
     <!-- nuestro enfoque -->
     <section class="enfoque">
-      <span class="chip">Nuestro enfoque</span>
+      <h2 class="chip">Nuestro enfoque</h2>
       <p class="txt">TerraTech Agro es una gestora agroindustrial que integra su vasta experiencia en el <b>sector agroexportador</b>, desde una <b>gestión hídrica</b>, <b>administración financiera empresarial</b> y <b>estructuración de predios con producción</b>, <b>control</b> y <b>gestión sustentable</b> entre otros.</p>
     </section>
 
@@ -382,7 +382,7 @@
     <div class="flow">
       <!-- pilares -->
       <section class="pilares" id="pilares">
-        <span class="chip">Pilares bajo criterios ESG</span>
+        <h2 class="chip">Pilares bajo criterios ESG</h2>
         <p class="lead">Toca cada pilar para ver su detalle.</p>
 
         <details class="pill p-ma" open>
@@ -417,7 +417,7 @@
 
       <!-- experiencia -->
       <section class="exp">
-        <span class="chip">Experiencia</span>
+        <h2 class="chip">Experiencia</h2>
         <div class="stats">
           <article class="stat stat-1">
             <p class="num"><span class="plus">+</span><span class="count" data-target="60">60</span><span class="suf">k</span></p>
@@ -446,19 +446,19 @@
         <a href="https://www.linkedin.com/company/terratech-agro/" aria-label="TerraTech Agro en LinkedIn" target="_blank" rel="noopener"><img src="../assets/png/social-li-claro.png" alt="" width="20" height="20"></a>
       </div>
       <div class="col">
-        <h3>Dirección</h3>
+        <p class="foot-title">Dirección</p>
         <p class="addr">Santiago, Chile<br>Isidora Goyenechea 3162,<br>Of. 902, Las Condes</p>
       </div>
       <div class="cols2">
         <div class="col">
-          <h3>Explorar</h3>
+          <p class="foot-title">Explorar</p>
           <a class="link" href="index.html">Inicio</a>
           <a class="link" href="nosotros.html">Nosotros</a>
           <a class="link q-link" href="que-hacemos.html">¿<span>Qué hacemos</span>?</a>
           <a class="link" href="proyectos.html">Proyectos</a>
         </div>
         <div class="col">
-          <h3>Ayuda</h3>
+          <p class="foot-title">Ayuda</p>
           <a class="link" href="contacto.html">Contacto</a>
         </div>
       </div>

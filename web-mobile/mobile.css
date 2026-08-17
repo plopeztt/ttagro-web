@@ -55,7 +55,7 @@ body{font-family:var(--font);background:#dfe3e0;color:#111;display:flex;justify-
 .mmenu .mlang a.is-active{font-weight:500;color:#0d7233}
 
 /* chip (esquinas asimétricas) */
-.chip{display:inline-flex;align-items:center;justify-content:center;background:var(--blanco-suave);border:1px solid var(--borde-chip);border-radius:18px 0 18px 0;padding:8px 19px;font-family:var(--display);font-size:14px;color:var(--verde-oscuro);letter-spacing:-.12px}
+.chip{display:inline-flex;align-items:center;justify-content:center;font-weight:400;background:var(--blanco-suave);border:1px solid var(--borde-chip);border-radius:18px 0 18px 0;padding:8px 19px;font-family:var(--display);font-size:14px;color:var(--verde-oscuro);letter-spacing:-.12px}
 
 /* botones */
 .btn-yellow{display:inline-block;background:var(--amarillo);color:var(--verde-oscuro);font-size:13px;font-weight:400;padding:10px 26px;border-radius:13px;text-decoration:none;letter-spacing:-.3px;border:0;cursor:pointer}
@@ -69,7 +69,7 @@ body{font-family:var(--font);background:#dfe3e0;color:#111;display:flex;justify-
 .foot .social a{width:20px;height:20px;color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center}
 .foot .social a img{width:100%;height:100%;display:block}
 .foot .col{margin-bottom:20px}
-.foot h3{color:var(--amarillo-90);font-size:14px;font-weight:600;margin-bottom:8px;letter-spacing:-.08px}
+.foot .foot-title{color:var(--amarillo-90);font-size:14px;font-weight:600;margin-bottom:8px;letter-spacing:-.08px}
 .foot .addr{font-size:13px;line-height:1.5;font-weight:500}
 .foot a.link{display:block;color:rgba(243,250,239,.8);text-decoration:underline;font-size:13px;font-weight:500;padding:3px 0}
 .foot a.link.q-link{text-decoration:none}
@@ -82,7 +82,7 @@ body{font-family:var(--font);background:#dfe3e0;color:#111;display:flex;justify-
 .foot.light .company{color:#000}
 .foot.light .tag{color:rgba(0,0,0,.6)}
 .foot.light .social a{color:rgba(0,0,0,.55)}
-.foot.light h3{color:#000}
+.foot.light .foot-title{color:#000}
 .foot.light .addr{color:rgba(0,0,0,.6)}
 .foot.light a.link{color:rgba(0,0,0,.6)}
 .foot.light .divider{border-top-color:rgba(0,0,0,.15);opacity:.5}

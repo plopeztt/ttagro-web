@@ -1216,10 +1216,43 @@ Metas: **LCP < 2,5 s** · **CLS < 0,1** · **SEO 90+**
 
 ---
 
-## 🔴 TAREA 13 — H1 en las páginas móviles (hallazgo del 17 ago 2026)
-**Impacto: alto · Dificultad: baja · Tiempo: 30 min**
+## ✅ TAREA 13 — H1 en las páginas móviles — **SOLUCIONADO** (17 ago 2026)
+**Impacto: alto · Dificultad: baja**
 
-### El problema
+### Qué se hizo
+
+Las **20 páginas** —escritorio y móvil, los dos idiomas— tienen ahora exactamente 1 H1 y una
+jerarquía sin saltos. Se usó el mismo método de la Tarea 2: cambiar la etiqueta conservando
+las clases, así el texto visible y el diseño no se mueven.
+
+| Página móvil | Qué pasó a H1 | Resto de la jerarquía |
+|---|---|---|
+| `index` | el `<h2>` del hero | H2: Nuestro enfoque · Pilares ESG · Experiencia |
+| `nosotros` | chip "Nosotros" | H2: Misión · Visión · Equipo · H3: Asesorías |
+| `que-hacemos` | ya lo tenía | — |
+| `proyectos` | chip "Sur Andina" | — |
+| `contacto` | chip "Estamos para ayudarte" | H2: Datos personales · Área de contacto |
+
+**El pie dejó de usar `<h3>`.** Eran 30 etiquetas en las 10 páginas móviles. Es el arreglo que
+la Tarea 2 ya había hecho en escritorio y que nunca llegó al móvil: sin él, en `nosotros` y
+`proyectos` el esquema de encabezados de la página entera era *Dirección · Explorar · Ayuda*.
+Ahora son `<p class="foot-title">`, con la regla CSS renombrada de `.foot h3` a
+`.foot .foot-title`.
+
+**Dos clases necesitaban `font-weight: 400`**: `.chip` en `mobile.css` y `.mv-chip` en el CSS
+inline de `nosotros`. Ninguna lo declaraba, así que un `<h1>` o `<h2>` habría salido en
+negrita. Es el mismo ajuste que la Tarea 2 le hizo a `styles.css`.
+
+**Verificado con capturas antes/después:** las cuatro páginas que cambiaron encabezados y el
+pie renderizan **idénticos píxel a píxel** (hash SHA-256 de la imagen, no a ojo).
+
+### ⚠️ Lo que sigue pendiente, y es decisión de contenido
+
+Los dos H1 que el manual ya señalaba en la Tarea 2 siguen con texto poco descriptivo, ahora
+también en móvil: `contacto` dice "Estamos para ayudarte" y `proyectos` dice "Sur Andina".
+**No se tocaron**: el contenido del sitio ya pasó por el directorio.
+
+### El problema original
 
 La Tarea 2 puso un H1 en cada página **de escritorio** y se dio por cerrada. Al revisar las
 móviles apareció que **4 de las 5 no tienen ningún H1**: siguen usando `<span class="chip">`.
@@ -1381,7 +1414,7 @@ Marca solo cuando hayas verificado con evidencia, no cuando creas que quedó.
 | 1 | `identifier` (RUT) | ⏳ Falta el dato real | ☐ |
 | 1 | `contactPoint` (email corporativo) | ⏳ Falta el dato real | ☐ |
 | 2 | H1 en las 5 páginas de escritorio | `Ctrl+U` → `<h1` da 1/1 | ✅ |
-| 2 | H1 en las páginas **móviles** | 🔴 Medido 17 ago: 4 de 5 dan 0. Ver **Tarea 13** | ☐ |
+| 2 | H1 en las páginas **móviles** | Solucionado el 17 ago. Ver **Tarea 13** | ✅ |
 | 2 | Jerarquía sin saltos | H1→H2→H3 correlativos | ✅ |
 | 2 | Footer sin `<h3>` | Ahora `<p class="footer-title">` | ✅ |
 | 3 | CTA `#nosotros` corregido | Ya estaba correcto de antes | ✅ |
@@ -1413,7 +1446,9 @@ Marca solo cuando hayas verificado con evidencia, no cuando creas que quedó.
 | 11 | hreflang recíproco | 10 páginas de escritorio + sitemap.xml | ✅ |
 | 11 | Traducción automática bloqueada | `notranslate` en las 20 páginas | ✅ |
 | 12 | PageSpeed móvil | SEO 90+, LCP < 2,5 s | ☐ |
-| 13 | H1 en las páginas móviles | `Ctrl+U` → `<h1` da 1 en las 10 móviles | ☐ |
+| 13 | H1 en las páginas móviles | Medido: las 20 páginas dan exactamente 1 | ✅ |
+| 13 | Pie sin `<h3>` en móvil | 30 etiquetas → `<p class="foot-title">` | ✅ |
+| 13 | El diseño no se movió | Capturas antes/después idénticas (hash SHA-256) | ✅ |
 
 ---
 

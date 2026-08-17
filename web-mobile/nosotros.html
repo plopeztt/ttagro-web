@@ -13,14 +13,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="mobile.css?v=3">
+<link rel="stylesheet" href="mobile.css?v=4">
 <style>
   .nos{padding:44px 30px 46px}
   .nos > .chip{margin-bottom:2px}
   .chip-sep{margin-top:40px}
   .mv{display:flex;flex-direction:column;gap:16px;margin-top:22px;margin-bottom:6px}
   .mv-card{background:rgba(123,194,80,.09);border-radius:26px;padding:26px 24px}
-  .mv-chip{display:inline-block;background:rgba(123,194,80,.16);color:#6aa63c;font-family:var(--display);font-size:14px;border-radius:999px;padding:.45em 1.4em} /* 14/16 = misma relacion que desktop (20/23): el texto pesa mas que el titulo */
+  .mv-chip{display:inline-block;font-weight:400;background:rgba(123,194,80,.16);color:#6aa63c;font-family:var(--display);font-size:14px;border-radius:999px;padding:.45em 1.4em} /* 14/16 = misma relacion que desktop (20/23): el texto pesa mas que el titulo */
   .mv-text{margin-top:18px;font-size:16px;line-height:1.4;color:#043120;font-weight:400}
   .mv-text .hl{color:#6aa63c;font-weight:400}
   .team{display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;margin-top:24px}
@@ -186,20 +186,20 @@
     </div>
 
     <main class="nos">
-      <span class="chip">Nosotros</span>
+      <h1 class="chip">Nosotros</h1>
 
       <div class="mv">
         <article class="mv-card">
-          <span class="mv-chip">Misión</span>
+          <h2 class="mv-chip">Misión</h2>
           <p class="mv-text">Ejecutar y operar proyectos agrícolas sostenibles bajo estándares <span class="hl">productivos y criterios ESG</span>, garantizando alimentos <span class="hl">sanos y trazables</span> a los mercados mundiales.</p>
         </article>
         <article class="mv-card">
-          <span class="mv-chip">Visión</span>
+          <h2 class="mv-chip">Visión</h2>
           <p class="mv-text">Contribuir al desarrollo agroexportador junto con aliados estratégicos mediante prácticas <span class="hl">modernas, tecnológicas y sostenibles</span> que generen resultados económicos en armonía y respeto con el entorno.</p>
         </article>
       </div>
 
-      <span class="chip chip-sep">Equipo</span>
+      <h2 class="chip chip-sep">Equipo</h2>
       <div class="team">
         <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/michael-grasty.webp" alt="Michael Grasty C., Presidente de TerraTech Agro" width="700" height="749"></div><figcaption><span class="tname">Michael Grasty C.</span><span class="trole">Presidente</span></figcaption></figure>
         <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/tomas-bottiger.webp" alt="Tomás Bottiger M., Director de TerraTech Agro" width="700" height="749"></div><figcaption><span class="tname">Tomás Bottiger M.</span><span class="trole">Director</span></figcaption></figure>
@@ -211,7 +211,7 @@
         <figure class="tcard tcard-solo"><div class="tphoto"><img src="../assets/equipo/rafael-guerrero.webp" alt="Rafael Guerrero, Administrador del Fundo Sur Andina" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Rafael Guerrero</span><span class="trole">Administrador Fundo SurAndina</span></figcaption></figure>
       </div>
 
-      <span class="chip chip-sep">Asesorías técnicas externas</span>
+      <h3 class="chip chip-sep">Asesorías técnicas externas</h3>
       <div class="team">
                 <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/manuel-palacios.webp" alt="Manuel Palacios, asesor técnico en cítricos y paltos en Perú" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Manuel Palacios</span><span class="trole">Cítricos y Paltos / Perú</span></figcaption></figure>
         <figure class="tcard"><div class="tphoto"><img src="../assets/equipo/francisco-garcia-huidobro.webp" alt="Francisco García Huidobro, asesor técnico en nogales" width="841" height="900" loading="lazy"></div><figcaption><span class="tname">Francisco García Huidobro</span><span class="trole">Nogales</span></figcaption></figure>
@@ -225,10 +225,10 @@
       <div class="social">
         <a href="https://www.linkedin.com/company/terratech-agro/" aria-label="TerraTech Agro en LinkedIn" target="_blank" rel="noopener"><img src="../assets/png/social-li-gris.png" alt="" width="20" height="20"></a>
       </div>
-      <div class="col"><h3>Dirección</h3><p class="addr">Santiago, Chile<br>Isidora Goyenechea 3162,<br>Of. 902, Las Condes</p></div>
+      <div class="col"><p class="foot-title">Dirección</p><p class="addr">Santiago, Chile<br>Isidora Goyenechea 3162,<br>Of. 902, Las Condes</p></div>
       <div class="cols2">
-        <div class="col"><h3>Explorar</h3><a class="link" href="index.html">Inicio</a><a class="link" href="nosotros.html">Nosotros</a><a class="link q-link" href="que-hacemos.html">¿<span>Qué hacemos</span>?</a><a class="link" href="proyectos.html">Proyectos</a></div>
-        <div class="col"><h3>Ayuda</h3><a class="link" href="contacto.html">Contacto</a></div>
+        <div class="col"><p class="foot-title">Explorar</p><a class="link" href="index.html">Inicio</a><a class="link" href="nosotros.html">Nosotros</a><a class="link q-link" href="que-hacemos.html">¿<span>Qué hacemos</span>?</a><a class="link" href="proyectos.html">Proyectos</a></div>
+        <div class="col"><p class="foot-title">Ayuda</p><a class="link" href="contacto.html">Contacto</a></div>
       </div>
     </footer>
   </div>
