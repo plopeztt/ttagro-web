@@ -58,8 +58,7 @@
      que esta entidad es TERRATECH AGRO SpA y no la otra empresa de nombre
      parecido que vende fertilizantes.
 
-     FALTAN A PROPOSITO dos campos, hasta que existan los datos reales:
-       - identifier (RUT)        -> es el desambiguador definitivo
+     FALTA A PROPOSITO un campo, hasta que exista el dato real:
        - contactPoint (email)    -> hoy no hay correo corporativo
      Se agregan despues sin rehacer nada. Ver Tarea 1 del manual. -->
 <script type="application/ld+json">
@@ -77,6 +76,11 @@
   "logo": "https://ttagro.cl/assets/png/logo.png",
   "image": "https://ttagro.cl/assets/og-image.jpg",
   "description": "Chilean agribusiness management company that designs, implements and operates sustainable agricultural projects under ESG criteria, with traceable institutional management and a focus on export markets. It does not manufacture, import or sell fertilizers, biostimulants or any other agricultural input.",
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "RUT",
+    "value": "78.439.147-7"
+  },
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Isidora Goyenechea 3162, Oficina 902",

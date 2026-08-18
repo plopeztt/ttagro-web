@@ -101,7 +101,7 @@ exactamente lo que está publicado, y el circuito Paula → desarrollador está 
 
 ---
 
-## 🟡 TAREA 1 — Datos estructurados (Schema.org) — **VERSIÓN PARCIAL IMPLEMENTADA** (17 ago 2026)
+## 🟡 TAREA 1 — Datos estructurados (Schema.org) — **CASI COMPLETA** (18 ago 2026)
 **Impacto: máximo · Dificultad: baja**
 
 > **Decisión del 17 de agosto de 2026: se implementó la versión parcial descrita más abajo,
@@ -131,7 +131,7 @@ de escritorio, el rastreador podría no verlo nunca. El plan original de esta ta
 | `url`, `logo`, `image` | ✅ Puesto |
 | `AboutPage` con las 8 personas del equipo | ✅ Puesto |
 | `sameAs` (LinkedIn) | ✅ **Puesto el 17 ago** — era el que más pesaba |
-| `identifier` (RUT) | ⏳ Falta |
+| `identifier` (RUT) | ✅ **Puesto el 18 ago** — 78.439.147-7, validado |
 | `contactPoint` (teléfono, email) | ⏳ Falta |
 
 ### `sameAs` — resuelto el mismo día
@@ -146,8 +146,8 @@ nueve que se respaldan entre sí.
 
 ### ⚠️ Los campos que faltan se OMITEN, no se ponen con datos de ejemplo
 
-El código de más abajo trae `"value": "XX.XXX.XXX-X"` y `contacto@ttagro.cl`. **Nada de eso
-se publicó.** Publicar un RUT inventado o un correo que no existe es peor que no declarar
+El código de más abajo trae `contacto@ttagro.cl`, un correo que no existe. **No se
+publicó.** Publicar un RUT inventado o un correo que no existe es peor que no declarar
 nada: Google intenta verificarlo, falla, y la señal de identidad queda dañada justo en lo que
 esta tarea viene a arreglar.
 
@@ -161,8 +161,9 @@ los tenga sepa dónde van.
 2. **Email corporativo** (`contacto@ttagro.cl` o similar). Ver también la Tarea 8: hoy el
    formulario de contacto llega a un correo personal.
 3. **Teléfono de la empresa**, si se decide publicar uno.
-4. **RUT de la sociedad** — es público (está en el Diario Oficial) y es el desambiguador
-   definitivo: ninguna otra Terra Tech del mundo comparte el RUT.
+4. ✅ ~~RUT de la sociedad~~ — **hecho el 18 de agosto de 2026: 78.439.147-7.** Se validó
+   el dígito verificador antes de publicarlo. Es el desambiguador definitivo: ninguna otra
+   Terra Tech del mundo comparte este RUT.
 
 ### ✅ El ícono de LinkedIn en el pie — hecho (17 ago 2026)
 
@@ -224,7 +225,7 @@ lo que ya es público en el sitio, y agregarle los campos que faltan después si
 | `description` con la negación de fertilizantes | ✅ Sí — es la parte que desambigua |
 | `knowsAbout` (áreas de expertise) | ✅ Sí |
 | `url`, `logo` | ✅ Sí |
-| `identifier` (RUT) | ⏳ Falta |
+| `identifier` (RUT) | ✅ **Puesto el 18 ago** — 78.439.147-7, validado |
 | `contactPoint` (teléfono, email) | ⏳ Falta |
 | `sameAs` (LinkedIn) | ⏳ Falta — el más importante |
 
@@ -237,8 +238,9 @@ Eso ya sería pasar de **cero datos estructurados** a la mayor parte del benefic
 2. **Email corporativo** (`contacto@ttagro.cl` o similar). Ver también la Tarea 8: hoy el
    formulario de contacto llega a un correo personal.
 3. **Teléfono de la empresa**, si se decide publicar uno.
-4. **RUT de la sociedad** — es público (está en el Diario Oficial) y es el desambiguador
-   definitivo: ninguna otra Terra Tech del mundo comparte el RUT.
+4. ✅ ~~RUT de la sociedad~~ — **hecho el 18 de agosto de 2026: 78.439.147-7.** Se validó
+   el dígito verificador antes de publicarlo. Es el desambiguador definitivo: ninguna otra
+   Terra Tech del mundo comparte este RUT.
 
 ### Código (para cuando estén los datos)
 
@@ -1411,7 +1413,7 @@ Marca solo cuando hayas verificado con evidencia, no cuando creas que quedó.
 | 1 | Sin datos de ejemplo publicados | 0 apariciones de RUT/email/LinkedIn falsos | ✅ |
 | 1 | `sameAs` con URLs funcionales | LinkedIn de empresa, comprobado que responde 200 | ✅ |
 | 1 | El equipo declara la empresa en LinkedIn | 8 perfiles apuntando a la página. **Paso humano** | ☐ |
-| 1 | `identifier` (RUT) | ⏳ Falta el dato real | ☐ |
+| 1 | `identifier` (RUT) | 78.439.147-7 · dígito verificador validado | ✅ |
 | 1 | `contactPoint` (email corporativo) | ⏳ Falta el dato real | ☐ |
 | 2 | H1 en las 5 páginas de escritorio | `Ctrl+U` → `<h1` da 1/1 | ✅ |
 | 2 | H1 en las páginas **móviles** | Solucionado el 17 ago. Ver **Tarea 13** | ✅ |
