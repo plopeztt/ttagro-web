@@ -20,8 +20,11 @@
 
   var ruta = location.pathname;
   var enMovil = ruta.indexOf('/' + CARPETA) !== -1;
-  var pagina = ruta.split('/').pop() || 'index.html';
-  if (pagina.indexOf('.html') === -1) pagina = 'index.html';
+
+  // Las URLs del sitio no llevan extension (/nosotros, no /nosotros.html), pero el
+  // servidor sigue aceptando ambas. Nos quedamos con el nombre a secas, asi el par
+  // escritorio/movil se empareja igual venga como venga. Cadena vacia = portada.
+  var pagina = (ruta.split('/').pop() || '').replace(/\.html$/, '');
 
   // preferencia manual (?ver=full | ?ver=movil), recordada durante la sesión
   var forzado = (location.search.match(/[?&]ver=(full|movil)/) || [])[1];

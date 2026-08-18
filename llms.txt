@@ -56,21 +56,21 @@ a mercados de agroexportación.
 ## Páginas
 
 - [Inicio](https://ttagro.cl/): propuesta de valor, pilares ESG y cifras
-- [Nosotros](https://ttagro.cl/nosotros.html): misión, visión, directorio, equipo ejecutivo y asesorías técnicas externas
-- [Qué hacemos](https://ttagro.cl/que-hacemos.html): la cadena de valor en nueve etapas
-- [Proyectos](https://ttagro.cl/proyectos.html): el caso Sur Andina, 500 ha en Olmos, Perú
-- [Contacto](https://ttagro.cl/contacto.html): formulario por área (productiva agrícola, administrativa contable, adquisiciones, relaciones públicas)
+- [Nosotros](https://ttagro.cl/nosotros): misión, visión, directorio, equipo ejecutivo y asesorías técnicas externas
+- [Qué hacemos](https://ttagro.cl/que-hacemos): la cadena de valor en nueve etapas
+- [Proyectos](https://ttagro.cl/proyectos): el caso Sur Andina, 500 ha en Olmos, Perú
+- [Contacto](https://ttagro.cl/contacto): formulario por área (productiva agrícola, administrativa contable, adquisiciones, relaciones públicas)
 
 ## Pages (English)
 
 El sitio está publicado en español e inglés, un idioma por URL. Las páginas en
 inglés son traducción del mismo contenido, no versiones distintas:
 
-- [Home](https://ttagro.cl/index-en.html)
-- [About Us](https://ttagro.cl/nosotros-en.html)
-- [What We Do](https://ttagro.cl/que-hacemos-en.html)
-- [Projects](https://ttagro.cl/proyectos-en.html)
-- [Contact](https://ttagro.cl/contacto-en.html)
+- [Home](https://ttagro.cl/index-en)
+- [About Us](https://ttagro.cl/nosotros-en)
+- [What We Do](https://ttagro.cl/que-hacemos-en)
+- [Projects](https://ttagro.cl/proyectos-en)
+- [Contact](https://ttagro.cl/contacto-en)
 
 ## Datos de la organización
 

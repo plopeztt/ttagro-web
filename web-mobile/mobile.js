@@ -68,29 +68,29 @@ window.TT.swipe = function (el, onPrev, onNext) {
   var EN = document.documentElement.lang === 'en';
 
   var INDICE = EN ? [
-    { t: 'Home', d: 'Main page — traceable management for sustainable agriculture', u: 'index-en.html' },
-    { t: 'ESG Pillars — Environment', d: 'Traceable and efficient water use, waste management, sustainable production certified by GLOBALG.A.P.', u: 'index-en.html#pilares' },
-    { t: 'ESG Pillars — Social', d: 'Integrity and ethics, workplace equity, fair compensation, ongoing training, safe infrastructure', u: 'index-en.html#pilares' },
-    { t: 'ESG Pillars — Governance', d: 'Independent board of directors, financial transparency, risk management', u: 'index-en.html#pilares' },
-    { t: 'Experience', d: '+60k hectares: crops, fruit orchards, water management, agricultural innovation, environmental stewardship; KPIs; +25 years', u: 'index-en.html' },
-    { t: 'About Us', d: 'Mission, vision and team of TerraTech Agro', u: 'nosotros-en.html' },
-    { t: 'Team', d: 'Michael Grasty, Tomás Bottiger, Germán Wielandt, Fernando Cisternas, Isabel Quiroz, Pedro Barros, Paula López, Rafael Guerrero', u: 'nosotros-en.html' },
-    { t: 'External Technical Advisors', d: 'Citrus and avocados, walnuts, hydrology', u: 'nosotros-en.html' },
-    { t: 'What We Do', d: '9-step value chain: from the client needs assessment to ongoing operational support', u: 'que-hacemos-en.html' },
-    { t: 'Projects — Sur Andina', d: '500-hectare agribusiness project in Olmos, Peru: citrus orchards and crops', u: 'proyectos-en.html' },
-    { t: 'Contact', d: 'Form: agricultural production, administration and accounting, procurement, public relations', u: 'contacto-en.html' }
+    { t: 'Home', d: 'Main page — traceable management for sustainable agriculture', u: 'index-en' },
+    { t: 'ESG Pillars — Environment', d: 'Traceable and efficient water use, waste management, sustainable production certified by GLOBALG.A.P.', u: 'index-en#pilares' },
+    { t: 'ESG Pillars — Social', d: 'Integrity and ethics, workplace equity, fair compensation, ongoing training, safe infrastructure', u: 'index-en#pilares' },
+    { t: 'ESG Pillars — Governance', d: 'Independent board of directors, financial transparency, risk management', u: 'index-en#pilares' },
+    { t: 'Experience', d: '+60k hectares: crops, fruit orchards, water management, agricultural innovation, environmental stewardship; KPIs; +25 years', u: 'index-en' },
+    { t: 'About Us', d: 'Mission, vision and team of TerraTech Agro', u: 'nosotros-en' },
+    { t: 'Team', d: 'Michael Grasty, Tomás Bottiger, Germán Wielandt, Fernando Cisternas, Isabel Quiroz, Pedro Barros, Paula López, Rafael Guerrero', u: 'nosotros-en' },
+    { t: 'External Technical Advisors', d: 'Citrus and avocados, walnuts, hydrology', u: 'nosotros-en' },
+    { t: 'What We Do', d: '9-step value chain: from the client needs assessment to ongoing operational support', u: 'que-hacemos-en' },
+    { t: 'Projects — Sur Andina', d: '500-hectare agribusiness project in Olmos, Peru: citrus orchards and crops', u: 'proyectos-en' },
+    { t: 'Contact', d: 'Form: agricultural production, administration and accounting, procurement, public relations', u: 'contacto-en' }
   ] : [
-    { t: 'Inicio', d: 'Página principal — gestión trazable para una agricultura sostenible', u: 'index.html' },
-    { t: 'Pilares ESG — Medio Ambiente', d: 'Uso trazable y eficiente del agua, gestión de residuos, producción limpia GLOBALG.A.P.', u: 'index.html#pilares' },
-    { t: 'Pilares ESG — Social', d: 'Integridad y ética, equidad laboral, remuneraciones justas, capacitaciones continuas', u: 'index.html#pilares' },
-    { t: 'Pilares ESG — Gobernanza', d: 'Directorio independiente, transparencia financiera, gestión de riesgos', u: 'index.html#pilares' },
-    { t: 'Experiencia', d: '+60k hectáreas: cultivos, frutales, gestión hídrica, innovación, impacto ambiental; KPIs; +25 años', u: 'index.html' },
-    { t: 'Nosotros', d: 'Misión, visión y equipo de TerraTech Agro', u: 'nosotros.html' },
-    { t: 'Equipo', d: 'Michael Grasty, Tomás Bottiger, Germán Wielandt, Fernando Cisternas, Isabel Quiroz, Pedro Barros, Paula López, Rafael Guerrero', u: 'nosotros.html' },
-    { t: 'Asesorías técnicas externas', d: 'Cítricos y paltos, nogales, hidrología', u: 'nosotros.html' },
-    { t: '¿Qué hacemos?', d: 'Cadena de valor en 9 pasos: desde el entendimiento del cliente hasta el soporte permanente de la operación', u: 'que-hacemos.html' },
-    { t: 'Proyectos — Sur Andina', d: 'Proyecto agroindustrial de 500 hectáreas en Olmos, Perú: cítricos y cultivos', u: 'proyectos.html' },
-    { t: 'Contacto', d: 'Formulario: consultas productiva agrícola, administrativa contable, adquisiciones, relaciones públicas', u: 'contacto.html' }
+    { t: 'Inicio', d: 'Página principal — gestión trazable para una agricultura sostenible', u: './' },
+    { t: 'Pilares ESG — Medio Ambiente', d: 'Uso trazable y eficiente del agua, gestión de residuos, producción limpia GLOBALG.A.P.', u: './#pilares' },
+    { t: 'Pilares ESG — Social', d: 'Integridad y ética, equidad laboral, remuneraciones justas, capacitaciones continuas', u: './#pilares' },
+    { t: 'Pilares ESG — Gobernanza', d: 'Directorio independiente, transparencia financiera, gestión de riesgos', u: './#pilares' },
+    { t: 'Experiencia', d: '+60k hectáreas: cultivos, frutales, gestión hídrica, innovación, impacto ambiental; KPIs; +25 años', u: './' },
+    { t: 'Nosotros', d: 'Misión, visión y equipo de TerraTech Agro', u: 'nosotros' },
+    { t: 'Equipo', d: 'Michael Grasty, Tomás Bottiger, Germán Wielandt, Fernando Cisternas, Isabel Quiroz, Pedro Barros, Paula López, Rafael Guerrero', u: 'nosotros' },
+    { t: 'Asesorías técnicas externas', d: 'Cítricos y paltos, nogales, hidrología', u: 'nosotros' },
+    { t: '¿Qué hacemos?', d: 'Cadena de valor en 9 pasos: desde el entendimiento del cliente hasta el soporte permanente de la operación', u: 'que-hacemos' },
+    { t: 'Proyectos — Sur Andina', d: 'Proyecto agroindustrial de 500 hectáreas en Olmos, Perú: cítricos y cultivos', u: 'proyectos' },
+    { t: 'Contacto', d: 'Formulario: consultas productiva agrícola, administrativa contable, adquisiciones, relaciones públicas', u: 'contacto' }
   ];
   var nrm = function (s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); };
 

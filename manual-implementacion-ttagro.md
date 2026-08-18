@@ -9,7 +9,7 @@
 Está ordenado **por tarea**, no por hallazgo. Cada tarea trae: qué hay que hacer, dónde, el código listo para pegar, y **cómo verificar tú misma que quedó bien** antes de darla por cerrada.
 
 - **Parte 1** — Contexto en 3 minutos
-- **Parte 2** — Tareas de implementación (13, priorizadas)
+- **Parte 2** — Tareas de implementación (14, priorizadas)
 - **Parte 3** — Herramientas de verificación
 - **Parte 4** — Checklist de cierre
 - **Anexo** — Diagnóstico completo, por si quieres el detalle
@@ -1296,6 +1296,86 @@ subir **ese** a H1 en vez del chip, igual que en el escritorio.
 
 ---
 
+## ✅ TAREA 14 — URLs sin `.html` — **HECHO** (18 ago 2026)
+**Impacto: bajo (estético) · Dificultad: media**
+
+`ttagro.cl/que-hacemos.html` pasa a `ttagro.cl/que-hacemos`.
+
+**Aclaración, para decidir con la información correcta:** esto **no mejora el
+posicionamiento.** Google trata igual `/nosotros` y `/nosotros.html`. Es imagen: se ve más
+profesional y es más fácil de dictar por teléfono.
+
+### El punto que lo habría roto en silencio
+
+`version.js` decidía a qué página móvil mandar al visitante **leyendo el `.html` del nombre**:
+
+```js
+if (pagina.indexOf('.html') === -1) pagina = 'index.html';
+```
+
+Con URLs limpias, `/nosotros` no contiene `.html`, así que **todo visitante desde celular
+habría terminado en la portada móvil**, entrara donde entrara. Y como Google rastrea
+mobile-first, habría visto una sola página en vez de diez. En computador no se habría notado
+nada.
+
+Ahora la línea es:
+
+```js
+var pagina = (ruta.split('/').pop() || '').replace(/\.html$/, '');
+```
+
+Acepta las dos formas, así que el par escritorio/móvil se empareja venga como venga.
+
+### Alcance
+
+| Qué | Cuánto |
+|---|---|
+| Enlaces internos en las 20 páginas | 358 |
+| `canonical`, `og:url`, `hreflang`, `alternate media` | 72 etiquetas |
+| `sitemap.xml` | 35 |
+| `llms.txt` | 9 |
+| Índices del buscador (`script.js`, `mobile.js`) | 37 |
+| Reglas nuevas en el `.htaccess` | 2 |
+
+La portada apunta a `/` (y a `./` en móvil), no a `/index`.
+
+### Las dos reglas del servidor
+
+```apache
+# /que-hacemos.html -> /que-hacemos, visible para el visitante
+RewriteCond %{THE_REQUEST} \s/+([^\s?]+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# y al reves, interno: /que-hacemos sirve que-hacemos.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+```
+
+`THE_REQUEST` mira la petición original y no la ruta ya reescrita, que es lo que evita el
+bucle infinito entre ambas. La condición `-f` hace que una URL inexistente siga dando 404.
+
+**Van en el mismo bloque que las redirecciones**, así que es un solo envío al desarrollador.
+
+### ✅ Cómo se verificó
+
+Se levantó un servidor local que emula esas reglas y se navegó el sitio entero:
+
+- Las 11 URLs limpias sirven la página correcta, incluidas las de `/web-mobile/`
+- Las viejas con `.html` redirigen con 301 a su versión limpia
+- **91 enlaces internos navegados desde URLs limpias, ninguno roto**
+- Una URL inexistente sigue dando 404
+- CSS, JS e imágenes cargan igual
+- Simulado el emparejamiento móvil en los dos sentidos
+
+### ⚠️ No sirve de nada hasta que se aplique el `.htaccess`
+
+Los archivos ya están listos, pero **las URLs limpias solo funcionan con las reglas puestas**.
+Si se publican los archivos sin el bloque, los enlaces internos apuntarían a `/nosotros` y el
+servidor devolvería 404. **Hay que hacer las dos cosas juntas.**
+
+---
+
 # PARTE 3 — Herramientas de verificación
 
 ## El atajo que más vas a usar
@@ -1451,6 +1531,9 @@ Marca solo cuando hayas verificado con evidencia, no cuando creas que quedó.
 | 13 | H1 en las páginas móviles | Medido: las 20 páginas dan exactamente 1 | ✅ |
 | 13 | Pie sin `<h3>` en móvil | 30 etiquetas → `<p class="foot-title">` | ✅ |
 | 13 | El diseño no se movió | Capturas antes/después idénticas (hash SHA-256) | ✅ |
+| 14 | URLs sin `.html` | 91 enlaces navegados desde URLs limpias, 0 rotos | ✅ |
+| 14 | `version.js` acepta ambas formas | Simulado escritorio↔móvil en los dos sentidos | ✅ |
+| 14 | Reglas aplicadas en el servidor | ⚠️ **Sin esto las URLs limpias dan 404** | ☐ |
 
 ---
 
